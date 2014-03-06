@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    gcommitnode.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    gcommitnode.h
 
 FORMS    += mainwindow.ui
