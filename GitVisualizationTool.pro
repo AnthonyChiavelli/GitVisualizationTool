@@ -14,9 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gcommitnode.cpp
+    gcommitnode.cpp \
+    gcommitarrow.cpp \
+    ggraphicsscene.cpp
 
 HEADERS  += mainwindow.h \
-    gcommitnode.h
+    gcommitnode.h \
+    gcommitarrow.h \
+    ggraphicsscene.h
 
 FORMS    += mainwindow.ui

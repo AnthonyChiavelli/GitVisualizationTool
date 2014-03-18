@@ -15,8 +15,7 @@ QRectF GCommitNode::boundingRect() const {
 
 void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
 
-    // Render the rectange
-
+    // Render the rectangle
     painter->setBrush(Qt::cyan);
     painter->drawRect(0, 0, size, size);
     painter->setBrush(Qt::darkCyan);
@@ -25,3 +24,6 @@ void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
+int GCommitNode::getNextArrowStartPoint() {
+    return 0;
+}
