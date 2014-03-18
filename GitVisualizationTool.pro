@@ -16,11 +16,11 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     gcommitnode.cpp \
     gcommitarrow.cpp \
-    ggraphicsscene.cpp
+    greposcene.cpp
 
 HEADERS  += mainwindow.h \
     gcommitnode.h \
     gcommitarrow.h \
-    ggraphicsscene.h
+    greposcene.h
 
 FORMS    += mainwindow.ui

@@ -1,6 +1,6 @@
 #include "gcommitarrow.h"
 
-GCommitArrow::GCommitArrow(QObject *parent) : QGraphicsItem(parent) {
+GCommitArrow::GCommitArrow(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
 
 }
@@ -16,4 +16,7 @@ void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     // Draw our line
     painter->drawLine(x, x, x+100, x+100);
 
+    // Draw arrow head
+
 }
+

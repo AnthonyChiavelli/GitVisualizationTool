@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "ui_mainwindow.h"
+#include "greposcene.h"
 
 #include <QMainWindow>
 
@@ -15,12 +16,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private slots:
-    void on_pushButton_2_clicked();
-
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene;
+    GRepoScene *repoScene;
+
 };
 
 #endif // MAINWINDOW_H

@@ -27,3 +27,12 @@ void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 int GCommitNode::getNextArrowStartPoint() {
     return 0;
 }
+
+
+void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event){
+
+}
+
+void GCommitNode::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
+
+}

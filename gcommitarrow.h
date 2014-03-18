@@ -8,6 +8,7 @@ class GCommitArrow : public QObject, public QGraphicsItem {
     Q_OBJECT
 
 public:
+    GCommitArrow(QGraphicsItem *parent);
     explicit GCommitArrow(QObject *parent = 0);
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
