@@ -7,9 +7,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     ui->setupUi(this);
 
     // Instantiate a graphics view for this scene
-    QGraphicsView *canvas = ui->Canvas;
-    this->scene= new QGraphicsScene(this);
-    canvas->setScene(scene);
+    //    QGraphicsView *canvas = ui->Canvas;
+    //    this->scene= new QGraphicsScene(this);
+    //    canvas->setScene(scene);
+    setCentralWidget(ui->gridLayoutWidget);
+
+
+
 }
 
 MainWindow::~MainWindow() {
@@ -24,7 +28,7 @@ void MainWindow::on_pushButton_2_clicked() {
     GCommitNode *node2 = new GCommitNode(0);
 
 
-    this->scene->addItem(node);
-    this->scene->addItem(node2);
+//    this->scene->addItem(node);
+//    this->scene->addItem(node2);
 
 }
