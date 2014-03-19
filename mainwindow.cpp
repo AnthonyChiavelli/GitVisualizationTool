@@ -10,11 +10,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     this->repoScene = new GRepoScene(this->centralWidget());
     ui->graphicsView->setScene(this->repoScene);
+    this->repoScene->attachRootCommitNode(new GCommitNode(0));
+    this->repoScene->renderScene();
 
-    GCommitNode *node = new GCommitNode(0);
-
-
-    this->repoScene->addItem(node);
 
 }
 
