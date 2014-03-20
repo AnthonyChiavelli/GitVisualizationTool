@@ -1,6 +1,6 @@
 #include "gcommitarrow.h"
 
-GCommitArrow::GCommitArrow(QObject *parent) : QGraphicsItem(parent) {
+GCommitArrow::GCommitArrow(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
 
 }

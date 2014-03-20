@@ -1,10 +1,12 @@
 #ifndef REPOSITORY_H
 #define REPOSITORY_H
-#include commitnode.h
+
+#include "commitnode.h"
 
 class Repository {
 
 public:
+    Repository();
     Repository(CommitNode &initialCommit);
 
     CommitNode getInitialCommit() const;

@@ -25,10 +25,9 @@ public:
     int getNextArrowStartPoint();
 
 protected:
-
     // Mouse events
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    //void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
 

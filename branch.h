@@ -1,5 +1,7 @@
 #ifndef BRANCH_H
 #define BRANCH_H
+#include <string>
+#include "commitnode.h"
 
 class Branch
 {

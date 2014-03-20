@@ -1,7 +1,8 @@
 #ifndef COMMITNODE_H
 #define COMMITNODE_H
+#include <vector>
 
-#include gituser.h
+#include "gituser.h"
 
 using namespace std;
 

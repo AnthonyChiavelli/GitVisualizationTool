@@ -1,5 +1,9 @@
 #include "gituser.h"
 
+GitUser::GitUser() {
+
+}
+
 GitUser::GitUser(string& name, string& email) {
     this->name = name;
     this->email = email;

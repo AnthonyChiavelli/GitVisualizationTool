@@ -1,5 +1,7 @@
 #ifndef LOCALREPOSITORY_H
 #define LOCALREPOSITORY_H
+#include "repository.h"
+#include "remote.h"
 
 using namespace std;
 

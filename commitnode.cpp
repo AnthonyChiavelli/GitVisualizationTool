@@ -1,7 +1,6 @@
 #include "commitnode.h"
 
-CommitNode::CommitNode()
-{
+CommitNode::CommitNode() {
 }
 
 vector<CommitNode> CommitNode::getParents() const

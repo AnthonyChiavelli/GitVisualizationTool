@@ -1,5 +1,9 @@
 #include "repository.h"
 
+Repository::Repository() {
+
+}
+
 Repository::Repository(CommitNode &initialCommit) {
     this->initialCommit = initialCommit;
 }

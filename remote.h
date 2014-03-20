@@ -1,6 +1,8 @@
 #ifndef REMOTE_H
 #define REMOTE_H
 
+#include <string>
+
 using namespace std;
 
 class Remote {

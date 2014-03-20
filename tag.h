@@ -1,7 +1,7 @@
 #ifndef TAG_H
 #define TAG_H
-
-#include commitnode.h
+#include <string>
+#include "commitnode.h"
 
 class Tag {
 
