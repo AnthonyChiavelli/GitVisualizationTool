@@ -3,6 +3,9 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <vector>
+
+using namespace std;
 
 /*
  * Graphical node representing a commit

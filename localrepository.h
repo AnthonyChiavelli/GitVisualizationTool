@@ -1,8 +1,8 @@
 #ifndef LOCALREPOSITORY_H
 #define LOCALREPOSITORY_H
 
-class LocalRepository : public Repository
-{
+class LocalRepository : public Repository {
+
 public:
     LocalRepository();
 };

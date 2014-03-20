@@ -13,6 +13,10 @@ QRectF GCommitNode::boundingRect() const {
     return QRectF(0,0,size,size);
 }
 
+//void GCommitNode::render() {
+
+//}
+
 void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
 
     // Render the rectangle

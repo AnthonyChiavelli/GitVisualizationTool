@@ -1,8 +1,7 @@
 #ifndef REPOSITORY_H
 #define REPOSITORY_H
 
-class Repository
-{
+class Repository {
 public:
     Repository();
 };
