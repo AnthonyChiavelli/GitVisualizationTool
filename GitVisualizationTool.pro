@@ -14,9 +14,23 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gcommitnode.cpp
+    gcommitnode.cpp \
+    remote.cpp \
+    repository.cpp \
+    gituser.cpp \
+    commitnode.cpp \
+    localrepository.cpp \
+    branch.cpp \
+    tag.cpp
 
 HEADERS  += mainwindow.h \
-    gcommitnode.h
+    gcommitnode.h \
+    remote.h \
+    repository.h \
+    gituser.h \
+    commitnode.h \
+    localrepository.h \
+    branch.h \
+    tag.h
 
 FORMS    += mainwindow.ui
