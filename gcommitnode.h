@@ -15,7 +15,7 @@ class GCommitNode : public QObject, public QGraphicsItem {
 
 public:
 
-    GCommitNode(QGraphicsItem *parent);
+    GCommitNode(QGraphicsItem *parent = 0);
     // QGraphicsItems must override these two methods
     // Returns estimate of size
     QRectF boundingRect() const;
@@ -24,19 +24,30 @@ public:
     // Get the location the commit arrow should point to
     int getNextArrowStartPoint();
 
+    // Size of node
+    int size;
+
+    // Relatives
+    vector<const GCommitNode *> parentGNodes;
+    vector<GCommitNode *> childrenGNodes;
+
+    // Commit data
+    string author;
+    string message;
+    string sha;
+
+    // How far away from root node we are
+    int depth;
+
+    // Implement equality comparison between gcommit nodes
+    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
+
 protected:
     // Mouse events
     //void mousePressEvent(QGraphicsSceneMouseEvent *event);
     //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-private:
 
-    // Size of node
-    int size;
-
-    // Relatives
-    vector<GCommitNode *> parentGNodes;
-    vector<GCommitNode *> childrenGNodes;
 
 signals:
 

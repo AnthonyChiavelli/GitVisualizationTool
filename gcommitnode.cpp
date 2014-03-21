@@ -1,7 +1,7 @@
 #include "gcommitnode.h"
 #include <QGraphicsView>
 
-GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent), size(100) {
+GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
     // Allow the object to be dragged around
     setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -10,18 +10,15 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent), size(10
 }
 
 QRectF GCommitNode::boundingRect() const {
-    return QRectF(0,0,size,size);
+    return QRectF(0,0,100,100);
 }
 
-//void GCommitNode::render() {
-
-//}
 
 void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
 
     // Render the rectangle
     painter->setBrush(Qt::cyan);
-    painter->drawRect(0, 0, size, size);
+    painter->drawRect(0, 0, 100, 100);
     painter->setBrush(Qt::darkCyan);
     painter->setPen(Qt::darkCyan);
     painter->drawText(0, 0, "Commit: ^%&$654");
@@ -30,4 +27,8 @@ void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 int GCommitNode::getNextArrowStartPoint() {
     return 0;
+}
+
+bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
+    return lhs.sha == rhs.sha;
 }
