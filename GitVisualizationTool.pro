@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     branch.cpp \
     tag.cpp \
     ggraphicsscene.cpp \
-    gcommitarrow.cpp
+    gcommitarrow.cpp \
+    gitobject.cpp \
+    localrepoparser.cpp
 
 HEADERS  += mainwindow.h \
     gcommitnode.h \
@@ -35,7 +37,9 @@ HEADERS  += mainwindow.h \
     branch.h \
     tag.h \
     ggraphicsscene.h \
-    gcommitarrow.h
+    gcommitarrow.h \
+    localrepoparser.h \
+    gitobject.h
 
 
 FORMS    += mainwindow.ui

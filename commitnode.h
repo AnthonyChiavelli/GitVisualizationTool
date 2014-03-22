@@ -2,11 +2,12 @@
 #define COMMITNODE_H
 #include <vector>
 
+#include "gitobject.h"
 #include "gituser.h"
 
 using namespace std;
 
-class CommitNode {
+class CommitNode : GitObject {
 
 public:
     CommitNode();

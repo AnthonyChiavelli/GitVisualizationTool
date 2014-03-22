@@ -10,6 +10,12 @@ class Remote {
 public:
     Remote(string& name, string& url);
 
+    string getUrl() const;
+    void setUrl(const string &value);
+
+    string getName() const;
+    void setName(const string &value);
+
 private:
     string url;
     string name;

@@ -1,9 +1,13 @@
 #ifndef TAG_H
 #define TAG_H
+
 #include <string>
 #include "commitnode.h"
+#include "gitobject.h"
 
-class Tag {
+using namespace std;
+
+class Tag : GitObject {
 
 public:
     Tag(CommitNode &commit, string &type, string &tag, string &tagger, string &message);
