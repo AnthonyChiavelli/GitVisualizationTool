@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     branch.cpp \
     tag.cpp \
     ggraphicsscene.cpp \
-    gcommitarrow.cpp
+    gcommitarrow.cpp \
+    commitsha.cpp
 
 HEADERS  += mainwindow.h \
     gcommitnode.h \
@@ -35,7 +36,8 @@ HEADERS  += mainwindow.h \
     branch.h \
     tag.h \
     ggraphicsscene.h \
-    gcommitarrow.h
+    gcommitarrow.h \
+    commitsha.h
 
 
 FORMS    += mainwindow.ui

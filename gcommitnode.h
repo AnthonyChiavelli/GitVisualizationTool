@@ -7,6 +7,10 @@
 
 using namespace std;
 
+// Graphics properties
+#define nodeWidth 100
+#define nodeHeight nodeWidth
+
 /*
  * Graphical node representing a commit
  */
