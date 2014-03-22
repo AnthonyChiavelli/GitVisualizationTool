@@ -5,6 +5,10 @@
 #include "commitnode.h"
 #include <QGraphicsScene>
 
+/**Graphics properties**/
+#define SCENE_X 500
+#define SCENE_Y 500
+
 class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
 public:

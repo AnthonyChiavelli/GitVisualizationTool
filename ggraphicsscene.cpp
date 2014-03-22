@@ -3,6 +3,8 @@
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
+    // Set up our coordinate rectange
+    this->setSceneRect(0, 0, SCENE_X, SCENE_Y);
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const & commitNode, GCommitNode const * parent, int nodeDepth) {
@@ -17,7 +19,6 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const & c
     else {
         gCommitNode = new GCommitNode();
     }
-
 
     // If this is a recursive call, we'll have a parent to attach
     if (parent != 0) {
