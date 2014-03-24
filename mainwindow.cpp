@@ -13,9 +13,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     canvas->setScene(scene);
 
     //Test stuff
-    GCommitNode *node = new GCommitNode(0);
+    GCommitNode *node1 = new GCommitNode(1, 0, 0);
+    GCommitNode *node2 = new GCommitNode(2, 2, 0);
+    GCommitNode *node3 = new GCommitNode(3, 3, 0);
+    GCommitNode *node4 = new GCommitNode(4, 4, 0);
 
-    this->scene->addItem(node);
+
+    this->scene->addItem(node1);
+    this->scene->addItem(node2);
+    this->scene->addItem(node3);
+    this->scene->addItem(node4);
 }
 
 MainWindow::~MainWindow() {

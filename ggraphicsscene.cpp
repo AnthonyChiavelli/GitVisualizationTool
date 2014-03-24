@@ -1,5 +1,6 @@
 #include "ggraphicsscene.h"
 #include "gcommitnode.h"
+#include <vector>
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
@@ -35,7 +36,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const & c
         // Increase the node depth for these children
         nodeDepth++;
         // Recursively call ourselves for each child and add result to our set of children
-        for (vector<CommitNode>::iterator it = children.begin(); it !=children.end(); ++it) {
+        for (vector<CommitNode>::iterator it = children.begin(); it !=children.end(); ++it ) {
             gCommitNode->childrenGNodes.push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
         }
     }
@@ -43,4 +44,27 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const & c
     // Add this commit to a list of all commits
     this->allGCommitNodes.insert({gCommitNode->sha, gCommitNode});
     return gCommitNode;
+}
+
+void GGraphicsScene::renderScene(GCommitNode *rootNode) {
+
+    vector<GCommitNode *> nodes;
+
+    // Enqueue the root node
+    nodes.push_back(rootNode);
+
+    // While we have nodes remaining
+    while (!nodes.empty()) {
+
+        // For each node on the queue
+        for (vector<GCommitNode *>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+            // Render, pop, and add its children to queue
+            GCommitNode * currentNode = nodes.back();
+            this->addItem(currentNode);
+            nodes.pop_back();
+            for (vector<GCommitNode *>::iterator it = currentNode->childrenGNodes.begin(); it != currentNode->childrenGNodes.end(); ++it) {
+                nodes.push_back(*it);
+            }
+        }
+    }
 }

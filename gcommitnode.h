@@ -24,6 +24,7 @@ class GCommitNode : public QObject, public QGraphicsItem {
 public:
 
     GCommitNode(QGraphicsItem *parent = 0);
+    GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent = 0);
 
     // ---QGraphicsItems must override these next two methods ---
 
