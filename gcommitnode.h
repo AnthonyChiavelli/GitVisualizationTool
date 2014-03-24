@@ -49,6 +49,12 @@ public:
     // How far away from root node we are
     int depth;
 
+    // Number of cousins we have
+    int numberOfCousins;
+
+    // Render order within cousins
+    int renderOrder;
+
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 

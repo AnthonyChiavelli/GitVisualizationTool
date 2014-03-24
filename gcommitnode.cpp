@@ -11,7 +11,8 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
     // Establish our position in the scene based on our place in the tree
-    this->setPos(500 / (1 + 1), ROW_HEIGHT * 0);
+    //this->setPos(500 / (1 + 1), ROW_HEIGHT * depth);
+
 }
 
 GCommitNode::GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent) : QGraphicsItem(parent) {
@@ -22,7 +23,7 @@ GCommitNode::GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent) 
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
     // Establish our position in the scene based on our place in the tree
-    this->setPos(500 / (numberOfCousins + 2), ROW_HEIGHT * level);
+    //this->setPos(500 / (numberOfCousins + 2), ROW_HEIGHT * level);
 }
 
 

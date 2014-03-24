@@ -6,6 +6,22 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Set up our coordinate rectange
     this->setSceneRect(0, 0, SCENE_X, SCENE_Y);
+
+    // Build up test tree
+    GCommitNode *root = new GCommitNode(0, 0);
+    GCommitNode *uncle = new GCommitNode(1, 1);
+    uncle->parentGNodes.push_back(root);
+    GCommitNode *aunt = new GCommitNode(1, 1);
+    aunt->parentGNodes.push_back(root);
+    root->childrenGNodes.push_back(aunt);
+    root->childrenGNodes.push_back(uncle);
+
+    GCommitNode *cousin = new GCommitNode(2, 0);
+    cousin->parentGNodes.push_back(aunt);
+    aunt->childrenGNodes.push_back(cousin);
+
+    this->renderScene(root);
+
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const & commitNode, GCommitNode const * parent, int nodeDepth) {
@@ -49,6 +65,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const & c
 void GGraphicsScene::renderScene(GCommitNode *rootNode) {
 
     vector<GCommitNode *> nodes;
+    int currentLevel = 0;
 
     // Enqueue the root node
     nodes.push_back(rootNode);
@@ -57,14 +74,19 @@ void GGraphicsScene::renderScene(GCommitNode *rootNode) {
     while (!nodes.empty()) {
 
         // For each node on the queue
-        for (vector<GCommitNode *>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+        int cousinCount = 0;
+        vector<GCommitNode *> currentLevelVector(nodes);
+        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCount) {
             // Render, pop, and add its children to queue
-            GCommitNode * currentNode = nodes.back();
+            GCommitNode * currentNode = *it;
+            currentNode->setPos(500 / currentLevelVector.size(), currentLevel * 150);
             this->addItem(currentNode);
+            //currentLevelVector.pop_back();
             nodes.pop_back();
-            for (vector<GCommitNode *>::iterator it = currentNode->childrenGNodes.begin(); it != currentNode->childrenGNodes.end(); ++it) {
-                nodes.push_back(*it);
+            for (vector<GCommitNode *>::iterator it2 = currentNode->childrenGNodes.begin(); it2 != currentNode->childrenGNodes.end(); ++it2) {
+                nodes.push_back(*it2);
             }
         }
+        currentLevel++;
     }
 }
