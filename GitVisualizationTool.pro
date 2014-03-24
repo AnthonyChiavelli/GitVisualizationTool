@@ -15,12 +15,29 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     gcommitnode.cpp \
+    remote.cpp \
+    repository.cpp \
+    gituser.cpp \
+    commitnode.cpp \
+    localrepository.cpp \
+    branch.cpp \
+    tag.cpp \
+    ggraphicsscene.cpp \
     gcommitarrow.cpp \
-    greposcene.cpp
+    commitsha.cpp
 
 HEADERS  += mainwindow.h \
     gcommitnode.h \
+    remote.h \
+    repository.h \
+    gituser.h \
+    commitnode.h \
+    localrepository.h \
+    branch.h \
+    tag.h \
+    ggraphicsscene.h \
     gcommitarrow.h \
-    greposcene.h
+    commitsha.h
+
 
 FORMS    += mainwindow.ui
