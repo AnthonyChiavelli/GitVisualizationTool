@@ -14,64 +14,64 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1391</width>
-      <height>691</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="2" alignment="Qt::AlignRight">
-      <widget class="QListView" name="listView_2"/>
-     </item>
-     <item row="0" column="0" alignment="Qt::AlignLeft">
-      <widget class="QListView" name="listView"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="tab">
-        <attribute name="title">
-         <string>Tab 1</string>
-        </attribute>
-        <widget class="QGraphicsView" name="graphicsView">
-         <property name="geometry">
-          <rect>
-           <x>-5</x>
-           <y>1</y>
-           <width>871</width>
-           <height>461</height>
-          </rect>
-         </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Tab 1</string>
+         </attribute>
+         <widget class="QGraphicsView" name="graphicsView">
+          <property name="geometry">
+           <rect>
+            <x>-5</x>
+            <y>1</y>
+            <width>871</width>
+            <height>461</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Tab 2</string>
+         </attribute>
+         <widget class="QGraphicsView" name="graphicsView_2">
+          <property name="geometry">
+           <rect>
+            <x>-5</x>
+            <y>-9</y>
+            <width>871</width>
+            <height>471</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
        </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>Tab 2</string>
-        </attribute>
-        <widget class="QGraphicsView" name="graphicsView_2">
-         <property name="geometry">
-          <rect>
-           <x>-5</x>
-           <y>-9</y>
-           <width>871</width>
-           <height>471</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="3" alignment="Qt::AlignBottom">
-      <widget class="QListView" name="listView_3"/>
-     </item>
-    </layout>
-   </widget>
+      </item>
+      <item row="1" column="0" colspan="3" alignment="Qt::AlignBottom">
+       <widget class="QListView" name="listView_3"/>
+      </item>
+      <item row="0" column="2" alignment="Qt::AlignRight">
+       <widget class="QListView" name="listView_2"/>
+      </item>
+      <item row="0" column="0" alignment="Qt::AlignLeft">
+       <widget class="QListView" name="listView"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -79,7 +79,7 @@
      <x>0</x>
      <y>0</y>
      <width>1392</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
