@@ -13,29 +13,29 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    gcommitnode.cpp \
-    remote.cpp \
-    repository.cpp \
-    gituser.cpp \
-    commitnode.cpp \
-    localrepository.cpp \
-    branch.cpp \
-    tag.cpp \
-    ggraphicsscene.cpp \
-    gcommitarrow.cpp
+        ui/mainwindow.cpp \
+    model/gcommitnode.cpp \
+    model/remote.cpp \
+    model/repository.cpp \
+    model/gituser.cpp \
+    model/commitnode.cpp \
+    model/localrepository.cpp \
+    model/branch.cpp \
+    model/tag.cpp \
+    ui/ggraphicsscene.cpp \
+    ui/gcommitarrow.cpp
 
-HEADERS  += mainwindow.h \
-    gcommitnode.h \
-    remote.h \
-    repository.h \
-    gituser.h \
-    commitnode.h \
-    localrepository.h \
-    branch.h \
-    tag.h \
-    ggraphicsscene.h \
-    gcommitarrow.h
+HEADERS  += ui/mainwindow.h \
+    model/gcommitnode.h \
+    model/remote.h \
+    model/repository.h \
+    model/gituser.h \
+    model/commitnode.h \
+    model/localrepository.h \
+    model/branch.h \
+    model/tag.h \
+    ui/ggraphicsscene.h \
+    ui/gcommitarrow.h
 
 
 FORMS    += mainwindow.ui
