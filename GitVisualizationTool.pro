@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = GitVisualizationTool
 TEMPLATE = app
+CONFIG += C11++
 
 
 SOURCES += main.cpp\
@@ -23,7 +24,9 @@ SOURCES += main.cpp\
         branch.cpp \
         tag.cpp \
         ggraphicsscene.cpp \
-        gcommitarrow.cpp
+        gcommitarrow.cpp \
+    gitapiresponse.cpp \
+    gitapi.cpp
 
 HEADERS  += mainwindow.h \
         gcommitnode.h \
@@ -35,7 +38,9 @@ HEADERS  += mainwindow.h \
         branch.h \
         tag.h \
         ggraphicsscene.h \
-        gcommitarrow.h
+        gcommitarrow.h \
+    gitapiresponse.h \
+    gitapi.h
 
 
 FORMS    += mainwindow.ui
