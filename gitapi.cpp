@@ -94,6 +94,12 @@ static GitAPIResponse executeGitCommand(string& command);
         return executeGitCommand(command);
     }
 
+    GitAPIResponse gitAPI::showGitObjectContents(std::string& repoPath, Sha1 hash){
+        string command = "cd " + repoPath + ";git cat-file -p " + hash.getFullString() + ";echo $?";
+
+        return executeGitCommand(command);
+    }
+
     static GitAPIResponse executeGitCommand(string& command){
 
         FILE *output = popen(command.c_str(), "r"); // run the commands and saves the output on a file.
