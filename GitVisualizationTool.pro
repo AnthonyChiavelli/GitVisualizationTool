@@ -10,43 +10,34 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = GitVisualizationTool
 TEMPLATE = app
-CONFIG += C11++
 
 
-SOURCES += branch.cpp \
-        commitnode.cpp \
-        main.cpp\
+SOURCES += main.cpp\
         mainwindow.cpp \
-        gcommitarrow.cpp \
-        gcommitnode.cpp \
-        ggraphicsscene.cpp \
-        gitapi.cpp \
-        gitapiresponse.cpp \
-        gitobject.cpp \
-        gituser.cpp \
-        localrepoparser.cpp \
-        localrepository.cpp \
-        remote.cpp \
-        repository.cpp \
-        sha1.cpp \
-        tag.cpp
+    gcommitnode.cpp \
+    remote.cpp \
+    repository.cpp \
+    gituser.cpp \
+    commitnode.cpp \
+    localrepository.cpp \
+    branch.cpp \
+    tag.cpp \
+    ggraphicsscene.cpp \
+    gcommitarrow.cpp \
+    commitsha.cpp
 
+HEADERS  += mainwindow.h \
+    gcommitnode.h \
+    remote.h \
+    repository.h \
+    gituser.h \
+    commitnode.h \
+    localrepository.h \
+    branch.h \
+    tag.h \
+    ggraphicsscene.h \
+    gcommitarrow.h \
+    commitsha.h
 
-HEADERS  += branch.h \
-        commitnode.h \
-        mainwindow.h \
-        gcommitarrow.h \
-        gcommitnode.h \
-        ggraphicsscene.h \
-        gitapi.h \
-        gitapiresponse.h \
-        gitobject.h \
-        gituser.h \
-        localrepoparser.h \
-        localrepository.h \
-        remote.h \
-        repository.h \
-        sha1.h \
-        tag.h
 
 FORMS    += mainwindow.ui
