@@ -1,7 +1,7 @@
 #include "gcommitnode.h"
 #include <QGraphicsView>
 
-#include "commitsha.h"
+#include "sha1.h"
 
 GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
@@ -68,7 +68,7 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     // Render the text boxes
     painter->setBrush(Qt::darkCyan);
     painter->setPen(Qt::darkCyan);
-    CommitSha cs("2cd35f475899c74a90dba4345f11f0362268a952");
+    Sha1 cs("2cd35f475899c74a90dba4345f11f0362268a952");
     painter->drawText(labelTextMargin, 25, "Commit:");
     painter->drawText(shaTextMargin, 40, cs.getStringOfLength(6).c_str());
 }

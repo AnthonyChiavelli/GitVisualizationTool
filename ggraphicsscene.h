@@ -15,7 +15,7 @@ public:
     explicit GGraphicsScene(QObject *parent = 0);
 
     // Converts a CommitNode, produced by the parser, to a GCommitNode to be drawn on the canvas
-    GCommitNode *convertCommitNodeToGCommitNode(CommitNode const & commitNode, GCommitNode const * parent = 0, int nodeDepth = 0);
+    GCommitNode *convertCommitNodeToGCommitNode(CommitNode const * commitNode, GCommitNode const * parent = 0, int nodeDepth = 0);
 
     // Render the scene with a root node
     void renderScene(GCommitNode *rootNode);
