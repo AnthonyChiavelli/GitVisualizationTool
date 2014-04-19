@@ -3,21 +3,21 @@
 CommitNode::CommitNode() {
 }
 
-vector<CommitNode> CommitNode::getParents() const
+vector<CommitNode *> CommitNode::getParents() const
 {
     return parents;
 }
 
-void CommitNode::setParents(const vector<CommitNode> &value)
+void CommitNode::setParents(const vector<CommitNode *> &value)
 {
     parents = value;
 }
-vector<CommitNode> CommitNode::getChildren() const
+vector<CommitNode *> CommitNode::getChildren() const
 {
     return children;
 }
 
-void CommitNode::setChildren(const vector<CommitNode> &value)
+void CommitNode::setChildren(const vector<CommitNode *> &value)
 {
     children = value;
 }
