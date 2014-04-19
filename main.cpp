@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
+
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
@@ -9,3 +10,11 @@ int main(int argc, char *argv[]) {
 
     return a.exec();
 }
+
+
+//void test_GIT_API(){
+
+//    std::string path = "/home";
+//    gitAPI::gitInit(path);
+
+//}
