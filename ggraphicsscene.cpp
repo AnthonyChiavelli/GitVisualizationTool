@@ -26,11 +26,14 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * commitNode, GCommitNode const * parent, int nodeDepth) {
 
+
     // Check if this gcommit node has already been instantiated
     //TODO use getSha() once implemented
     GCommitNode *gCommitNode;
+    bool recylcingOldNode = false;
     if(this->allGCommitNodes.find(commitNode->getAuthor().getEmail()) != allGCommitNodes.end()) {
         gCommitNode = this->allGCommitNodes.at(commitNode->getAuthor().getEmail());
+        recylcingOldNode = true;
     }
     // Otherwise make a new one
     else {
@@ -57,8 +60,10 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
         }
     }
 
-    // Add this commit to a list of all commits
-    this->allGCommitNodes.insert({gCommitNode->sha, gCommitNode});
+    // Add this commit to a list of all commits, if it hasn't already been
+    if (!recylcingOldNode) {
+        this->allGCommitNodes.insert({gCommitNode->sha, gCommitNode});
+    }
     return gCommitNode;
 }
 
