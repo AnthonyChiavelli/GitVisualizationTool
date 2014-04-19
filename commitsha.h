@@ -10,7 +10,7 @@ using namespace std;
 class CommitSha {
 
 public:
-    // Takes the full SHA string
+    // Takes the full SHA stripng
     CommitSha(string);
     // n Character string representation
     string getStringOfLength(int);
