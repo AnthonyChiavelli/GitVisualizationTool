@@ -4,8 +4,8 @@ Branch::Branch() {
     // Empty constructor
 }
 
-Branch::Branch(string &name, string &commitSHA, int &type) :
-        name(name), commitSHA(commitSHA), type(type) {
+Branch::Branch(string &name, Sha1 &commitSHA, int &type) :
+        name(name), commitSha(commitSHA), type(type) {
 }
 
 string Branch::getName() const
@@ -25,14 +25,14 @@ void Branch::setType(int value)
 {
     type = value;
 }
-string Branch::getCommitSHA() const
+Sha1 Branch::getCommitSha() const
 {
-    return commitSHA;
+    return commitSha;
 }
 
-void Branch::setCommitSHA(const string &value)
+void Branch::setCommitSha(const Sha1 &value)
 {
-    commitSHA = value;
+    commitSha = value;
 }
 
 

@@ -1,7 +1,7 @@
 #ifndef GITOBJECT_H
 #define GITOBJECT_H
 
-#include <string>
+#include "sha1.h"
 
 using namespace std;
 
@@ -9,10 +9,10 @@ class GitObject {
 
 public:
     GitObject();
-    GitObject(string& SHA1);
+    GitObject(string& sha1);
 
-    string getSHA1() const;
-    void setSHA1(const string &value);
+    string getSha1() const;
+    void setSha1(const string &value);
 
     // Returns the name of the subdirectory in which this git object is located
     // (first two characters in SHA1)
@@ -23,7 +23,7 @@ public:
 
 
 private:
-    string SHA1;
+    Sha1 sha1;  // SHA-1 hash value used to identify git object
 };
 
 #endif // GITOBJECT_H

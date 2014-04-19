@@ -4,24 +4,24 @@ GitObject::GitObject() {
 
 }
 
-GitObject::GitObject(string &SHA1) {
-    this->SHA1 = SHA1;
+GitObject::GitObject(string &sha1) : sha1(sha1)  {
+    this->sha1 = sha1;
 }
 
-string GitObject::getSHA1() const {
-    return SHA1;
+string GitObject::getSha1() const {
+    return sha1.getFullString();
 }
 
-void GitObject::setSHA1(const string &value) {
-    SHA1 = value;
+void GitObject::setSha1(const string &value) {
+    sha1 = value;
 }
 
 string GitObject::getSubdirectoryName() const {
-    return SHA1.substr(0, 2);
+    return sha1.getStringOfLength(2) + "/";
 }
 
 string GitObject::getFileName() const {
-    return SHA1.substr(2, 38);
+    return sha1.getFullString().substr(2, 38);
 }
 
 

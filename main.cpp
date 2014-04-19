@@ -16,5 +16,8 @@ int main(int argc, char *argv[]) {
     string branchName = "master";
     LocalRepoParser::getBranch(pathToGitFolder, branchName);
 
+    // Test getting a git tree
+    LocalRepoParser::getGitTree(pathToGitFolder);
+
     return a.exec();
 }

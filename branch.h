@@ -2,6 +2,7 @@
 #define BRANCH_H
 
 #include <string>
+#include "sha1.h"
 
 #define LOCAL_BRANCH 0
 #define REMOTE_BRANCH 1
@@ -12,7 +13,7 @@ class Branch {
 
 public:
     Branch();
-    Branch(string &name, string &commitSHA, int &type);
+    Branch(string &name, Sha1 &commitSha, int &type);
 
     string getName() const;
     void setName(const string &value);
@@ -20,12 +21,12 @@ public:
     int getType() const;
     void setType(int value);
 
-    string getCommitSHA() const;
-    void setCommitSHA(const string &value);
+    Sha1 getCommitSha() const;
+    void setCommitSha(const Sha1 &value);
 
 private:
     string name;
-    string commitSHA;
+    Sha1 commitSha;
     int type;
 };
 
