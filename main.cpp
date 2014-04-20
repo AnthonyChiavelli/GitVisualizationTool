@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     w.show();
 
     // Test getting a branch from the git folder
-    string pathToGitFolder = "/home/krose/Development/GitVisualiztionTool/GitVisualizationTool/.git";
+    string pathToGitFolder = "/home/krose/Development/testGit";
     string branchName = "master";
     LocalRepoParser::getBranch(pathToGitFolder, branchName);
 
