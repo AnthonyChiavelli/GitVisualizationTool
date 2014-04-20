@@ -3,24 +3,27 @@
 CommitNode::CommitNode() {
 }
 
-vector<CommitNode *> CommitNode::getParents() const
-{
-    return parents;
+CommitNode::CommitNode(Sha1 sha) : sha(sha){
 }
 
-void CommitNode::setParents(const vector<CommitNode *> &value)
+vector<CommitNode *>* CommitNode::getParents() const
 {
-    parents = value;
-}
-vector<CommitNode *> CommitNode::getChildren() const
-{
-    return children;
+    return &parents;
 }
 
-void CommitNode::setChildren(const vector<CommitNode *> &value)
-{
-    children = value;
+void CommitNode::addParent(CommitNode *parent) {
+    parents->push_back(parent);
 }
+
+vector<CommitNode *>* CommitNode::getChildren() const
+{
+    return &children;
+}
+
+void CommitNode::addChild(CommitNode *parent) {
+    parents->push_back(parent);
+}
+
 GitUser CommitNode::getCommitter() const
 {
     return committer;
@@ -56,6 +59,11 @@ string CommitNode::getDateAndTime() const
 void CommitNode::setDateAndTime(const string &value)
 {
     dateAndTime = value;
+}
+
+CommitNode::~CommitNode() {
+    delete parents;
+    delete children;
 }
 
 

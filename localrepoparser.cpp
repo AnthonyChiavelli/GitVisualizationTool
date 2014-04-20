@@ -1,15 +1,19 @@
 #include "localrepoparser.h"
-
+#include "gitapiresponse.h"
 #include <iostream>
 #include <fstream>
 #include <QDir>
 #include <QString>
 #include <QStringList>
+#include <QStringListIterator>
 
 #define PATH_TO_REFS "/refs/heads/"
 #define PATH_TO_OBJECTS "/objects/"
-
 #define SKIP_HIDDEN_FOLDERS 2
+// git object line formats (for parsing)
+#define FORMAT_COMMIT_PARENT ""
+
+using namespace GitAPI;
 
 // Create hashmap for storing a record of all commits encountered (to prevent duplication)
 static QHash<string, CommitNode *> *commits;
@@ -76,6 +80,39 @@ CommitNode* LocalRepoParser::getCommitHistory(Sha1 const &commitSha, CommitNode 
 bool have(string &token) {
 }
 
-CommitNode* parseCommitNode() {
+CommitNode* parseCommitNode(CommitNode* commitNode, string& commitContents) {
+    // Break the commit contents up line-by-line
+    QStringList* lines = (new QString(commitContents))->split('\n');
+    QStringListIterator* lineIterator = new QStringListIterator(lines);
 
+    // Read through the contents of the commit
+    while (lineIterator->hasNext()) {
+        QString currentLine = lineIterator->next();
+
+        if (currentLine != "\n") {
+            QStringListIterator* tokenIterator = new QStringListIterator(currentLine.split(' '));
+            while (tokenIterator->hasNext()) {
+                QString currentToken = tokenIterator->next();
+                if (currentToken == "tree") {
+                    // Ignore the SHA-1 of the tree, since we aren't using them right now
+                    tokenIterator->next();
+                }
+                else if (currentToken == "parent") {
+                    // Get the SHA-1 of the parent commit
+                    currentToken == tokenIterator->next();
+                    //TODO: check for this commit in any existing tree
+                    CommitNode *parent = new CommitNode(currentToken);
+                    commitNode.addParent(parent);
+                }
+            }
+        }
+        else {
+            // Get the commit message if there is any
+            QString commitMessage = "";
+            while (lineIterator->hasNext()) {
+                commitMessage += lineIterator->next();
+            }
+            commitNode.setMessage(commitMessage);
+        }
+    }
 }

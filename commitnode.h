@@ -11,12 +11,14 @@ class CommitNode : public GitObject {
 
 public:
     CommitNode();
+    CommitNode(Sha1 &sha);
+    ~CommitNode();
 
-    vector<CommitNode *> getParents() const;
-    void setParents(const vector<CommitNode *> &value);
+    vector<CommitNode *>* getParents() const;
+    void addParent(const CommitNode * parent);
 
-    vector<CommitNode *> getChildren() const;
-    void setChildren(const vector<CommitNode *> &value);
+    vector<CommitNode *>* getChildren() const;
+    void addChild();
 
     GitUser getCommitter() const;
     void setCommitter(const GitUser &value);
@@ -31,8 +33,9 @@ public:
     void setDateAndTime(const string &value);
 
 private:
-    vector<CommitNode *> parents;
-    vector<CommitNode *> children;
+    Sha1 sha;
+    vector<CommitNode *>* parents = new vector<CommitNode *>();
+    vector<CommitNode *>* children = new vector<CommitNode *>();
     GitUser committer;
     GitUser author;
     string message;
