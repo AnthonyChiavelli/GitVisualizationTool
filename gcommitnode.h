@@ -7,6 +7,14 @@
 
 using namespace std;
 
+/**Graphics properties**/
+
+#define NODE_WIDTH 100
+#define NODE_HEIGHT NODE_WIDTH
+#define ROW_HEIGHT 120
+#define COLUMN_WIDTH 120
+
+
 /*
  * Graphical node representing a commit
  */
@@ -15,28 +23,52 @@ class GCommitNode : public QObject, public QGraphicsItem {
 
 public:
 
-    GCommitNode(QGraphicsItem *parent);
-    // QGraphicsItems must override these two methods
+    GCommitNode(QGraphicsItem *parent = 0);
+    GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent = 0);
+
+    // ---QGraphicsItems must override these next two methods ---
+
     // Returns estimate of size
     QRectF boundingRect() const;
+
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
     // Get the location the commit arrow should point to
     int getNextArrowStartPoint();
 
-protected:
-    // Mouse events
-    //void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    // Relatives
+    vector<const GCommitNode *> parentGNodes;
+    vector<GCommitNode *> childrenGNodes;
+
+    // Commit data
+    string author;
+    string message;
+    string sha;
+
+    // How far away from root node we are
+    int depth;
+
+    // Number of cousins we have
+    int numberOfCousins;
+
+    // Render order within cousins
+    int renderOrder;
+
+    // Implement equality comparison between gcommit nodes
+    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 
 private:
 
-    // Size of node
-    int size;
+    // Helper methods to help render the node
+    void renderNodeRectangle(QPainter *painter);
+    void renderNodeText(QPainter *painter);
 
-    // Relatives
-    vector<GCommitNode *> parentGNodes;
-    vector<GCommitNode *> childrenGNodes;
+protected:
+
+    // Mouse events
+    //void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
 
