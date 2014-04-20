@@ -47,12 +47,12 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     gCommitNode->depth = nodeDepth;
 
     // If there are any children, recursively call this on them
-    vector<CommitNode *> children = commitNode->getChildren();
-    if (children.size() > 0) {
+    vector<CommitNode *>* children = commitNode->getChildren();
+    if (children->size() > 0) {
         // Increase the node depth for these children
         nodeDepth++;
         // Recursively call ourselves for each child and add result to our set of children
-        for (vector<CommitNode *>::iterator it = children.begin(); it !=children.end(); ++it ) {
+        for (vector<CommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
             gCommitNode->childrenGNodes.push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
         }
     }

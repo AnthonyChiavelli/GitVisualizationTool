@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GitVisualizationTool
 TEMPLATE = app
 CONFIG += C11++
-
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += branch.cpp \
         commitnode.cpp \

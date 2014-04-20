@@ -5,14 +5,13 @@ GitObject::GitObject() {
 }
 
 GitObject::GitObject(string &sha1) : sha1(sha1)  {
-    this->sha1 = sha1;
 }
 
-string GitObject::getSha1() const {
+Sha1 GitObject::getSha1() const {
     return sha1.getFullString();
 }
 
-void GitObject::setSha1(const string &value) {
+void GitObject::setSha1(Sha1 const &value) {
     sha1 = value;
 }
 

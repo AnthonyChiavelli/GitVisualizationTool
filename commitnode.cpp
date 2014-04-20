@@ -3,12 +3,12 @@
 CommitNode::CommitNode() {
 }
 
-CommitNode::CommitNode(Sha1 sha) : sha(sha){
+CommitNode::CommitNode(Sha1 &sha) : sha(sha){
 }
 
 vector<CommitNode *>* CommitNode::getParents() const
 {
-    return &parents;
+    return parents;
 }
 
 void CommitNode::addParent(CommitNode *parent) {
@@ -17,7 +17,7 @@ void CommitNode::addParent(CommitNode *parent) {
 
 vector<CommitNode *>* CommitNode::getChildren() const
 {
-    return &children;
+    return children;
 }
 
 void CommitNode::addChild(CommitNode *parent) {

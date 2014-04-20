@@ -15,10 +15,10 @@ public:
     ~CommitNode();
 
     vector<CommitNode *>* getParents() const;
-    void addParent(const CommitNode * parent);
+    void addParent(CommitNode *parent);
 
     vector<CommitNode *>* getChildren() const;
-    void addChild();
+    void addChild(CommitNode *child);
 
     GitUser getCommitter() const;
     void setCommitter(const GitUser &value);
