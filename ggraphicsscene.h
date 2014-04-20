@@ -6,8 +6,8 @@
 #include <QGraphicsScene>
 
 /**Graphics properties**/
-#define SCENE_X 500
-#define SCENE_Y 500
+#define SCENE_X 700
+#define SCENE_Y 700
 
 class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
@@ -22,6 +22,7 @@ public:
 
     // A global set of all nodes mapped by sha
     map<string, GCommitNode *> allGCommitNodes;
+
 
 signals:
 

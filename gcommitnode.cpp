@@ -59,7 +59,7 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     QFont font;
     QFontMetrics fontMetrics(font);
     int labelTextWidth = fontMetrics.width("Commit: ");
-    int shaTextWidth = fontMetrics.width("123456789");
+    int shaTextWidth = 50;//fontMetrics.width(this->message);
 
     // Calculate margin necessary to center text boxes in node
     int labelTextMargin = (NODE_WIDTH - labelTextWidth) / 2;
@@ -70,7 +70,7 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     painter->setPen(Qt::darkCyan);
     Sha1 cs("2cd35f475899c74a90dba4345f11f0362268a952");
     painter->drawText(labelTextMargin, 25, "Commit:");
-    painter->drawText(shaTextMargin, 40, cs.getStringOfLength(6).c_str());
+    painter->drawText(shaTextMargin, 40, this->message.c_str());
 }
 
 bool operator==(GCommitNode &lhs, GCommitNode &rhs) {

@@ -8,17 +8,43 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     this->setSceneRect(0, 0, SCENE_X, SCENE_Y);
 
     // Build up test tree
-    GCommitNode *root = new GCommitNode(0, 0);
-    GCommitNode *uncle = new GCommitNode(1, 1);
-    uncle->parentGNodes.push_back(root);
-    GCommitNode *aunt = new GCommitNode(1, 1);
-    aunt->parentGNodes.push_back(root);
-    root->childrenGNodes.push_back(aunt);
-    root->childrenGNodes.push_back(uncle);
+    GCommitNode *root = new GCommitNode(1, 1);
+    root->depth = 0;
+    root->message = "root";
 
-    GCommitNode *cousin = new GCommitNode(2, 0);
-    cousin->parentGNodes.push_back(aunt);
-    aunt->childrenGNodes.push_back(cousin);
+
+    GCommitNode *child1 = new GCommitNode(2, 2);
+    child1->depth = 1;
+    child1->message = "child1";
+
+    GCommitNode *child2 = new GCommitNode(2, 2);
+    child2->depth = 1;
+    child2->message = "child2";
+
+    GCommitNode *grandchild1 = new GCommitNode(3, 3);
+    grandchild1->depth = 2;
+    grandchild1->message = "grandchild1";
+
+    GCommitNode *grandchild2 = new GCommitNode(3, 3);
+    grandchild2->depth = 2;
+    grandchild2->message = "grandchild2";
+
+    GCommitNode *grandchild3 = new GCommitNode(3, 3);
+    grandchild3->depth = 2;
+    grandchild3->message = "grandchild3";
+
+    grandchild1->parentGNodes.push_back(child1);
+//    grandchild2->parentGNodes.push_back(child1);
+//    grandchild3->parentGNodes.push_back(child2);
+
+    child1->childrenGNodes.push_back(grandchild1);
+//    child1->childrenGNodes.push_back(grandchild2);
+//    child2->childrenGNodes.push_back(grandchild3);
+
+    root->childrenGNodes.push_back(child1);
+    root->childrenGNodes.push_back(child2);
+    child1->parentGNodes.push_back(root);
+    child2->parentGNodes.push_back(root);
 
     this->renderScene(root);
 
@@ -79,12 +105,13 @@ void GGraphicsScene::renderScene(GCommitNode *rootNode) {
     while (!nodes.empty()) {
 
         // For each node on the queue
-        int cousinCount = 0;
         vector<GCommitNode *> currentLevelVector(nodes);
-        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCount) {
+        int cousinCounter = 0;
+        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCounter) {
             // Render, pop, and add its children to queue
             GCommitNode * currentNode = *it;
-            currentNode->setPos(500 / currentLevelVector.size(), currentLevel * 150);
+            int nodeDepth = currentNode->depth;
+            currentNode->setPos((500 / (currentLevelVector.size() + 1)) * (cousinCounter+1), (currentNode->depth + 1) * 150);
             this->addItem(currentNode);
             //currentLevelVector.pop_back();
             nodes.pop_back();
