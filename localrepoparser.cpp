@@ -16,19 +16,20 @@
 #define FORMAT_COMMIT_PARENT ""
 
 // Parses the contents of a commit object
-void parseCommitNode(CommitNode* commitNode, string& commitContents);
+void parseCommitNode(CommitNode *commitNode, string &commitContents, QHash<QString, CommitNode *> *commitsEncountered);
 // Returns the full history for the given commit (identified by it's SHA-1)
-void getCommitHistory(Sha1 const &commitSha, CommitNode *childCommit = NULL, QHash<string, CommitNode *> *commits = NULL);
+void getCommitHistory(Sha1 const &commitSha, QHash<QString, CommitNode *> *commits, CommitNode *childCommit = NULL);
 
-// Create hashmap for storing a record of all commits encountered (to prevent duplication)
-static QHash<string, CommitNode *> *commits;
-string absPathToGitFolder;
-CommitNode *rootCommit;
+static string absPathToGitFolder;
+static CommitNode *rootCommit;
 
 CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
     QStringList branchNames;
     vector<Branch *> branches;
     absPathToGitFolder = pathToGitFolder;
+
+    // Create hashmap for storing a record of all commits encountered (to prevent duplication)
+    QHash<QString, CommitNode *> *commits = new QHash<QString, CommitNode *>();
 
     // Get a list of all the local branches
     QDir branchDirectory((pathToGitFolder + PATH_TO_REFS).c_str());
@@ -38,10 +39,15 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
     }
 
     // Assemble the commit history of each branch into a single CommitNode
-    if (branches.size() > 0) {
-        cout << "Branch commit Sha: " << branches.at(0)->getCommitSha().getFullString() << endl;
-        getCommitHistory(branches.at(0)->getCommitSha());
+    for (Branch *branch : branches) {
+        cout << "Branch's commit Sha: " << branch->getCommitSha().getStringOfLength(7) << endl;
+        getCommitHistory(branch->getCommitSha(), commits);
     }
+
+    // TODO: Clean up memory
+    delete commits;
+
+    return rootCommit;
 }
 
 Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &branchName) {
@@ -64,39 +70,54 @@ Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &
     return branch;
 }
 
-void getCommitHistory(Sha1 const &commitSha, CommitNode *childCommit, QHash<string, CommitNode *> *commits) {
-    // Create a CommitNode* for the given sha
-    CommitNode *currentCommit = new CommitNode();
-    currentCommit->setSha1(commitSha);
+/**
+ * Assembles the commit history for the commit with the given SHA-1 if it doesn't already exist
+ *
+ * @brief getCommitHistory
+ * @param commitSha
+ * @param commits
+ * @param childCommit
+ */
+void getCommitHistory(Sha1 const &commitSha, QHash<QString, CommitNode *> *commits, CommitNode *childCommit) {
+    // Only get the commit history if we haven't already encountered this commit
+    QString shaString(commitSha.getFullString().c_str());
+    if (!commits->contains(shaString)) {
+        // Create a CommitNode* for the given sha
+        CommitNode *currentCommit = new CommitNode();
+        currentCommit->setSha1(commitSha);
 
-    // Get the contents of the commit file
-    string commitContents = GitApi::showGitObjectContents(absPathToGitFolder, commitSha).getMessage();
+        // Add the current commit to the list of those encountered
+        QString shaString(commitSha.getFullString().c_str());
+        commits->insert(shaString, currentCommit);
 
-    // ...and parse its contents into a commit object
-    parseCommitNode(currentCommit, commitContents);
+        // Get the contents of the commit file
+        string commitContents = GitApi::showGitObjectContents(absPathToGitFolder, commitSha).getMessage();
 
-    // Add child to the commit if any
-    if (childCommit != NULL) {
-        currentCommit->addChild(childCommit);
-    }
+        // ...and parse its contents into a commit object
+        parseCommitNode(currentCommit, commitContents, commits);
 
-    // Get the commit history for each parent
-    if (!currentCommit->getParents()->empty()) {
-        // get commit history for each parent
-        for (CommitNode * parent : *(currentCommit->getParents())) {
-            getCommitHistory(parent->getSha1(), currentCommit);
+        // Add child to the commit if any
+        if (childCommit != NULL) {
+            currentCommit->addChild(childCommit);
+        }
+
+        // Get the commit history for each parent
+        if (!currentCommit->getParents()->empty()) {
+            // get commit history for each parent
+            for (CommitNode * parent : *(currentCommit->getParents())) {
+                getCommitHistory(parent->getSha1(), commits, currentCommit);
+            }
+        }
+        else { // Root commit
+            // Save the root commit if it hasn't been saved already
+            if (rootCommit == NULL) {
+               rootCommit = currentCommit;
+            }
         }
     }
-    else { // Root commit
-        // Save the root commit if it hasn't been saved already
-        if (rootCommit == NULL) {
-           rootCommit = currentCommit;
-        }
-    }
-
 }
 
-void parseCommitNode(CommitNode* commitNode, string& commitContents) {
+void parseCommitNode(CommitNode* commitNode, string& commitContents, QHash<QString, CommitNode *> *commitsEncountered) {
     // Break the commit contents up line-by-line
     QStringList lines = (new QString(commitContents.c_str()))->split('\n');
     QStringListIterator* lineIterator = new QStringListIterator(lines);
@@ -105,7 +126,9 @@ void parseCommitNode(CommitNode* commitNode, string& commitContents) {
     while (lineIterator->hasNext()) {
         QString currentLine = lineIterator->next();
 
-        if (currentLine != "\n") {
+        // If we aren't reading the commit message
+        if (currentLine != "") {
+            // Read through each token in the current line
             QStringListIterator* tokenIterator = new QStringListIterator(currentLine.split(' '));
             while (tokenIterator->hasNext()) {
                 QString currentToken = tokenIterator->next();
@@ -116,10 +139,18 @@ void parseCommitNode(CommitNode* commitNode, string& commitContents) {
                 else if (currentToken == "parent") {
                     // Get the SHA-1 of the parent commit
                     currentToken = tokenIterator->next();
-                    //TODO: check for this commit in any existing tree
-                    Sha1 parentSha(currentToken.toStdString());
-                    CommitNode *parent = new CommitNode(parentSha);
-                    commitNode->addParent(parent);
+                    // If we've already encountered the parent commit
+                    if (commitsEncountered->contains(currentToken)) {
+                        // Link the parent with current commit. TODO: Fix segfault here
+                        commitsEncountered->value(currentToken)->addChild(commitNode);
+                        commitNode->addParent(commitsEncountered->value(currentToken));
+                    }
+                    else { // Create a new commit node for this parent
+                        Sha1 parentSha(currentToken.toStdString());
+                        CommitNode *parent = new CommitNode();
+                        parent->setSha1(parentSha);
+                        commitNode->addParent(parent);
+                    }
                 }
             }
         }
