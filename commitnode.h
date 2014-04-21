@@ -11,7 +11,6 @@ class CommitNode : public GitObject {
 
 public:
     CommitNode();
-    CommitNode(Sha1 &sha);
     ~CommitNode();
 
     vector<CommitNode *>* getParents() const;
@@ -33,7 +32,6 @@ public:
     void setDateAndTime(const string &value);
 
 private:
-    Sha1 sha;
     vector<CommitNode *>* parents = new vector<CommitNode *>();
     vector<CommitNode *>* children = new vector<CommitNode *>();
     GitUser committer;

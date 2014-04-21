@@ -3,9 +3,6 @@
 CommitNode::CommitNode() {
 }
 
-CommitNode::CommitNode(Sha1 &sha) : sha(sha){
-}
-
 vector<CommitNode *>* CommitNode::getParents() const
 {
     return parents;
@@ -20,8 +17,8 @@ vector<CommitNode *>* CommitNode::getChildren() const
     return children;
 }
 
-void CommitNode::addChild(CommitNode *parent) {
-    parents->push_back(parent);
+void CommitNode::addChild(CommitNode *child) {
+    children->push_back(child);
 }
 
 GitUser CommitNode::getCommitter() const
