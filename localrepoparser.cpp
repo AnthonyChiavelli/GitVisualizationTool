@@ -75,15 +75,15 @@ void getCommitHistory(Sha1 const &commitSha, QHash<QString, CommitNode *> *commi
     CommitNode *currentCommit = new CommitNode();
     currentCommit->setSha1(commitSha);
 
+    // Add the current commit to the list of those encountered
+    QString shaString(commitSha.getFullString().c_str());
+    commits->insert(shaString, currentCommit);
+
     // Get the contents of the commit file
     string commitContents = GitApi::showGitObjectContents(absPathToGitFolder, commitSha).getMessage();
 
     // ...and parse its contents into a commit object
     parseCommitNode(currentCommit, commitContents, commits);
-
-    // Add the current commit to the list of those encountered
-    QString shaString(commitSha.getFullString().c_str());
-    commits->insert(shaString, currentCommit);
 
     // Add child to the commit if any
     if (childCommit != NULL) {
@@ -133,8 +133,8 @@ void parseCommitNode(CommitNode* commitNode, string& commitContents, QHash<QStri
                     // If we've already encountered the parent commit
                     if (commitsEncountered->contains(currentToken)) {
                         // Link the parent with current commit. TODO: Fix segfault here
-                        //commitsEncountered->take(currentToken)->addChild(commitNode);
-                        commitNode->addParent(commitsEncountered->take(currentToken));
+                        commitsEncountered->value(currentToken)->addChild(commitNode);
+                        commitNode->addParent(commitsEncountered->value(currentToken));
                     }
                     else { // Create a new commit node for this parent
                         Sha1 parentSha(currentToken.toStdString());
