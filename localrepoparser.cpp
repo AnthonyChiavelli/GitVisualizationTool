@@ -44,7 +44,7 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
         getCommitHistory(branch->getCommitSha(), commits);
     }
 
-    // Clean up memory
+    // TODO: Clean up memory
     delete commits;
 
     return rootCommit;
@@ -70,42 +70,51 @@ Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &
     return branch;
 }
 
+/**
+ * Assembles the commit history for the commit with the given SHA-1 if it doesn't already exist
+ *
+ * @brief getCommitHistory
+ * @param commitSha
+ * @param commits
+ * @param childCommit
+ */
 void getCommitHistory(Sha1 const &commitSha, QHash<QString, CommitNode *> *commits, CommitNode *childCommit) {
-    // Create a CommitNode* for the given sha
-    CommitNode *currentCommit = new CommitNode();
-    currentCommit->setSha1(commitSha);
-
-    // Add the current commit to the list of those encountered
+    // Only get the commit history if we haven't already encountered this commit
     QString shaString(commitSha.getFullString().c_str());
-    commits->insert(shaString, currentCommit);
+    if (!commits->contains(shaString)) {
+        // Create a CommitNode* for the given sha
+        CommitNode *currentCommit = new CommitNode();
+        currentCommit->setSha1(commitSha);
 
-    // Get the contents of the commit file
-    string commitContents = GitApi::showGitObjectContents(absPathToGitFolder, commitSha).getMessage();
+        // Add the current commit to the list of those encountered
+        QString shaString(commitSha.getFullString().c_str());
+        commits->insert(shaString, currentCommit);
 
-    // ...and parse its contents into a commit object
-    parseCommitNode(currentCommit, commitContents, commits);
+        // Get the contents of the commit file
+        string commitContents = GitApi::showGitObjectContents(absPathToGitFolder, commitSha).getMessage();
 
-    // Add child to the commit if any
-    if (childCommit != NULL) {
-        currentCommit->addChild(childCommit);
-    }
+        // ...and parse its contents into a commit object
+        parseCommitNode(currentCommit, commitContents, commits);
 
-    // Get the commit history for each parent
-    if (!currentCommit->getParents()->empty()) {
-        // get commit history for each parent
-        for (CommitNode * parent : *(currentCommit->getParents())) {
-            getCommitHistory(parent->getSha1(), commits, currentCommit);
+        // Add child to the commit if any
+        if (childCommit != NULL) {
+            currentCommit->addChild(childCommit);
+        }
+
+        // Get the commit history for each parent
+        if (!currentCommit->getParents()->empty()) {
+            // get commit history for each parent
+            for (CommitNode * parent : *(currentCommit->getParents())) {
+                getCommitHistory(parent->getSha1(), commits, currentCommit);
+            }
+        }
+        else { // Root commit
+            // Save the root commit if it hasn't been saved already
+            if (rootCommit == NULL) {
+               rootCommit = currentCommit;
+            }
         }
     }
-    else { // Root commit
-        // Save the root commit if it hasn't been saved already
-        if (rootCommit == NULL) {
-           rootCommit = currentCommit;
-        }
-    }
-
-    delete currentCommit;
-
 }
 
 void parseCommitNode(CommitNode* commitNode, string& commitContents, QHash<QString, CommitNode *> *commitsEncountered) {

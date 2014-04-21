@@ -3,22 +3,22 @@
 CommitNode::CommitNode() {
 }
 
-vector<CommitNode *>* CommitNode::getParents() const
+QSet<CommitNode *>* CommitNode::getParents() const
 {
     return parents;
 }
 
 void CommitNode::addParent(CommitNode *parent) {
-    parents->push_back(parent);
+    parents->insert(parent);
 }
 
-vector<CommitNode *>* CommitNode::getChildren() const
+QSet<CommitNode *>* CommitNode::getChildren() const
 {
     return children;
 }
 
 void CommitNode::addChild(CommitNode *child) {
-    children->push_back(child);
+    children->insert(child);
 }
 
 GitUser CommitNode::getCommitter() const

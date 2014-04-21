@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     window.setWindowTitle("Gitty Up, Bitch!");
 
     // Test getting a branch from the git folder
-    string pathToGitFolder = "/home/krose/Development/testGit";
+    string pathToGitFolder = "/home/krose/Development/GitVisualiztionTool/GitVisualizationTool";
     string branchName = "master";
     LocalRepoParser::getBranch(pathToGitFolder, branchName);
 
