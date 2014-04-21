@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QtGui>
+#include <QtCore>
 
 #include "localrepoparser.h"
 
@@ -8,8 +10,8 @@ using namespace LocalRepoParser;
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    MainWindow window;
+    window.setWindowTitle("Gitty Up, Bitch!");
 
     // Test getting a branch from the git folder
     string pathToGitFolder = "/home/krose/Development/testGit";
@@ -19,6 +21,7 @@ int main(int argc, char *argv[]) {
     // Test getting a git tree
     LocalRepoParser::getGitTree(pathToGitFolder);
 
+    window.show();
     return a.exec();
 }
 
