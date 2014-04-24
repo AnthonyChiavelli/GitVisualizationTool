@@ -3,24 +3,24 @@
 CommitNode::CommitNode() {
 }
 
-vector<CommitNode *> CommitNode::getParents() const
+QSet<CommitNode *>* CommitNode::getParents() const
 {
     return parents;
 }
 
-void CommitNode::setParents(const vector<CommitNode *> &value)
-{
-    parents = value;
+void CommitNode::addParent(CommitNode *parent) {
+    parents->insert(parent);
 }
-vector<CommitNode *> CommitNode::getChildren() const
+
+QSet<CommitNode *>* CommitNode::getChildren() const
 {
     return children;
 }
 
-void CommitNode::setChildren(const vector<CommitNode *> &value)
-{
-    children = value;
+void CommitNode::addChild(CommitNode *child) {
+    children->insert(child);
 }
+
 GitUser CommitNode::getCommitter() const
 {
     return committer;
@@ -56,6 +56,11 @@ string CommitNode::getDateAndTime() const
 void CommitNode::setDateAndTime(const string &value)
 {
     dateAndTime = value;
+}
+
+CommitNode::~CommitNode() {
+    delete parents;
+    delete children;
 }
 
 

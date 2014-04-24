@@ -1,6 +1,6 @@
 #ifndef COMMITNODE_H
 #define COMMITNODE_H
-#include <vector>
+#include <QSet>
 
 #include "gitobject.h"
 #include "gituser.h"
@@ -11,12 +11,13 @@ class CommitNode : public GitObject {
 
 public:
     CommitNode();
+    ~CommitNode();
 
-    vector<CommitNode *> getParents() const;
-    void setParents(const vector<CommitNode *> &value);
+    QSet<CommitNode *>* getParents() const;
+    void addParent(CommitNode *parent);
 
-    vector<CommitNode *> getChildren() const;
-    void setChildren(const vector<CommitNode *> &value);
+    QSet<CommitNode *>* getChildren() const;
+    void addChild(CommitNode *child);
 
     GitUser getCommitter() const;
     void setCommitter(const GitUser &value);
@@ -31,8 +32,8 @@ public:
     void setDateAndTime(const string &value);
 
 private:
-    vector<CommitNode *> parents;
-    vector<CommitNode *> children;
+    QSet<CommitNode *>* parents = new QSet<CommitNode *>();
+    QSet<CommitNode *>* children = new QSet<CommitNode *>();
     GitUser committer;
     GitUser author;
     string message;
