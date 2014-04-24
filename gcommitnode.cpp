@@ -15,18 +15,6 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
 }
 
-GCommitNode::GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent) : QGraphicsItem(parent) {
-
-    // Allow the object to be dragged around
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
-    setFlag(QGraphicsItem::ItemIsMovable, true);
-    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-
-    // Establish our position in the scene based on our place in the tree
-    //this->setPos(500 / (numberOfCousins + 2), ROW_HEIGHT * level);
-}
-
-
 
 QRectF GCommitNode::boundingRect() const {
     return QRectF(0,0,NODE_WIDTH,NODE_HEIGHT);
