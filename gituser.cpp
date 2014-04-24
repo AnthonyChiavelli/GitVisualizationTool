@@ -4,25 +4,25 @@ GitUser::GitUser() {
 
 }
 
-GitUser::GitUser(string& name, string& email) {
+GitUser::GitUser(QString& name, QString& email) {
     this->name = name;
     this->email = email;
 }
-string GitUser::getName() const
+QString GitUser::getName() const
 {
     return name;
 }
 
-void GitUser::setName(const string &value)
+void GitUser::setName(const QString &value)
 {
     name = value;
 }
-string GitUser::getEmail() const
+QString GitUser::getEmail() const
 {
     return email;
 }
 
-void GitUser::setEmail(const string &value)
+void GitUser::setEmail(const QString &value)
 {
     email = value;
 }

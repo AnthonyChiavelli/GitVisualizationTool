@@ -1,7 +1,8 @@
 #ifndef COMMITNODE_H
 #define COMMITNODE_H
-#include <QSet>
 
+#include <QDateTime>
+#include <QSet>
 #include "gitobject.h"
 #include "gituser.h"
 
@@ -25,19 +26,20 @@ public:
     GitUser getAuthor() const;
     void setAuthor(const GitUser &value);
 
-    string getMessage() const;
-    void setMessage(const string &value);
+    QString getMessage() const;
+    void setMessage(QString &value);
 
-    string getDateAndTime() const;
-    void setDateAndTime(const string &value);
+    QDateTime getCommitTime() const;
+    void setCommitTime(QDateTime &commitTime);
+    void setCommitTime(qint64 &commitTimeInMillis);
 
 private:
     QSet<CommitNode *>* parents = new QSet<CommitNode *>();
     QSet<CommitNode *>* children = new QSet<CommitNode *>();
     GitUser committer;
     GitUser author;
-    string message;
-    string dateAndTime;
+    QString message;
+    QDateTime commitTime;
 };
 
 #endif // COMMITNODE_H
