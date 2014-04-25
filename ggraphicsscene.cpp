@@ -30,8 +30,8 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     // Check if this gcommit node has already been instantiated
     //TODO use getSha() once implemented
     GCommitNode *gCommitNode;
-    if(this->allGCommitNodes.find(commitNode->getAuthor().getEmail()) != allGCommitNodes.end()) {
-        gCommitNode = this->allGCommitNodes.at(commitNode->getAuthor().getEmail());
+    if(this->allGCommitNodes.find(commitNode->getAuthor().getEmail().toStdString()) != allGCommitNodes.end()) {
+        gCommitNode = this->allGCommitNodes.at(commitNode->getAuthor().getEmail().toStdString());
     }
     // Otherwise make a new one
     else {
@@ -44,7 +44,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     }
 
     // Set attributes for this g node
-    gCommitNode->sha = commitNode->getAuthor().getEmail();
+    gCommitNode->sha = commitNode->getAuthor().getEmail().toStdString();
     gCommitNode->depth = nodeDepth;
 
     // If there are any children, recursively call this on them
