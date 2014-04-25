@@ -50,3 +50,6 @@ HEADERS  += branch.h \
         tag.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources/images.qrc
