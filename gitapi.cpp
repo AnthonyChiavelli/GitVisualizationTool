@@ -77,10 +77,7 @@ static GitAPIResponse executeGitCommand(string& command);
     }
 
     GitAPIResponse GitApi::gitBranch(string& repoPath, string newBranchName){
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         string command = "cd " + repoPath + ";git branch " + newBranchName + ";echo $?";
 
         return executeGitCommand(command);

@@ -14,34 +14,40 @@ CONFIG += C11++
 QMAKE_CXXFLAGS += -std=c++11
 
 
-SOURCES += main.cpp\
+SOURCES += branch.cpp \
+        commitnode.cpp \
+        main.cpp\
         mainwindow.cpp \
+        gcommitarrow.cpp \
         gcommitnode.cpp \
+        ggraphicsscene.cpp \
+        gitapi.cpp \
+        gitapiresponse.cpp \
+        gitobject.cpp \
+        gituser.cpp \
+        localrepoparser.cpp \
+        localrepository.cpp \
         remote.cpp \
         repository.cpp \
-        gituser.cpp \
-        commitnode.cpp \
-        localrepository.cpp \
-        branch.cpp \
-        tag.cpp \
-        ggraphicsscene.cpp \
-        gcommitarrow.cpp \
-        gitapiresponse.cpp \
-        gitapi.cpp
+        sha1.cpp \
+        tag.cpp
 
-HEADERS  += mainwindow.h \
+
+HEADERS  += branch.h \
+        commitnode.h \
+        mainwindow.h \
+        gcommitarrow.h \
         gcommitnode.h \
+        ggraphicsscene.h \
+        gitapi.h \
+        gitapiresponse.h \
+        gitobject.h \
+        gituser.h \
+        localrepoparser.h \
+        localrepository.h \
         remote.h \
         repository.h \
-        gituser.h \
-        commitnode.h \
-        localrepository.h \
-        branch.h \
-        tag.h \
-        ggraphicsscene.h \
-        gcommitarrow.h \
-        gitapiresponse.h \
-        gitapi.h
-
+        sha1.h \
+        tag.h
 
 FORMS    += mainwindow.ui
