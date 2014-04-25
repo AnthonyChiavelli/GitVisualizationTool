@@ -11,8 +11,8 @@ public:
     GitObject();
     GitObject(string& sha1);
 
-    string getSha1() const;
-    void setSha1(const string &value);
+    Sha1 getSha1() const;
+    void setSha1(Sha1 const &value);
 
     // Returns the name of the subdirectory in which this git object is located
     // (first two characters in SHA1)

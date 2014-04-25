@@ -27,21 +27,21 @@ static GitAPIResponse executeGitCommand(string& command);
     // else we will get a non zero return value.
 
 
-    GitAPIResponse gitAPI::gitInit(string& repoPath){
+    GitAPIResponse GitApi::gitInit(string& repoPath){
 
        string command = "cd " + repoPath + ";git init;echo $?";
 
        return executeGitCommand(command);
     }
 
-    GitAPIResponse gitAPI::gitCommit(string& repoPath, string& message){
+    GitAPIResponse GitApi::gitCommit(string& repoPath, string& message){
 
         string command = "cd " + repoPath + ";git commit -m " + "\"" + message + "\"" + ";echo $?";
 
         return executeGitCommand(command);
     }
 
-    GitAPIResponse gitAPI::gitCheckout(string& repoPath, Branch targetBranch){
+    GitAPIResponse GitApi::gitCheckout(string& repoPath, Branch targetBranch){
 
         string branchName = targetBranch.getName();
         string command = "cd " + repoPath + ";git checkout " + branchName + ";echo $?";
@@ -50,15 +50,18 @@ static GitAPIResponse executeGitCommand(string& command);
     }
 
 
-    GitAPIResponse gitAPI::gitAdd_All(string& repoPath){
+    GitAPIResponse GitApi::gitAdd_All(string& repoPath){
 
         string command = "cd " + repoPath + ";git add --all;echo $?";
 
         return executeGitCommand(command);
+        std::vector<int> kol;
+        for (int i : kol)
+            std::cout << "print";
     }
 
     // not implemented yet
-//    GitAPIResponse gitAPI::gitAdd(string& repoPath, vector<string> files){
+//    GitAPIResponse GitApi::gitAdd(string& repoPath, vector<string> files){
 //
 //        string test = "test";
 //        GitAPIResponse response (false, test);
@@ -66,14 +69,14 @@ static GitAPIResponse executeGitCommand(string& command);
 //        return response;
 //    }
 
-    GitAPIResponse gitAPI::gitMerge(string& repoPath, Branch targetBranch, string& message){
+    GitAPIResponse GitApi::gitMerge(string& repoPath, Branch targetBranch, string& message){
         string branchName = targetBranch.getName();
         string command = "cd " + repoPath + ";git merge " + branchName + " -m " + message + ";echo $?";
 
         return executeGitCommand(command);
     }
 
-    GitAPIResponse gitAPI::gitBranch(string& repoPath, string newBranchName){
+    GitAPIResponse GitApi::gitBranch(string& repoPath, string newBranchName){
 
         string command = "cd " + repoPath + ";git branch " + newBranchName + ";echo $?";
 
@@ -81,15 +84,21 @@ static GitAPIResponse executeGitCommand(string& command);
     }
 
     // not implemented yet
-//    GitAPIResponse gitAPI::gitMergeMultipleBranches(string& repoPath, vector<Branch> targetBranchs, string& message){
+//    GitAPIResponse GitApi::gitMergeMultipleBranches(string& repoPath, vector<Branch> targetBranchs, string& message){
 //        string test = "test";
 //        GitAPIResponse response (false, test);
 //
 //        return response;
 //    }
 
-    GitAPIResponse gitAPI::gitStatus(string& repoPath){
+    GitAPIResponse GitApi::gitStatus(string& repoPath){
         string command = "cd " + repoPath + ";git status;echo $?";
+
+        return executeGitCommand(command);
+    }
+
+    GitAPIResponse GitApi::showGitObjectContents(std::string& repoPath, Sha1 hash){
+        string command = "cd " + repoPath + ";git cat-file -p " + hash.getFullString() + ";echo $?";
 
         return executeGitCommand(command);
     }

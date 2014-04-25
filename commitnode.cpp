@@ -3,24 +3,24 @@
 CommitNode::CommitNode() {
 }
 
-vector<CommitNode *> CommitNode::getParents() const
+QSet<CommitNode *>* CommitNode::getParents() const
 {
     return parents;
 }
 
-void CommitNode::setParents(const vector<CommitNode *> &value)
-{
-    parents = value;
+void CommitNode::addParent(CommitNode *parent) {
+    parents->insert(parent);
 }
-vector<CommitNode *> CommitNode::getChildren() const
+
+QSet<CommitNode *>* CommitNode::getChildren() const
 {
     return children;
 }
 
-void CommitNode::setChildren(const vector<CommitNode *> &value)
-{
-    children = value;
+void CommitNode::addChild(CommitNode *child) {
+    children->insert(child);
 }
+
 GitUser CommitNode::getCommitter() const
 {
     return committer;
@@ -39,23 +39,32 @@ void CommitNode::setAuthor(const GitUser &value)
 {
     author = value;
 }
-string CommitNode::getMessage() const
+QString CommitNode::getMessage() const
 {
     return message;
 }
 
-void CommitNode::setMessage(const string &value)
+void CommitNode::setMessage(QString &value)
 {
     message = value;
 }
-string CommitNode::getDateAndTime() const
+QDateTime CommitNode::getCommitTime() const
 {
-    return dateAndTime;
+    return commitTime;
 }
 
-void CommitNode::setDateAndTime(const string &value)
+void CommitNode::setCommitTime(QDateTime &value)
 {
-    dateAndTime = value;
+    commitTime = value;
+}
+
+void CommitNode::setCommitTime(qint64 &commitTimeInMillis) {
+    commitTime = QDateTime::fromMSecsSinceEpoch(commitTimeInMillis);
+}
+
+CommitNode::~CommitNode() {
+    delete parents;
+    delete children;
 }
 
 
