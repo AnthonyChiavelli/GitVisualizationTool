@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1350</width>
-    <height>665</height>
+    <height>675</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -457,10 +457,15 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="separator"/>
    <addaction name="actionGitInit"/>
+   <addaction name="actionGitAdd"/>
+   <addaction name="actionGitCommit"/>
+   <addaction name="actionGitBranch"/>
+   <addaction name="actionGitMerge"/>
+   <addaction name="actionGitStatus"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -488,7 +493,7 @@
   </widget>
   <action name="actionOpen">
    <property name="text">
-    <string>Open Project</string>
+    <string>Select Project Path</string>
    </property>
   </action>
   <action name="actionGitInit">
@@ -501,6 +506,66 @@
    </property>
    <property name="toolTip">
     <string>Initialize a new Git repo</string>
+   </property>
+  </action>
+  <action name="actionGitAdd">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitAdd</string>
+   </property>
+   <property name="toolTip">
+    <string>Add some sweet ass files to your git repo</string>
+   </property>
+  </action>
+  <action name="actionGitMerge">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitMerge</string>
+   </property>
+   <property name="toolTip">
+    <string>Merges them shits</string>
+   </property>
+  </action>
+  <action name="actionGitStatus">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitStatus</string>
+   </property>
+   <property name="toolTip">
+    <string>Status of the apparatus, sucka.</string>
+   </property>
+  </action>
+  <action name="actionGitCommit">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitCommit</string>
+   </property>
+   <property name="toolTip">
+    <string>Commits them shits.</string>
+   </property>
+  </action>
+  <action name="actionGitBranch">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitBranch</string>
+   </property>
+   <property name="toolTip">
+    <string>Branches them shits</string>
    </property>
   </action>
  </widget>

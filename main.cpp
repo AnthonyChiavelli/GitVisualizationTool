@@ -3,6 +3,7 @@
 #include <QtGui>
 #include <QtCore>
 
+
 #include "localrepoparser.h"
 
 using namespace LocalRepoParser;
