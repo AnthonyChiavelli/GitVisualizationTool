@@ -2,8 +2,14 @@
 #include "gcommitnode.h"
 #include <vector>
 #include <QSet>
+#include "logger.h"
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
+
+    Logger::info("GraphicsScene", "Info!", true);
+    Logger::debug("GraphicsScene", "Debug!", true);
+    Logger::error("GraphicsScene", "Error!", true);
+
 
     //this->renderScene(root);
 
@@ -15,9 +21,8 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
 
     // Check if this gcommit node has already been instantiated
     bool recylcingOldNode = false;
-    if(this->allGCommitNodes.find(commitNode->getSha1()) != allGCommitNodes.end()) {
-        cout << "Recycling node";
-        gCommitNode = this->allGCommitNodes.at(commitNode->getSha1());
+    if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
+        gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
         recylcingOldNode = true;
     }
     // Otherwise make a new one

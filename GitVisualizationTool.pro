@@ -29,7 +29,8 @@ SOURCES += branch.cpp \
         remote.cpp \
         repository.cpp \
         sha1.cpp \
-        tag.cpp
+        tag.cpp \
+    logger.cpp
 
 
 HEADERS  += branch.h \
@@ -47,6 +48,7 @@ HEADERS  += branch.h \
         remote.h \
         repository.h \
         sha1.h \
-        tag.h
+        tag.h \
+    logger.h
 
 FORMS    += mainwindow.ui
