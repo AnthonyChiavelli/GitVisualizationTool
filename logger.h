@@ -35,7 +35,7 @@ namespace Logger {
     //  Write a log message to STDOUT/STDERR
     //
     //  message - the message to write to the log
-    //  tag - a s /tring that identifies the calling process
+    //  tag - a string that identifies the caller (e.g. function, line, file, etc)
     //  writeToFile - also output to log file? (false by default)
     void error(string tag, string message, bool writeToFile = false);
     void debug(string tag, string message, bool writeToFile = false);
