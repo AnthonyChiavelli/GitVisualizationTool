@@ -51,8 +51,8 @@
          <widget class="QGraphicsView" name="graphicsView">
           <property name="geometry">
            <rect>
-            <x>-5</x>
-            <y>-9</y>
+            <x>0</x>
+            <y>-20</y>
             <width>801</width>
             <height>481</height>
            </rect>
@@ -466,6 +466,7 @@
    <addaction name="actionGitBranch"/>
    <addaction name="actionGitMerge"/>
    <addaction name="actionGitStatus"/>
+   <addaction name="actionGitRevert"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -488,8 +489,43 @@
      <string>Edit</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuGitOperations">
+    <property name="title">
+     <string>GitOperations</string>
+    </property>
+    <addaction name="actionGit_Init"/>
+    <addaction name="actionGit_Add"/>
+    <addaction name="actionGit_Commit"/>
+    <addaction name="actionGit_Merge"/>
+    <addaction name="actionGit_Branch"/>
+    <addaction name="actionGit_Status"/>
+    <addaction name="actionGit_Revert"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionCurrent_Version"/>
+    <addaction name="actionAbout_us"/>
+   </widget>
+   <widget class="QMenu" name="menuVCS">
+    <property name="title">
+     <string>VCS</string>
+    </property>
+    <widget class="QMenu" name="menuAttach_to_remote_repo">
+     <property name="title">
+      <string>Attach to remote repo</string>
+     </property>
+     <addaction name="actionGitHub"/>
+     <addaction name="actionBitBucket"/>
+    </widget>
+    <addaction name="menuAttach_to_remote_repo"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuGitOperations"/>
+   <addaction name="menuVCS"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -499,7 +535,7 @@
   <action name="actionGitInit">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/init.png</normaloff>:/new/prefix1/init.png</iconset>
    </property>
    <property name="text">
     <string>GitInit</string>
@@ -511,25 +547,25 @@
   <action name="actionGitAdd">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/add.png</normaloff>:/new/prefix1/add.png</iconset>
    </property>
    <property name="text">
     <string>GitAdd</string>
    </property>
    <property name="toolTip">
-    <string>Add some sweet ass files to your git repo</string>
+    <string>Add some sweet files to your git repo</string>
    </property>
   </action>
   <action name="actionGitMerge">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/merge.png</normaloff>:/new/prefix1/merge.png</iconset>
    </property>
    <property name="text">
     <string>GitMerge</string>
    </property>
    <property name="toolTip">
-    <string>Merges them shits</string>
+    <string>Merges branches</string>
    </property>
   </action>
   <action name="actionGitStatus">
@@ -547,25 +583,92 @@
   <action name="actionGitCommit">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/commit.png</normaloff>:/new/prefix1/commit.png</iconset>
    </property>
    <property name="text">
     <string>GitCommit</string>
    </property>
    <property name="toolTip">
-    <string>Commits them shits.</string>
+    <string>Commits</string>
    </property>
   </action>
   <action name="actionGitBranch">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/Branch</normaloff>:/new/prefix1/Branch</iconset>
    </property>
    <property name="text">
     <string>GitBranch</string>
    </property>
    <property name="toolTip">
-    <string>Branches them shits</string>
+    <string>Branches</string>
+   </property>
+  </action>
+  <action name="actionGit_Init">
+   <property name="text">
+    <string>Git Init</string>
+   </property>
+  </action>
+  <action name="actionGit_Add">
+   <property name="text">
+    <string>Git Add</string>
+   </property>
+  </action>
+  <action name="actionGit_Commit">
+   <property name="text">
+    <string>Git Commit</string>
+   </property>
+  </action>
+  <action name="actionGit_Merge">
+   <property name="text">
+    <string>Git Merge</string>
+   </property>
+  </action>
+  <action name="actionGit_Branch">
+   <property name="text">
+    <string>Git Branch</string>
+   </property>
+  </action>
+  <action name="actionGit_Status">
+   <property name="text">
+    <string>Git Status</string>
+   </property>
+  </action>
+  <action name="actionCurrent_Version">
+   <property name="text">
+    <string>Current Version</string>
+   </property>
+  </action>
+  <action name="actionAbout_us">
+   <property name="text">
+    <string>About us</string>
+   </property>
+  </action>
+  <action name="actionGitRevert">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/revert.png</normaloff>:/new/prefix1/revert.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitRevert</string>
+   </property>
+   <property name="toolTip">
+    <string>Reverts </string>
+   </property>
+  </action>
+  <action name="actionGitHub">
+   <property name="text">
+    <string>GitHub</string>
+   </property>
+  </action>
+  <action name="actionBitBucket">
+   <property name="text">
+    <string>BitBucket</string>
+   </property>
+  </action>
+  <action name="actionGit_Revert">
+   <property name="text">
+    <string>Git Revert</string>
    </property>
   </action>
  </widget>

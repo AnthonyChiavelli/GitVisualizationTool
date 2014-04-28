@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "gitinitdialog.h"
+#include "gitadddialog.h"
 #include "ui_mainwindow.h"
 #include "gcommitnode.h"
 #include "QGraphicsRectItem"
@@ -37,6 +39,17 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_actionGitInit_triggered()
 {
+    GitInitDialog GIdialog;
+    GIdialog.setModal(true);
+    GIdialog.exec();
     std::string path = "/home/nrosato/Desktop/GitTest";
     GitApi::gitInit(path);
 }
+
+void MainWindow::on_actionGitAdd_triggered(){
+    GitAddDialog GAdialog;
+    GAdialog.setModal(true);
+    GIdialog.exec();
+}
+
+

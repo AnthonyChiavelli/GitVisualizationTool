@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+
 #include <QApplication>
 #include <QtGui>
 #include <QtCore>
@@ -12,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
     MainWindow window;
-    window.setWindowTitle("Gitty Up, Bitch!");
+    window.setWindowTitle("Gitty Up!");
 
     // Test getting a branch from the git folder
     string pathToGitFolder = "/home/krose/Development/GitVisualiztionTool/GitVisualizationTool";

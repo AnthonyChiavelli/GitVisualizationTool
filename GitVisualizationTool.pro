@@ -30,7 +30,10 @@ SOURCES += branch.cpp \
         remote.cpp \
         repository.cpp \
         sha1.cpp \
-        tag.cpp
+        tag.cpp \
+    resources/initdialog.cpp \
+    gitinitdialog.cpp \
+    gitadddialog.cpp
 
 
 HEADERS  += branch.h \
@@ -48,9 +51,15 @@ HEADERS  += branch.h \
         remote.h \
         repository.h \
         sha1.h \
-        tag.h
+        tag.h \
+    resources/initdialog.h \
+    gitinitdialog.h \
+    gitadddialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    resources/initdialog.ui \
+    gitinitdialog.ui \
+    gitadddialog.ui
 
 RESOURCES += \
     resources/images.qrc
