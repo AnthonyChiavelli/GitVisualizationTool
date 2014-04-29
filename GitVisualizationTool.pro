@@ -31,7 +31,7 @@ SOURCES += branch.cpp \
         repository.cpp \
         sha1.cpp \
         tag.cpp \
-    resources/initdialog.cpp \
+    # resources/initdialog.cpp \
     gitinitdialog.cpp \
     gitadddialog.cpp
 
@@ -52,12 +52,12 @@ HEADERS  += branch.h \
         repository.h \
         sha1.h \
         tag.h \
-    resources/initdialog.h \
+    # resources/initdialog.h \
     gitinitdialog.h \
     gitadddialog.h
 
 FORMS    += mainwindow.ui \
-    resources/initdialog.ui \
+    # resources/initdialog.ui \
     gitinitdialog.ui \
     gitadddialog.ui
 

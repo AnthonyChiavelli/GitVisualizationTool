@@ -1,6 +1,6 @@
 #include "gitinitdialog.h"
 #include "ui_gitinitdialog.h"
-#include "string"
+#include <string>
 
 GitInitDialog::GitInitDialog(QWidget *parent) :
     QDialog(parent),
@@ -14,7 +14,14 @@ GitInitDialog::~GitInitDialog()
     delete ui;
 }
 
-GitInitDialog::on_actionOkButton_triggered(){
-    string path = "";
-    return path;
+void GitInitDialog::on_pushButton_clicked()
+{
+}
+
+void GitInitDialog::on_actionOkButton_triggered()
+{
+  /*
+  string path = "";
+  return path;
+  */
 }

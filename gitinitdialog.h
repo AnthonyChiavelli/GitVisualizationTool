@@ -15,7 +15,12 @@ public:
     explicit GitInitDialog(QWidget *parent = 0);
     ~GitInitDialog();
 
-private:
+  private slots:
+    void on_pushButton_clicked();
+
+    void on_actionOkButton_triggered();
+
+  private:
     Ui::GitInitDialog *ui;
 };
 
