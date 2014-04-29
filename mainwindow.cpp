@@ -36,20 +36,104 @@ MainWindow::~MainWindow() {
 
 
 
-
+/* Tool Bar Actions */
 void MainWindow::on_actionGitInit_triggered()
 {
     GitInitDialog GIdialog;
     GIdialog.setModal(true);
     GIdialog.exec();
-    std::string path = "/home/nrosato/Desktop/GitTest";
+    std::string path = "~/Desktop/GitTest";
     GitApi::gitInit(path);
 }
 
-void MainWindow::on_actionGitAdd_triggered(){
-    GitAddDialog GAdialog;
-    GAdialog.setModal(true);
-    GIdialog.exec();
+
+void MainWindow::on_actionGitMerge_triggered()
+{
+
+}
+
+void MainWindow::on_actionGitAdd_triggered()
+{
+  GitAddDialog GAdialog;
+  GAdialog.setModal(true);
+  GAdialog.exec();
+}
+
+void MainWindow::on_actionGitStatus_triggered()
+{
+
+}
+
+void MainWindow::on_actionGitCommit_triggered()
+{
+
+}
+
+void MainWindow::on_actionGitBranch_triggered()
+{
+
+}
+
+void MainWindow::on_actionGitRevert_triggered()
+{
+
 }
 
 
+/* Menu Git Actions*/
+void MainWindow::on_actionGit_Init_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Add_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Commit_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Merge_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Branch_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Status_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Revert_triggered()
+{
+
+}
+
+/* Menu Help Actions */
+void MainWindow::on_actionCurrent_Version_triggered()
+{
+
+}
+
+void MainWindow::on_actionAbout_us_triggered()
+{
+
+}
+
+/* Menu VCS Actions */
+void MainWindow::on_actionGitHub_triggered()
+{
+
+}
+
+void MainWindow::on_actionBitBucket_triggered()
+{
+
+}

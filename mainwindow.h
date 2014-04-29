@@ -20,7 +20,41 @@ public:
 private slots:
     void on_actionGitInit_triggered();
 
-private:
+    void on_actionGitMerge_triggered();
+
+    void on_actionGitAdd_triggered();
+
+    void on_actionGitStatus_triggered();
+
+    void on_actionGitCommit_triggered();
+
+    void on_actionGitBranch_triggered();
+
+    void on_actionGitRevert_triggered();
+
+    void on_actionGit_Init_triggered();
+
+    void on_actionGit_Add_triggered();
+
+    void on_actionGit_Commit_triggered();
+
+    void on_actionGit_Merge_triggered();
+
+    void on_actionGit_Branch_triggered();
+
+    void on_actionGit_Status_triggered();
+
+    void on_actionCurrent_Version_triggered();
+
+    void on_actionAbout_us_triggered();
+
+    void on_actionGitHub_triggered();
+
+    void on_actionBitBucket_triggered();
+
+    void on_actionGit_Revert_triggered();
+
+  private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;
 
