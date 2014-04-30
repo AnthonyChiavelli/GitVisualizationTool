@@ -23,7 +23,7 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item alignment="Qt::AlignLeft">
+      <item>
        <widget class="QListView" name="listView"/>
       </item>
      </layout>
@@ -42,7 +42,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -281,6 +281,16 @@
        </spacer>
       </item>
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Status</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="textBrowser_3"/>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="TimeHLayout">
         <item>
          <widget class="QLabel" name="label_8">
@@ -432,10 +442,13 @@
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>40</height>
+          <height>200</height>
          </size>
         </property>
        </spacer>
@@ -445,6 +458,7 @@
    </layout>
    <zorder></zorder>
    <zorder></zorder>
+   <zorder>listView</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="focusPolicy">
@@ -465,8 +479,9 @@
    <addaction name="actionGitCommit"/>
    <addaction name="actionGitBranch"/>
    <addaction name="actionGitMerge"/>
-   <addaction name="actionGitStatus"/>
    <addaction name="actionGitRevert"/>
+   <addaction name="actionGitpush"/>
+   <addaction name="actionGitPull"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -475,7 +490,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -568,18 +583,6 @@
     <string>Merges branches</string>
    </property>
   </action>
-  <action name="actionGitStatus">
-   <property name="icon">
-    <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
-   </property>
-   <property name="text">
-    <string>GitStatus</string>
-   </property>
-   <property name="toolTip">
-    <string>Status of the apparatus, sucka.</string>
-   </property>
-  </action>
   <action name="actionGitCommit">
    <property name="icon">
     <iconset resource="resources/images.qrc">
@@ -669,6 +672,30 @@
   <action name="actionGit_Revert">
    <property name="text">
     <string>Git Revert</string>
+   </property>
+  </action>
+  <action name="actionGitpush">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>Gitpush</string>
+   </property>
+   <property name="toolTip">
+    <string>Commit and push your code to a remote repo</string>
+   </property>
+  </action>
+  <action name="actionGitPull">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitPull</string>
+   </property>
+   <property name="toolTip">
+    <string>Pull latest from repo/branch</string>
    </property>
   </action>
  </widget>
