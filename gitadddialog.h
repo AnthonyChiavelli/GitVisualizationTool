@@ -15,7 +15,12 @@ public:
     explicit GitAddDialog(QWidget *parent = 0);
     ~GitAddDialog();
 
-private:
+  private slots:
+    void on_addButton_clicked();
+
+    void on_cancelButton_clicked();
+
+  private:
     Ui::GitAddDialog *ui;
 };
 

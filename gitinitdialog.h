@@ -16,9 +16,10 @@ public:
     ~GitInitDialog();
 
   private slots:
-    void on_pushButton_clicked();
 
-    void on_actionOkButton_triggered();
+    void on_initButton_clicked();
+
+    void on_cancelButton_clicked();
 
   private:
     Ui::GitInitDialog *ui;

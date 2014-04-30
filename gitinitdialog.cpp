@@ -14,14 +14,14 @@ GitInitDialog::~GitInitDialog()
     delete ui;
 }
 
-void GitInitDialog::on_pushButton_clicked()
+
+
+void GitInitDialog::on_initButton_clicked()
 {
+
 }
 
-void GitInitDialog::on_actionOkButton_triggered()
+void GitInitDialog::on_cancelButton_clicked()
 {
-  /*
-  string path = "";
-  return path;
-  */
+
 }

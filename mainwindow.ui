@@ -20,13 +20,13 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>9</x>
       <y>9</y>
       <width>1332</width>
-      <height>806</height>
+      <height>817</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -82,9 +82,6 @@
             </rect>
            </property>
           </widget>
-          <zorder>graphicsView_2</zorder>
-          <zorder></zorder>
-          <zorder></zorder>
          </widget>
         </widget>
        </item>
@@ -453,9 +450,6 @@
      </item>
     </layout>
    </widget>
-   <zorder></zorder>
-   <zorder></zorder>
-   <zorder>listView</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="focusPolicy">
@@ -477,7 +471,7 @@
    <addaction name="actionGitBranch"/>
    <addaction name="actionGitMerge"/>
    <addaction name="actionGitRevert"/>
-   <addaction name="actionGitpush"/>
+   <addaction name="actionGitPush"/>
    <addaction name="actionGitPull"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -487,7 +481,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -671,10 +665,10 @@
     <string>Git Revert</string>
    </property>
   </action>
-  <action name="actionGitpush">
+  <action name="actionGitPush">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/push.png</normaloff>:/new/prefix1/push.png</iconset>
    </property>
    <property name="text">
     <string>Gitpush</string>
@@ -686,7 +680,7 @@
   <action name="actionGitPull">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/gear.png</normaloff>:/new/prefix1/gear.png</iconset>
+     <normaloff>:/new/prefix1/pull.png</normaloff>:/new/prefix1/pull.png</iconset>
    </property>
    <property name="text">
     <string>GitPull</string>

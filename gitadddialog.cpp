@@ -12,3 +12,14 @@ GitAddDialog::~GitAddDialog()
 {
     delete ui;
 }
+
+void GitAddDialog::on_addButton_clicked()
+{
+
+}
+
+void GitAddDialog::on_cancelButton_clicked()
+{
+  //delete ui; //doesn't work
+  //delete this; //doesn't work
+}

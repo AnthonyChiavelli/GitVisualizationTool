@@ -54,6 +54,10 @@ private slots:
 
     void on_actionGit_Revert_triggered();
 
+    void on_actionGitPush_triggered();
+
+    void on_actionGitPull_triggered();
+
   private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;

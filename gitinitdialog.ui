@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>438</width>
-    <height>306</height>
+    <width>441</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>0</y>
+     <y>10</y>
      <width>421</width>
      <height>301</height>
     </rect>
@@ -59,9 +59,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="initButton">
         <property name="text">
-         <string>ok</string>
+         <string>Init</string>
         </property>
        </widget>
       </item>
@@ -82,7 +82,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="cancelButton">
         <property name="text">
          <string>Cancel</string>
         </property>

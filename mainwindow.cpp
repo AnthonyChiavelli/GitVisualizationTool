@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "gitinitdialog.h"
 #include "gitadddialog.h"
+#include "gitcommitdialog.h"
+#include "gitmergedialog.h"
+#include "gitrevertdialog.h"
+#include "gitbranchdialog.h"
 #include "ui_mainwindow.h"
 #include "gcommitnode.h"
 #include "QGraphicsRectItem"
@@ -49,7 +53,9 @@ void MainWindow::on_actionGitInit_triggered()
 
 void MainWindow::on_actionGitMerge_triggered()
 {
-
+  GitMergeDialog GMdialog;
+  GMdialog.setModal(true);
+  GMdialog.exec();
 }
 
 void MainWindow::on_actionGitAdd_triggered()
@@ -66,17 +72,23 @@ void MainWindow::on_actionGitStatus_triggered()
 
 void MainWindow::on_actionGitCommit_triggered()
 {
-
+  GitCommitDialog GCdialog;
+  GCdialog.setModal(true);
+  GCdialog.exec();
 }
 
 void MainWindow::on_actionGitBranch_triggered()
 {
-
+  GitBranchDialog GBdialog;
+  GBdialog.setModal(true);
+  GBdialog.exec();
 }
 
 void MainWindow::on_actionGitRevert_triggered()
 {
-
+  GitRevertDialog GRdialog;
+  GRdialog.setModal(true);
+  GRdialog.exec();
 }
 
 
@@ -112,6 +124,16 @@ void MainWindow::on_actionGit_Status_triggered()
 }
 
 void MainWindow::on_actionGit_Revert_triggered()
+{
+
+}
+
+void MainWindow::on_actionGitPush_triggered()
+{
+
+}
+
+void MainWindow::on_actionGitPull_triggered()
 {
 
 }
