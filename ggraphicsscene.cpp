@@ -84,7 +84,6 @@ void GGraphicsScene::renderScene(GCommitNode *rootNode) {
     this->addItem(cousin2);
 
 
-
 //    // Enqueue the root node
 //    nodes.push_back(rootNode);
 
