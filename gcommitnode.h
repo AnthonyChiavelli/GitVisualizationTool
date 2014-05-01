@@ -24,9 +24,6 @@ class GCommitNode : public QObject, public QGraphicsItem {
 public:
 
     GCommitNode(QGraphicsItem *parent = 0);
-    GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent = 0);
-
-    // ---QGraphicsItems must override these next two methods ---
 
     // Returns estimate of size
     QRectF boundingRect() const;
@@ -48,12 +45,8 @@ public:
 
     // How far away from root node we are
     int depth;
-
     // Number of cousins we have
     int numberOfCousins;
-
-    // Render order within cousins
-    int renderOrder;
 
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);

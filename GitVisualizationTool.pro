@@ -31,15 +31,15 @@ SOURCES += branch.cpp \
         repository.cpp \
         sha1.cpp \
         tag.cpp \
-    # resources/initdialog.cpp \
-    gitinitdialog.cpp \
-    gitadddialog.cpp \
-    gitmergedialog.cpp \
-    gitcommitdialog.cpp \
-    gitbranchdialog.cpp \
-    gitrevertdialog.cpp \
-    gitpulldialog.cpp \
-    gitpushdialog.cpp
+        gitinitdialog.cpp \
+        gitadddialog.cpp \
+        gitmergedialog.cpp \
+        gitcommitdialog.cpp \
+        gitbranchdialog.cpp \
+        gitrevertdialog.cpp \
+        gitpulldialog.cpp \
+        gitpushdialog.cpp \
+        logger.cpp
 
 
 HEADERS  += branch.h \
@@ -58,26 +58,24 @@ HEADERS  += branch.h \
         repository.h \
         sha1.h \
         tag.h \
-    # resources/initdialog.h \
-    gitinitdialog.h \
-    gitadddialog.h \
-    gitmergedialog.h \
-    gitcommitdialog.h \
-    gitbranchdialog.h \
-    gitrevertdialog.h \
-    gitpulldialog.h \
-    gitpushdialog.h
+        gitinitdialog.h \
+        gitadddialog.h \
+        gitmergedialog.h \
+        gitcommitdialog.h \
+        gitbranchdialog.h \
+        gitrevertdialog.h \
+        gitpulldialog.h \
+        gitpushdialog.h \
+        logger.h
 
 FORMS    += mainwindow.ui \
-    # resources/initdialog.ui \
-    gitinitdialog.ui \
-    gitadddialog.ui \
-    gitmergedialog.ui \
-    gitcommitdialog.ui \
-    gitbranchdialog.ui \
-    gitrevertdialog.ui \
-    gitpulldialog.ui \
-    gitpushdialog.ui
+        gitinitdialog.ui \
+        gitadddialog.ui \
+        gitmergedialog.ui \
+        gitcommitdialog.ui \
+        gitbranchdialog.ui \
+        gitrevertdialog.ui \
+        gitpulldialog.ui \
+        gitpushdialog.ui
 
-RESOURCES += \
-    resources/images.qrc
+RESOURCES += resources/images.qrc
