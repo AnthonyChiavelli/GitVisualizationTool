@@ -10,7 +10,7 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     Logger::debug("GraphicsScene", "Debug!", false);
     Logger::error("GraphicsScene", "Error!", false);
 
-    //this->renderScene(root);
+    this->renderScene(NULL);
 
 }
 
@@ -62,11 +62,11 @@ void GGraphicsScene::renderScene(GCommitNode *rootNode) {
     int currentLevel = 0;
 
 
-    GCommitNode *root = new GCommitNode(0, 0);
-    GCommitNode *uncle = new GCommitNode(1, 1);
-    GCommitNode *aunt = new GCommitNode(1, 1);
-    GCommitNode *cousin = new GCommitNode(2, 0);
-    GCommitNode *cousin2 = new GCommitNode(2, 0);
+    GCommitNode *root = new GCommitNode();
+    GCommitNode *uncle = new GCommitNode();
+    GCommitNode *aunt = new GCommitNode();
+    GCommitNode *cousin = new GCommitNode();
+    GCommitNode *cousin2 = new GCommitNode();
 
 
     root->setPos(250, 40);
