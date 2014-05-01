@@ -34,12 +34,12 @@
          <string>Path</string>
         </property>
         <property name="buddy">
-         <cstring>lineEdit</cstring>
+         <cstring>path</cstring>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="path"/>
       </item>
      </layout>
     </item>
@@ -92,14 +92,6 @@
     </item>
    </layout>
   </widget>
-  <action name="actionOkButton">
-   <property name="text">
-    <string>OkButton</string>
-   </property>
-   <property name="toolTip">
-    <string>Confirm the path for new git repositiory</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

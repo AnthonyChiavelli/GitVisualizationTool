@@ -66,7 +66,7 @@ HEADERS  += branch.h \
         gitrevertdialog.h \
         gitpulldialog.h \
         gitpushdialog.h \
-        logger.h
+        logger.h 
 
 FORMS    += mainwindow.ui \
         gitinitdialog.ui \

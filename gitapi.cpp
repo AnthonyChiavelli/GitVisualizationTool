@@ -60,6 +60,19 @@ static GitAPIResponse executeGitCommand(string& command);
             std::cout << "print";
     }
 
+    GitAPIResponse GitApi::gitAdd(string& repoPath, QStringList& files){
+
+        string command = "cd " + repoPath + ";git add ";
+
+        for(int i = 0; i < files.size(); i++){
+          command += files.at(i).toStdString() + " ";
+        }
+
+        command += ";echo $?";
+
+        return executeGitCommand(command);
+    }
+
     // not implemented yet
 //    GitAPIResponse GitApi::gitAdd(string& repoPath, vector<string> files){
 //
