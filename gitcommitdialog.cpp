@@ -19,7 +19,7 @@ GitCommitDialog::~GitCommitDialog()
 void GitCommitDialog::on_commitButton_clicked()
 {
   std::string message = ui->commitMessage->toPlainText().toStdString();
-  std::string path = "/home/maura/Desktop/GitTest";
+  std::string path = "$HOME/Desktop/GitTest";
   GitAPIResponse response = GitApi::gitCommit(path, message);
   accept();
 }

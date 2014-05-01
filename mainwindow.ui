@@ -473,6 +473,7 @@
    <addaction name="actionGitRevert"/>
    <addaction name="actionGitPush"/>
    <addaction name="actionGitPull"/>
+   <addaction name="actionRefresh"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -481,7 +482,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -693,6 +694,18 @@
   <action name="actionGit_Pull">
    <property name="text">
     <string>Git Pull</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/refresh.png</normaloff>:/new/prefix1/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="toolTip">
+    <string>So Refreshing!</string>
    </property>
   </action>
  </widget>
