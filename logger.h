@@ -26,7 +26,7 @@ namespace Logger {
 
     // Relative path to log file
     //INTENTIONAL ERROR! MAKE SURE TO CHANGE PATH
-    const string MAIN_LOGFILE_PATH = "~/.GitVisualizationTool/logs/main.log";
+    const string MAIN_LOGFILE_PATH = "~/.GitVisualizationTool/logs/main.log"; //"/home/anthony/dev/GitVisualizationTool/logs/main.log";
 
     // Format of log statements
     const string LOG_FORMAT = "[%s] %s | %s\n";
