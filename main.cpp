@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QtGui>
 #include <QtCore>
-#include "public_info.h"
 
 #include "localrepoparser.h"
 

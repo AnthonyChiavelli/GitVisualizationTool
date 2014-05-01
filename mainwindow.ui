@@ -484,6 +484,7 @@
    <addaction name="actionGitPush"/>
    <addaction name="actionGitPull"/>
    <addaction name="actionGitRevert"/>
+   <addaction name="actionGitCheckout"/>
    <addaction name="actionGitBranch"/>
    <addaction name="actionGitMerge"/>
    <addaction name="separator"/>
@@ -556,7 +557,7 @@
   <action name="actionGitInit">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/init.png</normaloff>:/new/prefix1/init.png</iconset>
+     <normaloff>:/icons/init.png</normaloff>:/icons/init.png</iconset>
    </property>
    <property name="text">
     <string>GitInit</string>
@@ -568,7 +569,7 @@
   <action name="actionGitAdd">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/add.png</normaloff>:/new/prefix1/add.png</iconset>
+     <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
    </property>
    <property name="text">
     <string>GitAdd</string>
@@ -580,7 +581,7 @@
   <action name="actionGitMerge">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/merge.png</normaloff>:/new/prefix1/merge.png</iconset>
+     <normaloff>:/icons/merge.png</normaloff>:/icons/merge.png</iconset>
    </property>
    <property name="text">
     <string>GitMerge</string>
@@ -592,7 +593,7 @@
   <action name="actionGitCommit">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/commit.png</normaloff>:/new/prefix1/commit.png</iconset>
+     <normaloff>:/icons/commit.png</normaloff>:/icons/commit.png</iconset>
    </property>
    <property name="text">
     <string>GitCommit</string>
@@ -604,7 +605,7 @@
   <action name="actionGitBranch">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/Branch</normaloff>:/new/prefix1/Branch</iconset>
+     <normaloff>:/icons/Branch</normaloff>:/icons/Branch</iconset>
    </property>
    <property name="text">
     <string>GitBranch</string>
@@ -651,7 +652,7 @@
   <action name="actionGitRevert">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/revert.png</normaloff>:/new/prefix1/revert.png</iconset>
+     <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
    </property>
    <property name="text">
     <string>GitRevert</string>
@@ -678,7 +679,7 @@
   <action name="actionGitPush">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/push.png</normaloff>:/new/prefix1/push.png</iconset>
+     <normaloff>:/icons/push.png</normaloff>:/icons/push.png</iconset>
    </property>
    <property name="text">
     <string>Gitpush</string>
@@ -690,7 +691,7 @@
   <action name="actionGitPull">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/pull.png</normaloff>:/new/prefix1/pull.png</iconset>
+     <normaloff>:/icons/pull.png</normaloff>:/icons/pull.png</iconset>
    </property>
    <property name="text">
     <string>GitPull</string>
@@ -712,7 +713,7 @@
   <action name="actionRefresh">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/refresh.png</normaloff>:/new/prefix1/refresh.png</iconset>
+     <normaloff>:/icons/refresh.png</normaloff>:/icons/refresh.png</iconset>
    </property>
    <property name="text">
     <string>Refresh</string>
@@ -724,7 +725,7 @@
   <action name="actionOpenRepo">
    <property name="icon">
     <iconset resource="resources/images.qrc">
-     <normaloff>:/new/prefix1/open_repo.png</normaloff>:/new/prefix1/open_repo.png</iconset>
+     <normaloff>:/icons/open_repo.png</normaloff>:/icons/open_repo.png</iconset>
    </property>
    <property name="text">
     <string>OpenRepo</string>
@@ -734,6 +735,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionGitCheckout">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/checkout_branch.png</normaloff>:/icons/checkout_branch.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitCheckout</string>
+   </property>
+   <property name="toolTip">
+    <string>Checkout a different branch</string>
    </property>
   </action>
  </widget>
