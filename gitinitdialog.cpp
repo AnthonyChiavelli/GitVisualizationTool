@@ -1,5 +1,7 @@
 #include "gitinitdialog.h"
 #include "ui_gitinitdialog.h"
+#include "gitapi.h"
+#include "gitapiresponse.h"
 #include <string>
 
 GitInitDialog::GitInitDialog(QWidget *parent) :
@@ -18,6 +20,8 @@ GitInitDialog::~GitInitDialog()
 
 void GitInitDialog::on_initButton_clicked()
 {
+  std::string path = "/home/maura/Desktop/GitTest";
+  GitAPIResponse init = GitApi::gitInit(path);
   accept();
 }
 

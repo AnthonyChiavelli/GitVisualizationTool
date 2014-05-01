@@ -48,8 +48,6 @@ void MainWindow::on_actionGitInit_triggered()
     GitInitDialog GIdialog;
     GIdialog.setModal(true);
     GIdialog.exec();
-    std::string path = "~/Desktop/GitTest";
-    GitApi::gitInit(path);
 }
 
 
