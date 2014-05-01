@@ -5,6 +5,8 @@
 #include "gitmergedialog.h"
 #include "gitrevertdialog.h"
 #include "gitbranchdialog.h"
+#include "gitpushdialog.h"
+#include "gitpulldialog.h"
 #include "ui_mainwindow.h"
 #include "gcommitnode.h"
 #include "QGraphicsRectItem"
@@ -93,12 +95,16 @@ void MainWindow::on_actionGitRevert_triggered()
 
 void MainWindow::on_actionGitPush_triggered()
 {
-
+  GitPushDialog GPdialog;
+  GPdialog.setModal(true);
+  GPdialog.exec();
 }
 
 void MainWindow::on_actionGitPull_triggered()
 {
-
+  GitPullDialog GPdialog;
+  GPdialog.setModal(true);
+  GPdialog.exec();
 }
 
 

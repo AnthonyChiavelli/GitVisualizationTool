@@ -37,7 +37,9 @@ SOURCES += branch.cpp \
     gitmergedialog.cpp \
     gitcommitdialog.cpp \
     gitbranchdialog.cpp \
-    gitrevertdialog.cpp
+    gitrevertdialog.cpp \
+    gitpulldialog.cpp \
+    gitpushdialog.cpp
 
 
 HEADERS  += branch.h \
@@ -62,7 +64,9 @@ HEADERS  += branch.h \
     gitmergedialog.h \
     gitcommitdialog.h \
     gitbranchdialog.h \
-    gitrevertdialog.h
+    gitrevertdialog.h \
+    gitpulldialog.h \
+    gitpushdialog.h
 
 FORMS    += mainwindow.ui \
     # resources/initdialog.ui \
@@ -71,7 +75,9 @@ FORMS    += mainwindow.ui \
     gitmergedialog.ui \
     gitcommitdialog.ui \
     gitbranchdialog.ui \
-    gitrevertdialog.ui
+    gitrevertdialog.ui \
+    gitpulldialog.ui \
+    gitpushdialog.ui
 
 RESOURCES += \
     resources/images.qrc
