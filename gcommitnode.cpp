@@ -47,7 +47,7 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     QFont font;
     QFontMetrics fontMetrics(font);
     int labelTextWidth = fontMetrics.width("Commit: ");
-    int shaTextWidth = 50;//fontMetrics.width(this->message);
+    int shaTextWidth = fontMetrics.width("2cd35f");
 
     // Calculate margin necessary to center text boxes in node
     int labelTextMargin = (NODE_WIDTH - labelTextWidth) / 2;
