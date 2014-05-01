@@ -105,6 +105,11 @@ void MainWindow::on_actionGitPull_triggered()
   GPdialog.exec();
 }
 
+void MainWindow::on_actionRefresh_triggered()
+{
+
+}
+
 
 /* Menu Git Actions*/
 void MainWindow::on_actionGit_Init_triggered()

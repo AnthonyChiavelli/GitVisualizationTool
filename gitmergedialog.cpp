@@ -2,6 +2,7 @@
 #include "ui_gitmergedialog.h"
 #include "gitapi.h"
 #include "gitapiresponse.h"
+#include "branch.h"
 #include <string>
 
 GitMergeDialog::GitMergeDialog(QWidget *parent) :
@@ -19,9 +20,12 @@ GitMergeDialog::~GitMergeDialog()
 void GitMergeDialog::on_mergeButton_clicked()
 {
   string name = ui->branchSelector->currentText().toStdString();
+  if(name.empty()){
+    return;
+  }
   string path = "/home/maura/Desktop/GitTest";
   string message = "Merging \"" + name + "\" into current branch.";
-  GitAPIResponse response = GitApi::gitMerge(path, name, message);
+  GitAPIResponse response = GitApi::gitMergeByName(path, name, message);
   accept();
 }
 
