@@ -15,11 +15,10 @@ GitAddDialog::~GitAddDialog()
 
 void GitAddDialog::on_addButton_clicked()
 {
-
+  accept();
 }
 
 void GitAddDialog::on_cancelButton_clicked()
 {
-  //delete ui; //doesn't work
-  //delete this; //doesn't work
+  reject();
 }

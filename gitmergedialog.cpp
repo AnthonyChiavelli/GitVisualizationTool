@@ -15,10 +15,10 @@ GitMergeDialog::~GitMergeDialog()
 
 void GitMergeDialog::on_mergeButton_clicked()
 {
-
+  accept();
 }
 
 void GitMergeDialog::on_cancelButton_clicked()
 {
-
+  reject();
 }

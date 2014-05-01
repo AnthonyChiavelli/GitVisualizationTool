@@ -15,10 +15,14 @@ GitCommitDialog::~GitCommitDialog()
 
 void GitCommitDialog::on_commitButton_clicked()
 {
-
+  accept();
 }
 
 void GitCommitDialog::on_cancelButton_clicked()
 {
+  reject();
+}
 
+void QWidget::focusOutEvent(QFocusEvent * event = NULL){
+  setFocus();
 }

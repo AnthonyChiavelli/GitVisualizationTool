@@ -15,10 +15,10 @@ GitBranchDialog::~GitBranchDialog()
 
 void GitBranchDialog::on_pushButton_clicked()
 {
-
+  accept();
 }
 
 void GitBranchDialog::on_pushButton_2_clicked()
 {
-
+  reject();
 }

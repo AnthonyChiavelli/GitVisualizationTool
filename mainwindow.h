@@ -58,6 +58,10 @@ private slots:
 
     void on_actionGitPull_triggered();
 
+    void on_actionGit_Push_triggered();
+
+    void on_actionGit_Pull_triggered();
+
   private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;

@@ -504,8 +504,9 @@
     <addaction name="actionGit_Commit"/>
     <addaction name="actionGit_Merge"/>
     <addaction name="actionGit_Branch"/>
-    <addaction name="actionGit_Status"/>
     <addaction name="actionGit_Revert"/>
+    <addaction name="actionGit_Push"/>
+    <addaction name="actionGit_Pull"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -623,11 +624,6 @@
     <string>Git Branch</string>
    </property>
   </action>
-  <action name="actionGit_Status">
-   <property name="text">
-    <string>Git Status</string>
-   </property>
-  </action>
   <action name="actionCurrent_Version">
    <property name="text">
     <string>Current Version</string>
@@ -687,6 +683,16 @@
    </property>
    <property name="toolTip">
     <string>Pull latest from repo/branch</string>
+   </property>
+  </action>
+  <action name="actionGit_Push">
+   <property name="text">
+    <string>Git Push</string>
+   </property>
+  </action>
+  <action name="actionGit_Pull">
+   <property name="text">
+    <string>Git Pull</string>
    </property>
   </action>
  </widget>

@@ -18,10 +18,10 @@ GitInitDialog::~GitInitDialog()
 
 void GitInitDialog::on_initButton_clicked()
 {
-
+  accept();
 }
 
 void GitInitDialog::on_cancelButton_clicked()
 {
-
+  reject();
 }

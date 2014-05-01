@@ -15,10 +15,10 @@ GitRevertDialog::~GitRevertDialog()
 
 void GitRevertDialog::on_revertButton_clicked()
 {
-
+  accept();
 }
 
 void GitRevertDialog::on_cancelButton_clicked()
 {
-
+  reject();
 }

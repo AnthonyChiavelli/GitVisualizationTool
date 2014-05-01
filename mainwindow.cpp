@@ -91,43 +91,6 @@ void MainWindow::on_actionGitRevert_triggered()
   GRdialog.exec();
 }
 
-
-/* Menu Git Actions*/
-void MainWindow::on_actionGit_Init_triggered()
-{
-
-}
-
-void MainWindow::on_actionGit_Add_triggered()
-{
-
-}
-
-void MainWindow::on_actionGit_Commit_triggered()
-{
-
-}
-
-void MainWindow::on_actionGit_Merge_triggered()
-{
-
-}
-
-void MainWindow::on_actionGit_Branch_triggered()
-{
-
-}
-
-void MainWindow::on_actionGit_Status_triggered()
-{
-
-}
-
-void MainWindow::on_actionGit_Revert_triggered()
-{
-
-}
-
 void MainWindow::on_actionGitPush_triggered()
 {
 
@@ -137,6 +100,54 @@ void MainWindow::on_actionGitPull_triggered()
 {
 
 }
+
+
+/* Menu Git Actions*/
+void MainWindow::on_actionGit_Init_triggered()
+{
+  on_actionGitInit_triggered();
+}
+
+void MainWindow::on_actionGit_Add_triggered()
+{
+  on_actionGitAdd_triggered();
+}
+
+void MainWindow::on_actionGit_Commit_triggered()
+{
+  on_actionGitCommit_triggered();
+}
+
+void MainWindow::on_actionGit_Merge_triggered()
+{
+  on_actionGitMerge_triggered();
+}
+
+void MainWindow::on_actionGit_Branch_triggered()
+{
+  on_actionGitBranch_triggered();
+}
+
+void MainWindow::on_actionGit_Status_triggered()
+{
+
+}
+
+void MainWindow::on_actionGit_Revert_triggered()
+{
+  on_actionGitRevert_triggered();
+}
+
+void MainWindow::on_actionGit_Push_triggered()
+{
+  on_actionGitPush_triggered();
+}
+
+void MainWindow::on_actionGit_Pull_triggered()
+{
+  on_actionGitPull_triggered();
+}
+
 
 /* Menu Help Actions */
 void MainWindow::on_actionCurrent_Version_triggered()
