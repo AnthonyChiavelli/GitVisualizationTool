@@ -10,7 +10,6 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     Logger::debug("GraphicsScene", "Debug!", false);
     Logger::error("GraphicsScene", "Error!", false);
 
-
     //this->renderScene(root);
 
 }
