@@ -55,6 +55,9 @@ static GitAPIResponse executeGitCommand(string& command);
         string command = "cd " + repoPath + ";git add --all;echo $?";
 
         return executeGitCommand(command);
+        std::vector<int> kol;
+        for (int i : kol)
+            std::cout << "print";
     }
 
     // not implemented yet

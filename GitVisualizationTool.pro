@@ -13,6 +13,7 @@ TEMPLATE = app
 CONFIG += C11++
 QMAKE_CXXFLAGS += -std=c++11
 
+
 SOURCES += branch.cpp \
         commitnode.cpp \
         main.cpp\
@@ -29,7 +30,16 @@ SOURCES += branch.cpp \
         remote.cpp \
         repository.cpp \
         sha1.cpp \
-        tag.cpp
+        tag.cpp \
+        gitinitdialog.cpp \
+        gitadddialog.cpp \
+        gitmergedialog.cpp \
+        gitcommitdialog.cpp \
+        gitbranchdialog.cpp \
+        gitrevertdialog.cpp \
+        gitpulldialog.cpp \
+        gitpushdialog.cpp \
+        logger.cpp
 
 
 HEADERS  += branch.h \
@@ -47,6 +57,25 @@ HEADERS  += branch.h \
         remote.h \
         repository.h \
         sha1.h \
-        tag.h
+        tag.h \
+        gitinitdialog.h \
+        gitadddialog.h \
+        gitmergedialog.h \
+        gitcommitdialog.h \
+        gitbranchdialog.h \
+        gitrevertdialog.h \
+        gitpulldialog.h \
+        gitpushdialog.h \
+        logger.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+        gitinitdialog.ui \
+        gitadddialog.ui \
+        gitmergedialog.ui \
+        gitcommitdialog.ui \
+        gitbranchdialog.ui \
+        gitrevertdialog.ui \
+        gitpulldialog.ui \
+        gitpushdialog.ui
+
+RESOURCES += resources/images.qrc
