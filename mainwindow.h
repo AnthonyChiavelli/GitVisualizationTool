@@ -64,6 +64,10 @@ private slots:
 
     void on_actionRefresh_triggered();
 
+    void on_UpdateButton_clicked();
+
+    void on_actionOpenRepo_triggered();
+
   private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;

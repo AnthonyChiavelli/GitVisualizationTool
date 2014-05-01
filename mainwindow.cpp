@@ -110,6 +110,11 @@ void MainWindow::on_actionRefresh_triggered()
 
 }
 
+void MainWindow::on_actionOpenRepo_triggered()
+{
+
+}
+
 
 /* Menu Git Actions*/
 void MainWindow::on_actionGit_Init_triggered()
@@ -178,4 +183,15 @@ void MainWindow::on_actionGitHub_triggered()
 void MainWindow::on_actionBitBucket_triggered()
 {
 
+}
+
+/* Info Panel Actions*/
+
+void MainWindow::on_UpdateButton_clicked()
+{
+    //changes latest commit message. All you, Nick; I don't know the appropriate git command for that
+  string newMessage = ui->CommitMessageEditor->toPlainText().toStdString();
+  if(newMessage.empty())
+    return;
+  //GitApi::modifyCommit(newMessage); //or something like this
 }

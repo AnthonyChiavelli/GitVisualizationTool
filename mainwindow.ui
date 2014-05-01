@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1350</width>
-    <height>689</height>
+    <width>1262</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,17 +23,24 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>1332</width>
-      <height>855</height>
+      <x>10</x>
+      <y>10</y>
+      <width>1241</width>
+      <height>651</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QListView" name="listView"/>
+        <widget class="QListView" name="listView">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -53,7 +60,7 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="tab_3">
+         <widget class="QWidget" name="tab1">
           <attribute name="title">
            <string>Tab 1</string>
           </attribute>
@@ -68,7 +75,7 @@
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="tab_4">
+         <widget class="QWidget" name="tab2">
           <attribute name="title">
            <string>Tab 2</string>
           </attribute>
@@ -208,7 +215,7 @@
         <layout class="QHBoxLayout" name="CommitHLayout"/>
        </item>
        <item>
-        <widget class="QTextBrowser" name="GitStatuTextBrowser">
+        <widget class="QTextBrowser" name="GitStatusTextBrowser">
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
@@ -245,12 +252,12 @@
           <string>Commit Message</string>
          </property>
          <property name="buddy">
-          <cstring>CommitMesageBrowser</cstring>
+          <cstring>CommitMessageEditor</cstring>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextBrowser" name="CommitMesageBrowser">
+        <widget class="QPlainTextEdit" name="CommitMessageEditor">
          <property name="maximumSize">
           <size>
            <width>275</width>
@@ -266,9 +273,12 @@
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>130</width>
              <height>20</height>
             </size>
            </property>
@@ -436,7 +446,7 @@
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Preferred</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -465,15 +475,18 @@
     <bool>false</bool>
    </attribute>
    <addaction name="separator"/>
+   <addaction name="actionOpenRepo"/>
+   <addaction name="actionRefresh"/>
+   <addaction name="separator"/>
    <addaction name="actionGitInit"/>
    <addaction name="actionGitAdd"/>
    <addaction name="actionGitCommit"/>
-   <addaction name="actionGitBranch"/>
-   <addaction name="actionGitMerge"/>
-   <addaction name="actionGitRevert"/>
    <addaction name="actionGitPush"/>
    <addaction name="actionGitPull"/>
-   <addaction name="actionRefresh"/>
+   <addaction name="actionGitRevert"/>
+   <addaction name="actionGitBranch"/>
+   <addaction name="actionGitMerge"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -481,8 +494,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1350</width>
-     <height>20</height>
+     <width>1262</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -706,6 +719,21 @@
    </property>
    <property name="toolTip">
     <string>So Refreshing!</string>
+   </property>
+  </action>
+  <action name="actionOpenRepo">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/new/prefix1/open_repo.png</normaloff>:/new/prefix1/open_repo.png</iconset>
+   </property>
+   <property name="text">
+    <string>OpenRepo</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a repository</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
  </widget>

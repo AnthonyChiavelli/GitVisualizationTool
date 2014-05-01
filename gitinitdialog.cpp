@@ -21,7 +21,9 @@ GitInitDialog::~GitInitDialog()
 void GitInitDialog::on_initButton_clicked()
 {
   string path = ui->path->text().toStdString();
-  GitAPIResponse init = GitApi::gitInit(path);
+  if(path.empty())
+    return;
+  GitAPIResponse response = GitApi::gitInit(path);
   accept();
 }
 

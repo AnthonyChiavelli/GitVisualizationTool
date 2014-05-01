@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     // Test getting a branch from the git folder
     string pathToGitFolder = "/home/maura/Desktop/GitTest";//"~/Documents/Assignments/CS 410/GitVisualizationTool";   //"/home/krose/Development/GitVisualiztionTool/GitVisualizationTool";
-    string branchName = "mauraUI";
+    string branchName = "master";
     LocalRepoParser::getBranch(pathToGitFolder, branchName);
 
     // Test getting a git tree
