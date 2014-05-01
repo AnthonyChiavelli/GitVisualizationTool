@@ -10,8 +10,7 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     Logger::debug("GraphicsScene", "Debug!", false);
     Logger::error("GraphicsScene", "Error!", false);
 
-
-    //this->renderScene(root);
+    this->renderScene(NULL);
 
 }
 
@@ -62,26 +61,49 @@ void GGraphicsScene::renderScene(GCommitNode *rootNode) {
     vector<GCommitNode *> nodes;
     int currentLevel = 0;
 
-    // Enqueue the root node
-    nodes.push_back(rootNode);
 
-    // While we have nodes remaining
-    while (!nodes.empty()) {
+    GCommitNode *root = new GCommitNode();
+    GCommitNode *uncle = new GCommitNode();
+    GCommitNode *aunt = new GCommitNode();
+    GCommitNode *cousin = new GCommitNode();
+    GCommitNode *cousin2 = new GCommitNode();
 
-        // For each node on the queue
-        vector<GCommitNode *> currentLevelVector(nodes);
-        int cousinCounter = 0;
-        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCounter) {
-            // Render, pop, and add its children to queue
-            GCommitNode * currentNode = *it;
-            currentNode->setPos((500 / (currentLevelVector.size() + 1)) * (cousinCounter+1), (currentNode->depth + 1) * 150);
-            this->addItem(currentNode);
-            //currentLevelVector.pop_back();
-            nodes.pop_back();
-            for (vector<GCommitNode *>::iterator it2 = currentNode->childrenGNodes.begin(); it2 != currentNode->childrenGNodes.end(); ++it2) {
-                nodes.push_back(*it2);
-            }
-        }
-        currentLevel++;
-    }
+
+    root->setPos(250, 40);
+    uncle->setPos(150, 180);
+    aunt->setPos(350, 180);
+    cousin->setPos(60, 340);
+    cousin2->setPos(230, 340);
+
+
+    this->addItem(root);
+    this->addItem(uncle);
+    this->addItem(aunt);
+    this->addItem(cousin);
+    this->addItem(cousin2);
+
+
+//    // Enqueue the root node
+//    nodes.push_back(rootNode);
+
+//    // While we have nodes remaining
+//    while (!nodes.empty()) {
+
+//        // For each node on the queue
+//        int cousinCount = 0;
+//        vector<GCommitNode *> currentLevelVector(nodes);
+//        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCount) {
+//            // Render, pop, and add its children to queue
+//            GCommitNode * currentNode = *it;
+//            currentNode->setPos(500 / currentLevelVector.size(), currentLevel * 150);
+//            this->addItem(currentNode);
+//            //currentLevelVector.pop_back();
+//            nodes.pop_back();
+//            for (vector<GCommitNode *>::iterator it2 = currentNode->childrenGNodes.begin(); it2 != currentNode->childrenGNodes.end(); ++it2) {
+//                nodes.push_back(*it2);
+//            }
+//        }
+//        currentLevel++;
+//    }
+
 }

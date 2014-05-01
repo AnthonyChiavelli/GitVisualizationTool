@@ -18,10 +18,9 @@ GitAddDialog::~GitAddDialog()
 
 void GitAddDialog::on_addButton_clicked()
 {
-  string path = "/Desktop/GitTest";
+  string path = "home/maura/Desktop/GitTest";
   if (! filenames.empty()){
     GitAPIResponse response = GitApi::gitAdd(path, filenames);
-    //GitApi::gitAdd_All();
   }
   accept();
 }

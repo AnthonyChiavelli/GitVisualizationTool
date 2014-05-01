@@ -20,7 +20,7 @@ GitInitDialog::~GitInitDialog()
 
 void GitInitDialog::on_initButton_clicked()
 {
-  std::string path = ui->path->text().toStdString();
+  string path = ui->path->text().toStdString();
   GitAPIResponse init = GitApi::gitInit(path);
   accept();
 }
