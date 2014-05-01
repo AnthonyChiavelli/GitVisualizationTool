@@ -23,40 +23,36 @@ class GCommitNode : public QObject, public QGraphicsItem {
 
 public:
 
+    // -- Constructors --
+    // Create a node as a child of a parent
     GCommitNode(QGraphicsItem *parent = 0);
-    GCommitNode(int level, int numberOfCousins, QGraphicsItem *parent = 0);
 
-    // ---QGraphicsItems must override these next two methods ---
 
+    // -- Graphics method (required) --
     // Returns estimate of size
     QRectF boundingRect() const;
-
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    // Get the location the commit arrow should point to
-    int getNextArrowStartPoint();
-
-    // Relatives
+    // -- Relatives --
     vector<const GCommitNode *> parentGNodes;
     vector<GCommitNode *> childrenGNodes;
 
-    // Commit data
+    // -- Commit Data --
     string author;
     string message;
     string sha;
 
+    // -- Tree Situation --
     // How far away from root node we are
     int depth;
-
     // Number of cousins we have
     int numberOfCousins;
 
-    // Render order within cousins
-    int renderOrder;
-
+    // -- Operators --
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
+
 
 private:
 
