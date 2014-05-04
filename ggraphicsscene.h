@@ -11,6 +11,7 @@
 
 class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
+
 public:
     explicit GGraphicsScene(QObject *parent = 0);
 

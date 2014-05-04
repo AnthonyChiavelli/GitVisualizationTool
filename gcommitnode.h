@@ -20,6 +20,7 @@ using namespace std;
  */
 class GCommitNode : public QObject, public QGraphicsItem {
     Q_OBJECT
+        Q_INTERFACES(QGraphicsItem)
 
 public:
 

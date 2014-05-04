@@ -9,44 +9,7 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     this->setSceneRect(0, 0, SCENE_X, SCENE_Y);
 
     // Build up test tree
-    GCommitNode *root = new GCommitNode(1, 1);
-    root->depth = 0;
-    root->message = "root";
-
-
-    GCommitNode *child1 = new GCommitNode(2, 2);
-    child1->depth = 1;
-    child1->message = "child1";
-
-    GCommitNode *child2 = new GCommitNode(2, 2);
-    child2->depth = 1;
-    child2->message = "child2";
-
-    GCommitNode *grandchild1 = new GCommitNode(3, 3);
-    grandchild1->depth = 2;
-    grandchild1->message = "grandchild1";
-
-    GCommitNode *grandchild2 = new GCommitNode(3, 3);
-    grandchild2->depth = 2;
-    grandchild2->message = "grandchild2";
-
-    GCommitNode *grandchild3 = new GCommitNode(3, 3);
-    grandchild3->depth = 2;
-    grandchild3->message = "grandchild3";
-
-    grandchild1->parentGNodes.push_back(child1);
-//    grandchild2->parentGNodes.push_back(child1);
-//    grandchild3->parentGNodes.push_back(child2);
-
-    child1->childrenGNodes.push_back(grandchild1);
-//    child1->childrenGNodes.push_back(grandchild2);
-//    child2->childrenGNodes.push_back(grandchild3);
-
-    root->childrenGNodes.push_back(child1);
-    root->childrenGNodes.push_back(child2);
-    child1->parentGNodes.push_back(root);
-    child2->parentGNodes.push_back(root);
-
+    GCommitNode *root = new GCommitNode();
     this->renderScene(root);
 
 }
