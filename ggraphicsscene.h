@@ -6,6 +6,8 @@
 #include <QGraphicsScene>
 
 /**Graphics properties**/
+#define X_SPACE_PER_LEAF 200
+#define Y_SPACE_PER_LEVEL 150
 #define SCENE_X 700
 #define SCENE_Y 700
 
@@ -27,6 +29,9 @@ public:
     // A global set of all nodes mapped by sha
     map<string, GCommitNode *> allGCommitNodes;
 
+private:
+    // Render a node and its children in the space space from startX to endX
+    void renderNode(GCommitNode *node, int startX, int endX);
 
 signals:
 

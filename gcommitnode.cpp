@@ -93,3 +93,10 @@ void GCommitNode::setDepth(int value) { depth = value; }
 int GCommitNode::getNumberOfCousins()  { return numberOfCousins; }
 void GCommitNode::setNumberOfCousins(int value) { numberOfCousins = value; }
 
+int GCommitNode::getXEnd() { return xEnd; }
+void GCommitNode::setXEnd(int value) { xEnd = value; }
+int GCommitNode::getXStart() { return xStart; }
+void GCommitNode::setXStart(int value) { xStart = value; }
+
+
+

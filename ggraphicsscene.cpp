@@ -6,12 +6,17 @@
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
-    // Set up our coordinate rectange
-    this->setSceneRect(0, 0, SCENE_X, SCENE_Y);
-
     // Build up test tree
     GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo"));
 
+    // Measure tree
+    int totalLeaves = this->measurePhase(root);
+
+    // Size canvas coordinate grid based on measurement
+    this->setSceneRect(0, 0, totalLeaves * X_SPACE_PER_LEAF, 1000); //TODO fix number
+    this->setBackgroundBrush(QBrush(Qt::gray, Qt::SolidPattern));
+
+    // Render tree
     this->renderPhase(root);
 
 }
@@ -68,35 +73,42 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 
 void GGraphicsScene::renderPhase(GCommitNode *node) {
 
-    // Situate yourself in the middle of your allocated width
+    // Figure out allocated width for whole tree
+    int totalAllocatedWidth = node->getNumberOfLeaves() * X_SPACE_PER_LEAF;
 
+    // Render tree starting at root node
+    this->renderNode(node, 0, totalAllocatedWidth);
 
-    vector<GCommitNode *> nodes;
-    int currentLevel = 0;
+}
 
-    // Enqueue the root node
-    nodes.push_back(node);
+void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
-    // While we have nodes remaining
-    while (!nodes.empty()) {
+    // Position yourself in the middle of your allocated width
+    int xPos = startX + ((endX - startX) / 2.0);
+    node->setPos(xPos, Y_SPACE_PER_LEVEL * node->getDepth());
 
-        // For each node on the queue
-        vector<GCommitNode *> currentLevelVector(nodes);
-        int cousinCounter = 0;
-        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCounter) {
-            // Render, pop, and add its children to queue
-            GCommitNode * currentNode = *it;
-            int nodeDepth = currentNode->getDepth();
-            currentNode->setPos((500 / (currentLevelVector.size() + 1)) * (cousinCounter+1), (currentNode->getDepth() + 1) * 150);
-            this->addItem(currentNode);
-            //currentLevelVector.pop_back();
-            nodes.pop_back();
-            for (vector<GCommitNode *>::iterator it2 = currentNode->getChildrenGNodes()->begin(); it2 != currentNode->getChildrenGNodes()->end(); ++it2) {
-                nodes.push_back(*it2);
-            }
-        }
-        currentLevel++;
+    // Render
+    this->addItem(node);
+
+    // If we're a leaf, we're done
+    if (node->getChildrenGNodes()->empty()) {
+        return;
     }
+    // Divide up your allocated space into even slots for each child (later to be adjusted based on
+    // subtree leaf number)
+    int spacePerChild = (int)((double)(endX - startX) / (double)node->getChildrenGNodes()->size());
+
+    // Iterate over children, allocate them space inside us, and render them
+    int childNumber = 0;
+    vector<GCommitNode *> *children = node->getChildrenGNodes();
+    for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+        int xs = startX + (spacePerChild * childNumber);
+        int xe = startX + (spacePerChild * (childNumber+1));
+        this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
+        childNumber++;
+    }
+
+
 }
 
 int GGraphicsScene::measurePhase(GCommitNode *node) {
@@ -110,6 +122,7 @@ int GGraphicsScene::measurePhase(GCommitNode *node) {
         }
         // Number of leaves to a node is the leaves on all of its subtrees added together
         node->setNumberOfLeaves(leavesOnSubTrees);
+        return leavesOnSubTrees;
     }
     // Otherwise we are a leaf
     else {
@@ -121,3 +134,4 @@ int GGraphicsScene::measurePhase(GCommitNode *node) {
 
 
 }
+

@@ -69,6 +69,12 @@ public:
     int getNumberOfCousins();
     void setNumberOfCousins(int value);
 
+    int getXEnd();
+    void setXEnd(int value);
+
+    int getXStart();
+    void setXStart(int value);
+
 private:
 
     // -- Attributes of the commit --
@@ -85,12 +91,16 @@ private:
     // -- Tree Situation --
     // Our allocated space - the space we can use for ourselves and all of our children
     int allocatedWidth;
+    // The X-range of our allocated space
+    int xStart, xEnd;
     // Number of leaves we have
     int numberOfLeaves;
     // How far away from root node we are
     int depth;
+    //
     // Number of cousins we have
     int numberOfCousins;
+
 
     // -- Helper methods to help render the node --
     void renderNodeRectangle(QPainter *painter);
