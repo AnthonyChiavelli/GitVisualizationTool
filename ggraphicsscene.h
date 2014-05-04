@@ -18,8 +18,11 @@ public:
     // Converts a CommitNode, produced by the parser, to a GCommitNode to be drawn on the canvas
     GCommitNode *convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent = 0, int nodeDepth = 0);
 
-    // Render the scene with a root node
-    void renderNode(GCommitNode *rootNode);
+    // Traverse the tree and assign an allocated space to each node
+    int measurePhase(GCommitNode *node);
+
+    // Traverse the tree and render each node
+    void renderPhase(GCommitNode *node);
 
     // A global set of all nodes mapped by sha
     map<string, GCommitNode *> allGCommitNodes;

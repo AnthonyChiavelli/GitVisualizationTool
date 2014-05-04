@@ -40,7 +40,6 @@ public:
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 
-
     // -- Getters and setters --
     GitUser getCommitter();
     void setCommitter(const GitUser &value);
@@ -57,9 +56,9 @@ public:
     Sha1 getSha();
     void setSha(const Sha1 &value);
 
-    vector<GCommitNode *> getParentGNodes();
+    vector<GCommitNode *> *getParentGNodes();
 
-    vector<GCommitNode *> getChildrenGNodes();
+    vector<GCommitNode *> *getChildrenGNodes();
 
     int getNumberOfLeaves();
     void setNumberOfLeaves(int value);
@@ -84,6 +83,8 @@ private:
     vector<GCommitNode *> childrenGNodes;
 
     // -- Tree Situation --
+    // Our allocated space - the space we can use for ourselves and all of our children
+    int allocatedWidth;
     // Number of leaves we have
     int numberOfLeaves;
     // How far away from root node we are

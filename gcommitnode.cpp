@@ -80,9 +80,9 @@ void GCommitNode::setDateAndTime(const string &value) { dateAndTime = value; }
 Sha1 GCommitNode::getSha()  { return sha; }
 void GCommitNode::setSha(const Sha1 &value) { sha = value; }
 
-vector< GCommitNode *> GCommitNode::getParentGNodes()  { return parentGNodes; }
+vector< GCommitNode *> *GCommitNode::getParentGNodes()  { return &parentGNodes; }
 
-vector<GCommitNode *> GCommitNode::getChildrenGNodes()  { return childrenGNodes; }
+vector<GCommitNode *> *GCommitNode::getChildrenGNodes()  { return &childrenGNodes; }
 
 int GCommitNode::getNumberOfLeaves()  { return numberOfLeaves; }
 void GCommitNode::setNumberOfLeaves(int value) { numberOfLeaves = value; }

@@ -1,7 +1,8 @@
-#include "ggraphicsscene.h"
-#include "gcommitnode.h"
 #include <vector>
 #include <QSet>
+#include "ggraphicsscene.h"
+#include "gcommitnode.h"
+#include "localrepoparser.h"
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
@@ -9,8 +10,9 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     this->setSceneRect(0, 0, SCENE_X, SCENE_Y);
 
     // Build up test tree
-    GCommitNode *root = new GCommitNode();
-    this->renderNode(root);
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo"));
+
+    this->renderPhase(root);
 
 }
 
@@ -27,19 +29,20 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     // Otherwise make a new one
     else {
         gCommitNode = new GCommitNode();
+
+        // Set attributes for this g node
+        gCommitNode->setSha(commitNode->getSha1());
+        gCommitNode->setCommitter(commitNode->getCommitter());
+        gCommitNode->setAuthor(commitNode->getAuthor());
+        gCommitNode->setDateAndTime(commitNode->getDateAndTime());
+        gCommitNode->setMessage(commitNode->getMessage());
     }
 
     // If this is a recursive call, we'll have a parent to attach
     if (parent != 0) {
-        gCommitNode->getParentGNodes().push_back(parent);
+        gCommitNode->getParentGNodes()->push_back(parent);
     }
 
-    // Set attributes for this g node
-    gCommitNode->setSha(commitNode->getSha1());
-    gCommitNode->setCommitter(commitNode->getCommitter());
-    gCommitNode->setAuthor(commitNode->getAuthor());
-    gCommitNode->setDateAndTime(commitNode->getDateAndTime());
-    gCommitNode->setMessage(commitNode->getMessage());
 
     gCommitNode->setDepth(nodeDepth);
 
@@ -50,7 +53,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         nodeDepth++;
         // Recursively call ourselves for each child and add result to our set of children
         for (QSet<CommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
-            gCommitNode->getChildrenGNodes().push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
+            gCommitNode->getChildrenGNodes()->push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
         }
     }
 
@@ -61,9 +64,11 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     return gCommitNode;
 }
 
-void GGraphicsScene::renderNode(GCommitNode *node) {
 
 
+void GGraphicsScene::renderPhase(GCommitNode *node) {
+
+    // Situate yourself in the middle of your allocated width
 
 
     vector<GCommitNode *> nodes;
@@ -86,10 +91,33 @@ void GGraphicsScene::renderNode(GCommitNode *node) {
             this->addItem(currentNode);
             //currentLevelVector.pop_back();
             nodes.pop_back();
-            for (vector<GCommitNode *>::iterator it2 = currentNode->getChildrenGNodes().begin(); it2 != currentNode->getChildrenGNodes().end(); ++it2) {
+            for (vector<GCommitNode *>::iterator it2 = currentNode->getChildrenGNodes()->begin(); it2 != currentNode->getChildrenGNodes()->end(); ++it2) {
                 nodes.push_back(*it2);
             }
         }
         currentLevel++;
     }
+}
+
+int GGraphicsScene::measurePhase(GCommitNode *node) {
+    vector<GCommitNode *> *children = node->getChildrenGNodes();
+
+    // Recurse down tree if we are an inner node
+    if (children->size() > 0) {
+        int leavesOnSubTrees = 0;
+        for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+            leavesOnSubTrees += measurePhase(*it);
+        }
+        // Number of leaves to a node is the leaves on all of its subtrees added together
+        node->setNumberOfLeaves(leavesOnSubTrees);
+    }
+    // Otherwise we are a leaf
+    else {
+        // We have no leaves
+        node->setNumberOfLeaves(0);
+        // Our parent gets +1 leaves
+        return 1;
+    }
+
+
 }
