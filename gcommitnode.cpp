@@ -15,6 +15,10 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae5423f547342cf478facd66c18fcdadd3d9a0ed
 
 QRectF GCommitNode::boundingRect() const {
     return QRectF(0,0,NODE_WIDTH,NODE_HEIGHT);
@@ -32,14 +36,6 @@ void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
-int GCommitNode::getNextArrowStartPoint() {
-    return 0;
-}
-
-void GCommitNode::printTreeHere() {
-
-
-}
 
 void GCommitNode::renderNodeRectangle(QPainter *painter) {
 
@@ -67,5 +63,43 @@ void GCommitNode::renderNodeText(QPainter *painter) {
 }
 
 bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
-    return lhs.sha == rhs.sha;
+    return lhs.sha.getFullString() == rhs.sha.getFullString();
 }
+
+
+// -- Getters and setters --
+GitUser GCommitNode::getCommitter() {return committer;}
+void GCommitNode::setCommitter(const GitUser &value) {committer = value;}
+
+GitUser GCommitNode::getAuthor()  { return author;}
+void GCommitNode::setAuthor(const GitUser &value) { author = value; }
+
+string GCommitNode::getMessage()  { return message; }
+void GCommitNode::setMessage(const string &value) { message = value; }
+
+string GCommitNode::getDateAndTime()  { return dateAndTime; }
+void GCommitNode::setDateAndTime(const string &value) { dateAndTime = value; }
+
+Sha1 GCommitNode::getSha()  { return sha; }
+void GCommitNode::setSha(const Sha1 &value) { sha = value; }
+
+vector< GCommitNode *> *GCommitNode::getParentGNodes()  { return &parentGNodes; }
+
+vector<GCommitNode *> *GCommitNode::getChildrenGNodes()  { return &childrenGNodes; }
+
+int GCommitNode::getNumberOfLeaves()  { return numberOfLeaves; }
+void GCommitNode::setNumberOfLeaves(int value) { numberOfLeaves = value; }
+
+int GCommitNode::getDepth()  { return depth; }
+void GCommitNode::setDepth(int value) { depth = value; }
+
+int GCommitNode::getNumberOfCousins()  { return numberOfCousins; }
+void GCommitNode::setNumberOfCousins(int value) { numberOfCousins = value; }
+
+int GCommitNode::getXEnd() { return xEnd; }
+void GCommitNode::setXEnd(int value) { xEnd = value; }
+int GCommitNode::getXStart() { return xStart; }
+void GCommitNode::setXStart(int value) { xStart = value; }
+
+
+

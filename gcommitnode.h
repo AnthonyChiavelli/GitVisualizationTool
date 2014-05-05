@@ -4,6 +4,8 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <vector>
+#include "gituser.h"
+#include "sha1.h"
 
 using namespace std;
 
@@ -20,16 +22,12 @@ using namespace std;
  */
 class GCommitNode : public QObject, public QGraphicsItem {
     Q_OBJECT
+        Q_INTERFACES(QGraphicsItem)
 
 public:
-
     // -- Constructors --
     // Create a node as a child of a parent
     GCommitNode(QGraphicsItem *parent = 0);
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d2bdd7be162628972712b8ed44fc6c5b9134c75
 
     // -- Graphics method (required) --
     // Returns estimate of size
@@ -37,32 +35,80 @@ public:
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    // -- Operators --
+    // Implement equality comparison between gcommit nodes
+    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
+
+    // -- Getters and setters --
+    GitUser getCommitter();
+    void setCommitter(const GitUser &value);
+
+    GitUser getAuthor();
+    void setAuthor(const GitUser &value);
+
+    string getMessage();
+    void setMessage(const string &value);
+
+    string getDateAndTime() ;
+    void setDateAndTime(const string &value);
+
+    Sha1 getSha();
+    void setSha(const Sha1 &value);
+
+    vector<GCommitNode *> *getParentGNodes();
+
+    vector<GCommitNode *> *getChildrenGNodes();
+
+    int getNumberOfLeaves();
+    void setNumberOfLeaves(int value);
+
+    int getDepth();
+    void setDepth(int value);
+
+    int getNumberOfCousins();
+    void setNumberOfCousins(int value);
+
+    int getXEnd();
+    void setXEnd(int value);
+
+    int getXStart();
+    void setXStart(int value);
+
+private:
+
+    // -- Attributes of the commit --
+    GitUser committer;
+    GitUser author;
+    Sha1 sha;
+    string message;
+    string dateAndTime;
+
     // -- Relatives --
-    vector<const GCommitNode *> parentGNodes;
+    vector<GCommitNode *> parentGNodes;
     vector<GCommitNode *> childrenGNodes;
 
-    // -- Commit Data --
-    string author;
-    string message;
-    string sha;
-
     // -- Tree Situation --
+    // Our allocated space - the space we can use for ourselves and all of our children
+    int allocatedWidth;
+    // The X-range of our allocated space
+    int xStart, xEnd;
+    // Number of leaves we have
+    int numberOfLeaves;
     // How far away from root node we are
     int depth;
+    //
     // Number of cousins we have
     int numberOfCousins;
 
-<<<<<<< HEAD
-=======
+
     // -- Operators --
->>>>>>> 2d2bdd7be162628972712b8ed44fc6c5b9134c75
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 
 
 private:
 
-    // Helper methods to help render the node
+    // -- Helper methods to help render the node --
     void renderNodeRectangle(QPainter *painter);
     void renderNodeText(QPainter *painter);
 

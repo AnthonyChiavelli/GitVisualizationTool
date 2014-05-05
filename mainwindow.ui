@@ -41,6 +41,9 @@
             <height>461</height>
            </rect>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOn</enum>
+          </property>
          </widget>
         </widget>
         <widget class="QWidget" name="tab_2">
@@ -79,7 +82,7 @@
      <x>0</x>
      <y>0</y>
      <width>1392</width>
-     <height>20</height>
+     <height>29</height>
     </rect>
    </property>
   </widget>

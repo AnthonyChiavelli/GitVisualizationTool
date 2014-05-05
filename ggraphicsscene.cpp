@@ -1,21 +1,32 @@
-#include "ggraphicsscene.h"
-#include "gcommitnode.h"
 #include <vector>
 #include <QSet>
+#include "ggraphicsscene.h"
+#include "gcommitnode.h"
+#include "localrepoparser.h"
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
-    //this->renderScene(root);
 
+    // Build up test tree
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool"));
+
+    // Measure tree
+    int totalLeaves = this->measurePhase(root);
+
+    // Size canvas coordinate grid based on measurement
+    this->setSceneRect(0, 0, totalLeaves * X_SPACE_PER_LEAF, 1000); //TODO fix number
+    this->setBackgroundBrush(QBrush(Qt::gray, Qt::SolidPattern));
+
+    // Render tree
+    this->renderPhase(root);
 }
 
-GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * commitNode, GCommitNode const * parent, int nodeDepth) {
+GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
 
     GCommitNode *gCommitNode;
 
     // Check if this gcommit node has already been instantiated
     bool recylcingOldNode = false;
-
     if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
         gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
         recylcingOldNode = true;
@@ -23,17 +34,22 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     // Otherwise make a new one
     else {
         gCommitNode = new GCommitNode();
+
+        // Set attributes for this g node
+        gCommitNode->setSha(commitNode->getSha1());
+        gCommitNode->setCommitter(commitNode->getCommitter());
+        gCommitNode->setAuthor(commitNode->getAuthor());
+        gCommitNode->setDateAndTime(commitNode->getDateAndTime());
+        gCommitNode->setMessage(commitNode->getMessage());
     }
 
     // If this is a recursive call, we'll have a parent to attach
     if (parent != 0) {
-        gCommitNode->parentGNodes.push_back(parent);
+        gCommitNode->getParentGNodes()->push_back(parent);
     }
 
-    // Set attributes for this g node
-    gCommitNode->sha = commitNode->getSha1().getFullString();
-    //TODO change from string to sha1
-    gCommitNode->depth = nodeDepth;
+
+    gCommitNode->setDepth(nodeDepth);
 
     // If there are any children, recursively call this on them
     QSet<CommitNode *>* children = commitNode->getChildren();
@@ -42,7 +58,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
         nodeDepth++;
         // Recursively call ourselves for each child and add result to our set of children
         for (QSet<CommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
-            gCommitNode->childrenGNodes.push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
+            gCommitNode->getChildrenGNodes()->push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
         }
     }
 
@@ -53,31 +69,68 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     return gCommitNode;
 }
 
-void GGraphicsScene::renderScene(GCommitNode *rootNode) {
 
-    vector<GCommitNode *> nodes;
-    int currentLevel = 0;
 
-    // Enqueue the root node
-    nodes.push_back(rootNode);
+void GGraphicsScene::renderPhase(GCommitNode *node) {
 
-    // While we have nodes remaining
-    while (!nodes.empty()) {
+    // Figure out allocated width for whole tree
+    int totalAllocatedWidth = node->getNumberOfLeaves() * X_SPACE_PER_LEAF;
 
-        // For each node on the queue
-        vector<GCommitNode *> currentLevelVector(nodes);
-        int cousinCounter = 0;
-        for (vector<GCommitNode *>::iterator it = currentLevelVector.begin(); it != currentLevelVector.end() && !currentLevelVector.empty(); ++it, ++cousinCounter) {
-            // Render, pop, and add its children to queue
-            GCommitNode * currentNode = *it;
-            currentNode->setPos((500 / (currentLevelVector.size() + 1)) * (cousinCounter+1), (currentNode->depth + 1) * 150);
-            this->addItem(currentNode);
-            //currentLevelVector.pop_back();
-            nodes.pop_back();
-            for (vector<GCommitNode *>::iterator it2 = currentNode->childrenGNodes.begin(); it2 != currentNode->childrenGNodes.end(); ++it2) {
-                nodes.push_back(*it2);
-            }
-        }
-        currentLevel++;
-    }
+    // Render tree starting at root node
+    this->renderNode(node, 0, totalAllocatedWidth);
+
 }
+
+void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
+
+    // Position yourself in the middle of your allocated width
+    int xPos = startX + ((endX - startX) / 2.0);
+    node->setPos(xPos, Y_SPACE_PER_LEVEL * node->getDepth());
+
+    // Render
+    this->addItem(node);
+
+    // If we're a leaf, we're done
+    if (node->getChildrenGNodes()->empty()) {
+        return;
+    }
+    // Divide up your allocated space into even slots for each child (later to be adjusted based on
+    // subtree leaf number)
+    int spacePerChild = (int)((double)(endX - startX) / (double)node->getChildrenGNodes()->size());
+
+    // Iterate over children, allocate them space inside us, and render them
+    int childNumber = 0;
+    vector<GCommitNode *> *children = node->getChildrenGNodes();
+    for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+        int xs = startX + (spacePerChild * childNumber);
+        int xe = startX + (spacePerChild * (childNumber+1));
+        this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
+        childNumber++;
+    }
+
+
+}
+
+int GGraphicsScene::measurePhase(GCommitNode *node) {
+    vector<GCommitNode *> *children = node->getChildrenGNodes();
+
+    // Recurse down tree if we are an inner node
+    if (children->size() > 0) {
+        int leavesOnSubTrees = 0;
+        for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+            leavesOnSubTrees += measurePhase(*it);
+        }
+        // Number of leaves to a node is the leaves on all of its subtrees added together
+        node->setNumberOfLeaves(leavesOnSubTrees);
+        return leavesOnSubTrees;
+    }
+    // Otherwise we are a leaf
+    else {
+        // We have no leaves
+        node->setNumberOfLeaves(0);
+        // Our parent gets +1 leaves
+        return 1;
+    }
+
+}
+

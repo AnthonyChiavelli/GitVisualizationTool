@@ -6,6 +6,7 @@
 
 class GCommitArrow : public QObject, public QGraphicsItem {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 
 public:
     explicit GCommitArrow(QGraphicsItem *parent = 0);
