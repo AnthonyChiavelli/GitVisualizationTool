@@ -36,6 +36,11 @@ int GCommitNode::getNextArrowStartPoint() {
     return 0;
 }
 
+void GCommitNode::printTreeHere() {
+
+
+}
+
 void GCommitNode::renderNodeRectangle(QPainter *painter) {
 
     painter->setBrush(Qt::cyan);

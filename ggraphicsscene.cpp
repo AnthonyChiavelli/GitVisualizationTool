@@ -15,9 +15,9 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
 
     // Check if this gcommit node has already been instantiated
     bool recylcingOldNode = false;
-    if(this->allGCommitNodes.find(commitNode->getSha1()) != allGCommitNodes.end()) {
-        cout << "Recycling node";
-        gCommitNode = this->allGCommitNodes.at(commitNode->getSha1());
+
+    if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
+        gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
         recylcingOldNode = true;
     }
     // Otherwise make a new one
@@ -31,7 +31,8 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     }
 
     // Set attributes for this g node
-    gCommitNode->sha = commitNode->getAuthor().getEmail();
+    gCommitNode->sha = commitNode->getSha1().getFullString();
+    //TODO change from string to sha1
     gCommitNode->depth = nodeDepth;
 
     // If there are any children, recursively call this on them
@@ -47,7 +48,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
 
     // Add this commit to a list of all commits, if it hasn't already been
     if (!recylcingOldNode) {
-        this->allGCommitNodes.insert({gCommitNode->sha, gCommitNode});
+        this->allGCommitNodes.insert({commitNode->getSha1().getFullString(), gCommitNode});
     }
     return gCommitNode;
 }
