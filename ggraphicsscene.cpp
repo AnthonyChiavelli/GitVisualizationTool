@@ -7,17 +7,18 @@
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo"));
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool"));
 
     // Measure tree
-    int totalLeaves = this->measurePhase(root);
+    //int totalLeaves = this->measurePhase(root);
+    int totalLeaves = 1;
 
     // Size canvas coordinate grid based on measurement
     this->setSceneRect(0, 0, totalLeaves * X_SPACE_PER_LEAF, 1000); //TODO fix number
     this->setBackgroundBrush(QBrush(Qt::gray, Qt::SolidPattern));
 
     // Render tree
-    this->renderPhase(root);
+  //  this->renderPhase(root);
 
 }
 
