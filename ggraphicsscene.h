@@ -5,11 +5,15 @@
 #include "commitnode.h"
 #include <QGraphicsScene>
 
-/**Graphics properties**/
-#define X_SPACE_PER_LEAF 200
-#define Y_SPACE_PER_LEVEL 150
-#define SCENE_X 700
-#define SCENE_Y 700
+// -- Appearance Properties --
+#define CANVAS_SPACE_PER_NODE 150
+#define CANVAS_ROW_HEIGHT 90
+
+#define CANVAS_WIDTH 700
+#define CANVAS_HEIGHT 700
+
+#define CANVAS_BG_COLOR QColor(232,232,232)
+
 
 class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT

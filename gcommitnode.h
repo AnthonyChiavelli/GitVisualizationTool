@@ -9,13 +9,18 @@
 
 using namespace std;
 
-/**Graphics properties**/
+// -- Appearance properties --
 
-#define NODE_WIDTH 100
-#define NODE_HEIGHT NODE_WIDTH
-#define ROW_HEIGHT 120
-#define COLUMN_WIDTH 120
+#define NODE_WIDTH 70
+#define NODE_HEIGHT 50
+#define NODE_CORNER_RADIUS 1.5
 
+#define NODE_LABEL_TEXT "commit"
+#define NODE_LABEL_Y 20
+#define NODE_SHA_Y 35
+
+#define NODE_TEXT_COLOR QColor(255,255,255)
+#define NODE_BG_COLOR QColor(99,102,133)
 
 /*
  * Graphical node representing a commit
