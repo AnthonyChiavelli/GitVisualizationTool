@@ -1,5 +1,6 @@
 #include <vector>
 #include <QSet>
+#include "QColor"
 #include "ggraphicsscene.h"
 #include "gcommitnode.h"
 #include "localrepoparser.h"
@@ -7,18 +8,17 @@
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool"));
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo_bk"));
 
     // Measure tree
-    //int totalLeaves = this->measurePhase(root);
-    int totalLeaves = 1;
+    int totalLeaves = this->measurePhase(root);
 
     // Size canvas coordinate grid based on measurement
     this->setSceneRect(0, 0, totalLeaves * X_SPACE_PER_LEAF, 1000); //TODO fix number
-    this->setBackgroundBrush(QBrush(Qt::gray, Qt::SolidPattern));
+    this->setBackgroundBrush(QBrush(QColor(158,146, 181), Qt::SolidPattern));
 
     // Render tree
-  //  this->renderPhase(root);
+    this->renderPhase(root);
 
 }
 
