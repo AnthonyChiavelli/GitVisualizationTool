@@ -14,8 +14,8 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     int totalLeaves = this->measurePhase(root);
 
     // Size canvas coordinate grid based on measurement
-    this->setSceneRect(0, 0, totalLeaves * X_SPACE_PER_LEAF, 1000); //TODO fix number
-    this->setBackgroundBrush(QBrush(QColor(158,146, 181), Qt::SolidPattern));
+    this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
+    this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
 
     // Render tree
     this->renderPhase(root);
@@ -43,8 +43,8 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         gCommitNode->setSha(commitNode->getSha1());
         gCommitNode->setCommitter(commitNode->getCommitter());
         gCommitNode->setAuthor(commitNode->getAuthor());
-        gCommitNode->setDateAndTime(commitNode->getDateAndTime());
-        gCommitNode->setMessage(commitNode->getMessage());
+        gCommitNode->setDateAndTime(commitNode->getCommitTime().toString().toStdString());
+        gCommitNode->setMessage(commitNode->getMessage().toStdString());
     }
 
     // If this is a recursive call, we'll have a parent to attach
@@ -78,7 +78,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 void GGraphicsScene::renderPhase(GCommitNode *node) {
 
     // Figure out allocated width for whole tree
-    int totalAllocatedWidth = node->getNumberOfLeaves() * X_SPACE_PER_LEAF;
+    int totalAllocatedWidth = node->getNumberOfLeaves() * CANVAS_SPACE_PER_NODE;
 
     // Render tree starting at root node
     this->renderNode(node, 0, totalAllocatedWidth);
@@ -89,7 +89,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
     // Position yourself in the middle of your allocated width
     int xPos = startX + ((endX - startX) / 2.0);
-    node->setPos(xPos, Y_SPACE_PER_LEVEL * node->getDepth());
+    node->setPos(xPos, CANVAS_ROW_HEIGHT * node->getDepth());
 
     // Render
     this->addItem(node);
@@ -106,8 +106,6 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     int childNumber = 0;
     vector<GCommitNode *> *children = node->getChildrenGNodes();
     for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
-        int xs = startX + (spacePerChild * childNumber);
-        int xe = startX + (spacePerChild * (childNumber+1));
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
     }
