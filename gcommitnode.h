@@ -36,7 +36,7 @@ public:
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    // -- Operators -->>>>>>> master
+    // -- Operators --
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 
@@ -99,10 +99,6 @@ private:
     int depth;
     // Number of cousins we have
     int numberOfCousins;
-
-
-    // Implement equality comparison between gcommit nodes
-    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 
 private:
 
