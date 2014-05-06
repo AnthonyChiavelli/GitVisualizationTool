@@ -16,7 +16,6 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 }
 
 
-
 QRectF GCommitNode::boundingRect() const {
     return QRectF(0,0,NODE_WIDTH,NODE_HEIGHT);
 }

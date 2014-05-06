@@ -1,6 +1,6 @@
 #ifndef GITUSER_H
 #define GITUSER_H
-#include <string>
+#include <QString>
 
 using namespace std;
 
@@ -8,17 +8,17 @@ class GitUser {
 
 public:
     GitUser();
-    GitUser(string& name, string& email);
+    GitUser(QString& name, QString& email);
 
-    string getName() const;
-    void setName(const string &value);
+    QString getName() const;
+    void setName(const QString &value);
 
-    string getEmail() const;
-    void setEmail(const string &value);
+    QString getEmail() const;
+    void setEmail(const QString &value);
 
 private:
-    string name;
-    string email;
+    QString name;
+    QString email;
 };
 
 #endif // GITUSER_H

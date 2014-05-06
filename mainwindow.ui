@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1392</width>
-    <height>764</height>
+    <width>1262</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,83 +20,739 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QTabWidget" name="tabWidget">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="tab">
-         <attribute name="title">
-          <string>Tab 1</string>
-         </attribute>
-         <widget class="QGraphicsView" name="graphicsView">
-          <property name="geometry">
-           <rect>
-            <x>-5</x>
-            <y>1</y>
-            <width>871</width>
-            <height>461</height>
-           </rect>
-          </property>
-          <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOn</enum>
-          </property>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>1241</width>
+      <height>651</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QListView" name="listView">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>4</number>
+       </property>
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="minimumSize">
+          <size>
+           <width>800</width>
+           <height>500</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab1">
+          <attribute name="title">
+           <string>Tab 1</string>
+          </attribute>
+          <widget class="QGraphicsView" name="graphicsView">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>-20</y>
+             <width>801</width>
+             <height>481</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="tab2">
+          <attribute name="title">
+           <string>Tab 2</string>
+          </attribute>
+          <widget class="QGraphicsView" name="graphicsView_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>851</width>
+             <height>471</height>
+            </rect>
+           </property>
+          </widget>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab_2">
-         <attribute name="title">
-          <string>Tab 2</string>
-         </attribute>
-         <widget class="QGraphicsView" name="graphicsView_2">
-          <property name="geometry">
-           <rect>
-            <x>-5</x>
-            <y>-9</y>
-            <width>871</width>
-            <height>471</height>
-           </rect>
-          </property>
-         </widget>
+       </item>
+       <item>
+        <widget class="QTextBrowser" name="textBrowser_2"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="ProjectHLayout">
+         <item>
+          <widget class="QLabel" name="ProjectLabel">
+           <property name="text">
+            <string>Project</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>21</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="BranchHLayout">
+         <item>
+          <widget class="QLabel" name="BranchLabel">
+           <property name="text">
+            <string>Branch</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_2</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_2"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_11">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="GitStatusLabel">
+         <property name="text">
+          <string>Status</string>
+         </property>
         </widget>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="3" alignment="Qt::AlignBottom">
-       <widget class="QListView" name="listView_3"/>
-      </item>
-      <item row="0" column="2" alignment="Qt::AlignRight">
-       <widget class="QListView" name="listView_2"/>
-      </item>
-      <item row="0" column="0" alignment="Qt::AlignLeft">
-       <widget class="QListView" name="listView"/>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1392</width>
-     <height>29</height>
-    </rect>
-   </property>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="CommitHLayout"/>
+       </item>
+       <item>
+        <widget class="QTextBrowser" name="GitStatusTextBrowser">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="UpdateButtonHLayout"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="CommitMessageLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Commit Message</string>
+         </property>
+         <property name="buddy">
+          <cstring>CommitMessageEditor</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="CommitMessageEditor">
+         <property name="maximumSize">
+          <size>
+           <width>275</width>
+           <height>75</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>130</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="UpdateButton">
+           <property name="text">
+            <string>update msg</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="TimeHLayout">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Time</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_4</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>31</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_4"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="DateHLayout">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Date</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_5</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>32</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_5"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="AuthorHLayout">
+         <item>
+          <widget class="QLabel" name="AuthorLabel">
+           <property name="text">
+            <string>Author</string>
+           </property>
+           <property name="buddy">
+            <cstring>AuthorLineEdit_3</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="AuthorLineEdit_3"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>254</width>
+           <height>350</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="focusPolicy">
+    <enum>Qt::ClickFocus</enum>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="separator"/>
+   <addaction name="actionOpenRepo"/>
+   <addaction name="actionRefresh"/>
+   <addaction name="separator"/>
+   <addaction name="actionGitInit"/>
+   <addaction name="actionGitAdd"/>
+   <addaction name="actionGitCommit"/>
+   <addaction name="actionGitPush"/>
+   <addaction name="actionGitPull"/>
+   <addaction name="actionGitRevert"/>
+   <addaction name="actionGitCheckout"/>
+   <addaction name="actionGitBranch"/>
+   <addaction name="actionGitMerge"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1262</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuGitOperations">
+    <property name="title">
+     <string>GitOperations</string>
+    </property>
+    <addaction name="actionGit_Init"/>
+    <addaction name="actionGit_Add"/>
+    <addaction name="actionGit_Commit"/>
+    <addaction name="actionGit_Merge"/>
+    <addaction name="actionGit_Branch"/>
+    <addaction name="actionGit_Revert"/>
+    <addaction name="actionGit_Push"/>
+    <addaction name="actionGit_Pull"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionCurrent_Version"/>
+    <addaction name="actionAbout_us"/>
+   </widget>
+   <widget class="QMenu" name="menuVCS">
+    <property name="title">
+     <string>VCS</string>
+    </property>
+    <widget class="QMenu" name="menuAttach_to_remote_repo">
+     <property name="title">
+      <string>Attach to remote repo</string>
+     </property>
+     <addaction name="actionGitHub"/>
+     <addaction name="actionBitBucket"/>
+    </widget>
+    <addaction name="menuAttach_to_remote_repo"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuGitOperations"/>
+   <addaction name="menuVCS"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Select Project Path</string>
+   </property>
+  </action>
+  <action name="actionGitInit">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/init.png</normaloff>:/icons/init.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitInit</string>
+   </property>
+   <property name="toolTip">
+    <string>Initialize a new Git repo</string>
+   </property>
+  </action>
+  <action name="actionGitAdd">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitAdd</string>
+   </property>
+   <property name="toolTip">
+    <string>Add some sweet files to your git repo</string>
+   </property>
+  </action>
+  <action name="actionGitMerge">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/merge.png</normaloff>:/icons/merge.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitMerge</string>
+   </property>
+   <property name="toolTip">
+    <string>Merges branches</string>
+   </property>
+  </action>
+  <action name="actionGitCommit">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/commit.png</normaloff>:/icons/commit.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitCommit</string>
+   </property>
+   <property name="toolTip">
+    <string>Commits</string>
+   </property>
+  </action>
+  <action name="actionGitBranch">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/Branch</normaloff>:/icons/Branch</iconset>
+   </property>
+   <property name="text">
+    <string>GitBranch</string>
+   </property>
+   <property name="toolTip">
+    <string>Branches</string>
+   </property>
+  </action>
+  <action name="actionGit_Init">
+   <property name="text">
+    <string>Git Init</string>
+   </property>
+  </action>
+  <action name="actionGit_Add">
+   <property name="text">
+    <string>Git Add</string>
+   </property>
+  </action>
+  <action name="actionGit_Commit">
+   <property name="text">
+    <string>Git Commit</string>
+   </property>
+  </action>
+  <action name="actionGit_Merge">
+   <property name="text">
+    <string>Git Merge</string>
+   </property>
+  </action>
+  <action name="actionGit_Branch">
+   <property name="text">
+    <string>Git Branch</string>
+   </property>
+  </action>
+  <action name="actionCurrent_Version">
+   <property name="text">
+    <string>Current Version</string>
+   </property>
+  </action>
+  <action name="actionAbout_us">
+   <property name="text">
+    <string>About us</string>
+   </property>
+  </action>
+  <action name="actionGitRevert">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitRevert</string>
+   </property>
+   <property name="toolTip">
+    <string>Reverts </string>
+   </property>
+  </action>
+  <action name="actionGitHub">
+   <property name="text">
+    <string>GitHub</string>
+   </property>
+  </action>
+  <action name="actionBitBucket">
+   <property name="text">
+    <string>BitBucket</string>
+   </property>
+  </action>
+  <action name="actionGit_Revert">
+   <property name="text">
+    <string>Git Revert</string>
+   </property>
+  </action>
+  <action name="actionGitPush">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/push.png</normaloff>:/icons/push.png</iconset>
+   </property>
+   <property name="text">
+    <string>Gitpush</string>
+   </property>
+   <property name="toolTip">
+    <string>Commit and push your code to a remote repo</string>
+   </property>
+  </action>
+  <action name="actionGitPull">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/pull.png</normaloff>:/icons/pull.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitPull</string>
+   </property>
+   <property name="toolTip">
+    <string>Pull latest from repo/branch</string>
+   </property>
+  </action>
+  <action name="actionGit_Push">
+   <property name="text">
+    <string>Git Push</string>
+   </property>
+  </action>
+  <action name="actionGit_Pull">
+   <property name="text">
+    <string>Git Pull</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/refresh.png</normaloff>:/icons/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="toolTip">
+    <string>So Refreshing!</string>
+   </property>
+  </action>
+  <action name="actionOpenRepo">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/open_repo.png</normaloff>:/icons/open_repo.png</iconset>
+   </property>
+   <property name="text">
+    <string>OpenRepo</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a repository</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionGitCheckout">
+   <property name="icon">
+    <iconset resource="resources/images.qrc">
+     <normaloff>:/icons/checkout_branch.png</normaloff>:/icons/checkout_branch.png</iconset>
+   </property>
+   <property name="text">
+    <string>GitCheckout</string>
+   </property>
+   <property name="toolTip">
+    <string>Checkout a different branch</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

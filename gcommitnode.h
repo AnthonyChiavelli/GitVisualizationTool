@@ -36,7 +36,7 @@ public:
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    // -- Operators --
+    // -- Operators -->>>>>>> master
     // Implement equality comparison between gcommit nodes
     friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
 
@@ -97,10 +97,14 @@ private:
     int numberOfLeaves;
     // How far away from root node we are
     int depth;
-    //
     // Number of cousins we have
     int numberOfCousins;
 
+
+    // Implement equality comparison between gcommit nodes
+    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
+
+private:
 
     // -- Helper methods to help render the node --
     void renderNodeRectangle(QPainter *painter);

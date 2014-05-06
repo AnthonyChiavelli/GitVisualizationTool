@@ -39,23 +39,27 @@ void CommitNode::setAuthor(const GitUser &value)
 {
     author = value;
 }
-string CommitNode::getMessage() const
+QString CommitNode::getMessage() const
 {
     return message;
 }
 
-void CommitNode::setMessage(const string &value)
+void CommitNode::setMessage(QString &value)
 {
     message = value;
 }
-string CommitNode::getDateAndTime() const
+QDateTime CommitNode::getCommitTime() const
 {
-    return dateAndTime;
+    return commitTime;
 }
 
-void CommitNode::setDateAndTime(const string &value)
+void CommitNode::setCommitTime(QDateTime &value)
 {
-    dateAndTime = value;
+    commitTime = value;
+}
+
+void CommitNode::setCommitTime(qint64 &commitTimeInMillis) {
+    commitTime = QDateTime::fromMSecsSinceEpoch(commitTimeInMillis);
 }
 
 CommitNode::~CommitNode() {

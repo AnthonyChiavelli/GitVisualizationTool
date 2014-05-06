@@ -55,6 +55,24 @@ static GitAPIResponse executeGitCommand(string& command);
         string command = "cd " + repoPath + ";git add --all;echo $?";
 
         return executeGitCommand(command);
+        /*
+         std::vector<int> kol;
+        for (int i : kol)
+            std::cout << "print";
+         */
+    }
+
+    GitAPIResponse GitApi::gitAdd(string& repoPath, QStringList& files){
+
+        string command = "cd " + repoPath + ";git add ";
+
+        for(int i = 0; i < files.size(); i++){
+          command += files.at(i).toStdString() + " ";
+        }
+
+        command += ";echo $?";
+
+        return executeGitCommand(command);
     }
 
     // not implemented yet
@@ -73,11 +91,26 @@ static GitAPIResponse executeGitCommand(string& command);
         return executeGitCommand(command);
     }
 
+    GitAPIResponse GitApi::gitMergeByName(string& repoPath, string& targetBranch, string& message){
+      string command = "cd " + repoPath + ";git merge " + targetBranch + " -m " + message + ";echo $?";
+
+      return executeGitCommand(command);
+    }
+
     GitAPIResponse GitApi::gitBranch(string& repoPath, string newBranchName){
 
         string command = "cd " + repoPath + ";git branch " + newBranchName + ";echo $?";
 
         return executeGitCommand(command);
+    }
+
+    QStringList GitApi::gitBranches(string& repoPath){
+
+        string command = "cd " + repoPath + ";git branch;echo $?";
+        GitAPIResponse response = executeGitCommand(command);
+        QStringList branches;
+
+        return branches;
     }
 
     // not implemented yet
@@ -136,3 +169,4 @@ static GitAPIResponse executeGitCommand(string& command);
          return response;
          //  return new GitAPIResponse(isError, outputMessage); this will return a pointer
     }
+

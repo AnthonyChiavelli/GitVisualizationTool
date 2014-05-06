@@ -20,6 +20,7 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     // Render tree
     this->renderPhase(root);
 
+
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
@@ -27,10 +28,12 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 
     // Check if this gcommit node has already been instantiated
     GCommitNode *gCommitNode;
+    // Check if this gcommit node has already been instantiated
     bool recylcingOldNode = false;
     if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
         gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
         recylcingOldNode = true;
+
     }
     // Otherwise make a new one
     else {
