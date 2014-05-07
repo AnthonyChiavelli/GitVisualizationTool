@@ -47,8 +47,6 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
         getCommitHistory(branch->getCommitSha(), commits);
     }
 
-    // TODO: Clean up memory
-    delete commits;
 
     return rootCommit;
 }
