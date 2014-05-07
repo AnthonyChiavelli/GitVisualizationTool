@@ -68,7 +68,10 @@ private slots:
 
     void on_actionOpenRepo_triggered();
 
-  private:
+    void on_actionGitHub_2_triggered();
+
+    void setGitHubView(bool on);
+private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;
 

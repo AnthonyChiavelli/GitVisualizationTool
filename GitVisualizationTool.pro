@@ -39,8 +39,11 @@ SOURCES += branch.cpp \
         gitrevertdialog.cpp \
         gitpulldialog.cpp \
         gitpushdialog.cpp \
-        logger.cpp
-
+        logger.cpp \
+        github/githubwebapi.cpp \
+        github/githubrepoparser.cpp \
+    github/signup.cpp \
+    github/signin.cpp
 
 HEADERS  += branch.h \
         commitnode.h \
@@ -66,7 +69,11 @@ HEADERS  += branch.h \
         gitrevertdialog.h \
         gitpulldialog.h \
         gitpushdialog.h \
-        logger.h 
+        logger.h \ 
+        github/githubrepoparser.h \
+        github/githubwebapi.h \
+    github/signup.h \
+    github/signin.h
 
 FORMS    += mainwindow.ui \
         gitinitdialog.ui \
@@ -76,6 +83,29 @@ FORMS    += mainwindow.ui \
         gitbranchdialog.ui \
         gitrevertdialog.ui \
         gitpulldialog.ui \
-        gitpushdialog.ui
+        gitpushdialog.ui \
+    github/signup.ui \
+    github/signin.ui \
+    GitHubView.ui
 
 RESOURCES += resources/images.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/release/ -lcurl
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/debug/ -lcurl
+else:unix: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lcurl
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../usr/local/lib/release/libcurl.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../usr/local/lib/debug/libcurl.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../usr/local/lib/release/curl.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../usr/local/lib/debug/curl.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../../../../../usr/local/lib/libcurl.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/release/ -lcurl
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/debug/ -lcurl
+else:unix: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lcurl
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include

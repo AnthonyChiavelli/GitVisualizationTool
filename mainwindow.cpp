@@ -8,6 +8,7 @@
 #include "gitpushdialog.h"
 #include "gitpulldialog.h"
 #include "ui_mainwindow.h"
+#include "github/signup.h"
 #include "gcommitnode.h"
 #include "QGraphicsRectItem"
 #include "ggraphicsscene.h"
@@ -194,4 +195,13 @@ void MainWindow::on_UpdateButton_clicked()
   if(newMessage.empty())
     return;
   //GitApi::modifyCommit(newMessage); //or something like this
+}
+
+void MainWindow::on_actionGitHub_2_triggered()
+{
+    SignUp signWindow;
+    Qt::WindowFlags flags = signWindow.windowFlags();
+    signWindow.setWindowFlags(flags ^ Qt::WindowStaysOnTopHint);
+    signWindow.exec();
+
 }
