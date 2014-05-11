@@ -65,6 +65,9 @@ public:
 
     vector<GCommitNode *> *getChildrenGNodes();
 
+    // Children of ours for which we are the youngest parent
+    vector<GCommitNode *> *getCloseChildren();
+
     int getNumberOfLeaves();
     void setNumberOfLeaves(int value);
 

@@ -19,6 +19,10 @@ class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
 
 public:
+
+    //TODO remove
+    int counter = 0;
+
     explicit GGraphicsScene(QObject *parent = 0);
 
     // Converts a CommitNode, produced by the parser, to a GCommitNode to be drawn on the canvas

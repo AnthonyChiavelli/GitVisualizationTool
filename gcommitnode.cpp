@@ -60,7 +60,7 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     QPointF labelTextPosition = QPointF(labelTextMargin, NODE_LABEL_Y);
     painter->drawText(labelTextPosition, NODE_LABEL_TEXT);
     QPointF shaTextPosition = QPointF(shaTextMargin, NODE_SHA_Y);
-    painter->drawText(shaTextPosition, this->sha.getStringOfLength(6).c_str());
+    painter->drawText(shaTextPosition, this->message.c_str());//this->sha.getStringOfLength(6).c_str());
 }
 
 bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
@@ -87,6 +87,26 @@ void GCommitNode::setSha(const Sha1 &value) { sha = value; }
 vector< GCommitNode *> *GCommitNode::getParentGNodes()  { return &parentGNodes; }
 
 vector<GCommitNode *> *GCommitNode::getChildrenGNodes()  { return &childrenGNodes; }
+
+vector<GCommitNode *> *GCommitNode::getCloseChildren() {
+    int counter = 0;
+    vector<GCommitNode *> *closeChildren = new vector<GCommitNode*>();
+    for (vector<GCommitNode *>::iterator child = this->childrenGNodes.begin(); child != this->childrenGNodes.end(); child++) {
+        GCommitNode *childNode = *child;
+        bool haveYoungerParents = false;
+        //Check if they have younger parents
+        for (vector<GCommitNode *>::iterator childParent = childNode->getParentGNodes()->begin(); childParent != childNode->getParentGNodes()->end(); childParent++) {
+            GCommitNode *childParentNode = *childParent;
+            if (childParentNode->depth > this->depth) {
+                haveYoungerParents = true;
+            }
+        }
+        if (!haveYoungerParents) {
+            closeChildren->push_back(childNode);
+        }
+    }
+    return closeChildren;
+}
 
 int GCommitNode::getNumberOfLeaves()  { return numberOfLeaves; }
 void GCommitNode::setNumberOfLeaves(int value) { numberOfLeaves = value; }

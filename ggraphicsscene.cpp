@@ -4,11 +4,13 @@
 #include "ggraphicsscene.h"
 #include "gcommitnode.h"
 #include "localrepoparser.h"
+#include "logger.h"
+#include <iostream>
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo_bk"));
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo"));
 
     // Measure tree
     int totalLeaves = this->measurePhase(root);
@@ -28,7 +30,6 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 
     // Check if this gcommit node has already been instantiated
     GCommitNode *gCommitNode;
-    // Check if this gcommit node has already been instantiated
     bool recylcingOldNode = false;
     if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
         gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
@@ -100,11 +101,11 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     }
     // Divide up your allocated space into even slots for each child (later to be adjusted based on
     // subtree leaf number)
-    int spacePerChild = (int)((double)(endX - startX) / (double)node->getChildrenGNodes()->size());
+    int spacePerChild = (int)((double)(endX - startX) / (double)node->getCloseChildren()->size());
 
     // Iterate over children, allocate them space inside us, and render them
     int childNumber = 0;
-    vector<GCommitNode *> *children = node->getChildrenGNodes();
+    vector<GCommitNode *> *children = node->getCloseChildren();
     for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
@@ -114,7 +115,9 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 }
 
 int GGraphicsScene::measurePhase(GCommitNode *node) {
-    vector<GCommitNode *> *children = node->getChildrenGNodes();
+    cout<<counter++<<endl;
+    vector<GCommitNode *> *children = node->getCloseChildren();//node->getChildrenGNodes();
+    vector<GCommitNode *> *allChildren = node->getChildrenGNodes();
 
     // Recurse down tree if we are an inner node
     if (children->size() > 0) {
