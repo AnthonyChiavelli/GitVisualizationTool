@@ -3,11 +3,13 @@
 #include <map>
 #include "gcommitnode.h"
 #include "commitnode.h"
+#include "gcommitarrow.h"
 #include <QGraphicsScene>
 
 // -- Appearance Properties --
 #define CANVAS_SPACE_PER_NODE 150
 #define CANVAS_ROW_HEIGHT 90
+#define CANVAS_ROW_OFFSET 50
 
 #define CANVAS_WIDTH 700
 #define CANVAS_HEIGHT 700
@@ -19,9 +21,6 @@ class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
 
 public:
-
-    //TODO remove
-    int counter = 0;
 
     explicit GGraphicsScene(QObject *parent = 0);
 
@@ -36,6 +35,10 @@ public:
 
     // A global set of all nodes mapped by sha
     map<string, GCommitNode *> allGCommitNodes;
+
+    // The arrows that connect the nodes
+    vector<GCommitArrow *> arrows;
+
 
 private:
     // Render a node and its children in the space space from startX to endX

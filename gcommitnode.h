@@ -83,6 +83,7 @@ public:
     int getXStart();
     void setXStart(int value);
 
+
 private:
 
     // -- Attributes of the commit --

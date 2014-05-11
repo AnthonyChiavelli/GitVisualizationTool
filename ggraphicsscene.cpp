@@ -3,6 +3,7 @@
 #include "QColor"
 #include "ggraphicsscene.h"
 #include "gcommitnode.h"
+#include "gcommitarrow.h"
 #include "localrepoparser.h"
 #include "logger.h"
 #include <iostream>
@@ -22,7 +23,11 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     // Render tree
     this->renderPhase(root);
 
-
+    //TODO: remove. Add some arrows
+    GCommitArrow *arrow1 = new GCommitArrow();
+    arrow1->source = root;
+    arrow1->destination = root->getChildrenGNodes()->at(0);
+    this->addItem(arrow1);
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
@@ -63,7 +68,10 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         nodeDepth++;
         // Recursively call ourselves for each child and add result to our set of children
         for (QSet<CommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
-            gCommitNode->getChildrenGNodes()->push_back(convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth));
+            GCommitNode * newNode = convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth);
+            gCommitNode->getChildrenGNodes()->push_back(newNode);
+            // Add an arrow from this to the child to the global set of arrows
+            this->arrows.push_back(new GCommitArrow(gCommitNode, newNode));
         }
     }
 
@@ -84,13 +92,18 @@ void GGraphicsScene::renderPhase(GCommitNode *node) {
     // Render tree starting at root node
     this->renderNode(node, 0, totalAllocatedWidth);
 
+    // Render arrows
+    for (vector<GCommitArrow *>::iterator arrow = this->arrows.begin(); arrow != this->arrows.end(); arrow++) {
+        this->addItem(*arrow);
+    }
+
 }
 
 void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
     // Position yourself in the middle of your allocated width
     int xPos = startX + ((endX - startX) / 2.0);
-    node->setPos(xPos, CANVAS_ROW_HEIGHT * node->getDepth());
+    node->setPos(xPos, CANVAS_ROW_OFFSET + CANVAS_ROW_HEIGHT * node->getDepth());
 
     // Render
     this->addItem(node);
@@ -99,6 +112,8 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     if (node->getChildrenGNodes()->empty()) {
         return;
     }
+
+
     // Divide up your allocated space into even slots for each child (later to be adjusted based on
     // subtree leaf number)
     int spacePerChild = (int)((double)(endX - startX) / (double)node->getCloseChildren()->size());
@@ -115,7 +130,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 }
 
 int GGraphicsScene::measurePhase(GCommitNode *node) {
-    cout<<counter++<<endl;
+
     vector<GCommitNode *> *children = node->getCloseChildren();//node->getChildrenGNodes();
     vector<GCommitNode *> *allChildren = node->getChildrenGNodes();
 
