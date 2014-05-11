@@ -118,7 +118,7 @@ private:
 protected:
 
     // Mouse events
-    //void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 signals:

@@ -16,9 +16,10 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
 
 QRectF GCommitNode::boundingRect() const {
-    return QRectF(0,0,NODE_WIDTH,NODE_HEIGHT);
-
+    return QRectF(0,0,NODE_WIDTH, NODE_HEIGHT);
 }
+
+
 
 
 void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
@@ -61,6 +62,11 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     painter->drawText(labelTextPosition, NODE_LABEL_TEXT);
     QPointF shaTextPosition = QPointF(shaTextMargin, NODE_SHA_Y);
     painter->drawText(shaTextPosition, this->message.c_str());//this->sha.getStringOfLength(6).c_str());
+}
+
+void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+
 }
 
 bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
