@@ -1,23 +1,39 @@
 #ifndef GCOMMITARROW_H
 #define GCOMMITARROW_H
-
 #include <QGraphicsItem>
+#include <QGraphicsLineItem>
 #include "gcommitnode.h"
+
+#define PI 3.14159265
+
+// -- Graphics properties --
+#define ARROW_HEAD_SIZE 10
+
 
 class GCommitArrow : public QObject, public QGraphicsItem {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 
 public:
+    GCommitArrow(GCommitNode *origin, GCommitNode *destination);
     explicit GCommitArrow(QGraphicsItem *parent = 0);
+
+    // -- Graphics method (required) --
+    // Returns estimate of size
+    QRectF boundingRect() const;
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
-private:
-
-    // Source and destination nodes
+    // -- Source and destination nodes --
     GCommitNode *source;
     GCommitNode *destination;
+
+    QLineF renderArrowLine(QPainter *painter);
+    void determineArrowAttachment(QPointF destinationPoint, QRectF destinationRect, QRectF sourceRect, QPointF sourcePoint);
+    void determineArrowAttachment(QPointF sourcePoint, QPointF destinationPoint);
+private:
+
+    // Arrow Head
+    QPolygonF arrowHead;
 
 signals:
 

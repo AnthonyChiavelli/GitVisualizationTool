@@ -2,6 +2,7 @@
 #define GCOMMITNODE_H
 
 #include <QGraphicsItem>
+#include <QDateTime>
 #include <QPainter>
 #include <vector>
 #include "gituser.h"
@@ -9,22 +10,31 @@
 
 using namespace std;
 
-/**Graphics properties**/
+// Forward declaration to avoid circular dependencies
+class GCommitArrow;
 
-#define NODE_WIDTH 100
-#define NODE_HEIGHT NODE_WIDTH
-#define ROW_HEIGHT 120
-#define COLUMN_WIDTH 120
+// -- Appearance properties --
 
+#define NODE_WIDTH 70
+#define NODE_HEIGHT 50
+#define NODE_CORNER_RADIUS 1.5
+
+#define NODE_LABEL_TEXT "commit"
+#define NODE_LABEL_Y 20
+#define NODE_SHA_Y 35
+
+#define NODE_TEXT_COLOR QColor(255,255,255)
+#define NODE_BG_COLOR QColor(99,102,133)
 
 /*
  * Graphical node representing a commit
  */
 class GCommitNode : public QObject, public QGraphicsItem {
     Q_OBJECT
-        Q_INTERFACES(QGraphicsItem)
+    Q_INTERFACES(QGraphicsItem)
 
 public:
+
     // -- Constructors --
     // Create a node as a child of a parent
     GCommitNode(QGraphicsItem *parent = 0);
@@ -49,8 +59,8 @@ public:
     string getMessage();
     void setMessage(const string &value);
 
-    string getDateAndTime() ;
-    void setDateAndTime(const string &value);
+    QDateTime getDateAndTime() ;
+    void setDateAndTime(const QDateTime &value);
 
     Sha1 getSha();
     void setSha(const Sha1 &value);
@@ -58,6 +68,9 @@ public:
     vector<GCommitNode *> *getParentGNodes();
 
     vector<GCommitNode *> *getChildrenGNodes();
+
+    // Children of ours for which we are the youngest parent
+    vector<GCommitNode *> *getCloseChildren();
 
     int getNumberOfLeaves();
     void setNumberOfLeaves(int value);
@@ -74,6 +87,8 @@ public:
     int getXStart();
     void setXStart(int value);
 
+    vector<GCommitArrow *> *getTouchingArrows();
+
 private:
 
     // -- Attributes of the commit --
@@ -81,7 +96,7 @@ private:
     GitUser author;
     Sha1 sha;
     string message;
-    string dateAndTime;
+    QDateTime dateAndTime;
 
     // -- Relatives --
     vector<GCommitNode *> parentGNodes;
@@ -96,15 +111,8 @@ private:
     int numberOfLeaves;
     // How far away from root node we are
     int depth;
-    //
     // Number of cousins we have
     int numberOfCousins;
-
-
-    // -- Operators --
-    // Implement equality comparison between gcommit nodes
-    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
-
 
 private:
 
@@ -114,9 +122,9 @@ private:
 
 protected:
 
-    // Mouse events
-    //void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    // -- QT Callbacks --
+    // Called when there is some change done to an item
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 signals:
 

@@ -4,6 +4,7 @@
 #include "sha1.h"
 #include <iostream>
 #include <fstream>
+#include <QDateTime>
 #include <QDir>
 #include <QString>
 #include <QStringList>
@@ -19,6 +20,8 @@
 void parseCommitNode(CommitNode *commitNode, string &commitContents, QHash<QString, CommitNode *> *commitsEncountered);
 // Returns the full history for the given commit (identified by it's SHA-1)
 void getCommitHistory(Sha1 const &commitSha, QHash<QString, CommitNode *> *commits, CommitNode *childCommit = NULL);
+bool seeEmail(QString const &token);
+QString parseEmail(QString const &token);
 
 static string absPathToGitFolder;
 static CommitNode *rootCommit;
@@ -44,6 +47,8 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
         getCommitHistory(branch->getCommitSha(), commits);
     }
 
+    // TODO: Clean up memory
+    delete commits;
 
     return rootCommit;
 }
@@ -139,7 +144,7 @@ void parseCommitNode(CommitNode* commitNode, string& commitContents, QHash<QStri
                     currentToken = tokenIterator->next();
                     // If we've already encountered the parent commit
                     if (commitsEncountered->contains(currentToken)) {
-                        // Link the parent with current commit. TODO: Fix segfault here
+                        // Link the parent with current commit.
                         commitsEncountered->value(currentToken)->addChild(commitNode);
                         commitNode->addParent(commitsEncountered->value(currentToken));
                     }
@@ -150,6 +155,34 @@ void parseCommitNode(CommitNode* commitNode, string& commitContents, QHash<QStri
                         commitNode->addParent(parent);
                     }
                 }
+                else if (currentToken == "author") {
+                    GitUser author;
+                    QString authorName("");
+                    // Get and add the author to the commit node
+                    while (!seeEmail(tokenIterator->peekNext())) {
+                        authorName += tokenIterator->next() + " ";
+                    }
+                    authorName.chop(1); // Remove the extra space from the end of the name
+                    author.setName(authorName);
+                    author.setEmail(parseEmail(tokenIterator->next()));
+                    commitNode->setAuthor(author);
+                }
+                else if (currentToken == "committer") {
+                    GitUser committer;
+                    QString committerName("");
+                    // Get and add the committer to the commit node
+                    while (!seeEmail(tokenIterator->peekNext())) {
+                        committerName += tokenIterator->next() + " ";
+                    }
+                    committerName.chop(1); // Remove the extra space from the end of the name
+                    committer.setName(committerName);
+                    committer.setEmail(parseEmail(tokenIterator->next()));
+                    commitNode->setCommitter(committer);
+
+                    // Set the date and time of this commit
+                    qint64 commitTimeInMillis = tokenIterator->next().toLongLong();
+                    commitNode->setCommitTime(commitTimeInMillis);
+                }
             }
         }
         else {
@@ -158,7 +191,35 @@ void parseCommitNode(CommitNode* commitNode, string& commitContents, QHash<QStri
             while (lineIterator->hasNext()) {
                 commitMessage += lineIterator->next();
             }
-            commitNode->setMessage(commitMessage.toStdString());
+            commitNode->setMessage(commitMessage);
         }
     }
+}
+
+/**
+  * Returns true if the given token is an <email> (as listed in a git object)
+  *
+  * @brief seeEmail
+  * @param token
+  * @return
+  */
+ bool seeEmail(QString const &token) {
+     if (token.at(0) == '<') {
+         return true;
+     }
+     return false;
+ }
+
+ /**
+ * Removes the angle brackets from around an email address, for cosmetic purposes
+ *
+ * @brief parseEmail
+ * @param token
+ * @return
+ */
+QString parseEmail(QString const &token) {
+    QString result = token;
+    result.remove(0, 1);
+    result.remove(result.length()-1, 1);
+    return result;
 }
