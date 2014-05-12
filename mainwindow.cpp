@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "gitapiresponse.h"
+#include "gcommitnode.h"
 #include "gitinitdialog.h"
 #include "gitadddialog.h"
 #include "gitcommitdialog.h"
@@ -196,4 +198,24 @@ void MainWindow::on_UpdateButton_clicked()
   //GitApi::modifyCommit(newMessage); //or something like this
 }
 
+void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
+/* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
+{
 
+ ui->ProjectLineEdit->setText("some project");
+
+ ui->BranchLineEdit->setText("some branch");
+
+ //ui->CommitMessageEditor->setText(selectedNode->getMessage());
+
+// GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
+// ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
+
+
+ ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("hh:mm:ss.zzz"));
+
+ ui->DateLineEdit->setText(selectedNode->getDateAndTime().toString("hh:mm:ss.zzz"));
+
+ ui->AuthorLineEdit->setText(selectedNode->getAuthor().getName());
+
+}
