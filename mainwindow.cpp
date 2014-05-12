@@ -196,25 +196,4 @@ void MainWindow::on_UpdateButton_clicked()
   //GitApi::modifyCommit(newMessage); //or something like this
 }
 
-void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
-/* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
-{
 
-  ui->ProjectLineEdit->setPlaceholderText("some Project");
-
-  ui->BranchLineEdit->setPlaceholderText("some Branch");
-
-  GitAPIResponse response = GitApi::gitStatus(path);
-  ui->GitStatusTextBrowser->setPlaceholderText(response);
-
-  ui->CommitMessageEditor->setPlaceholderText(selectedNode->getMessage());
-
-  ui->TimeLineEdit->setPlaceholderText(selectedNode->getDateAndTime()->toString("hh:mm:ss.zzz"));
-
-  ui->DateLineEdit->setPlaceholderText(selectedNode->getDateAndTime()->toString("ddd MMMM d yy"));
-
-  ui->AuthorLineEdit->setPlaceholderText(selectedNode->getAuthor());
-
-
-
-}
