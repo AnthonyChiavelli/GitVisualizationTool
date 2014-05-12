@@ -27,22 +27,27 @@ void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     // If child node is completely below parent node
     if(sourceRect.bottom() < destinationRect.top()) {
         // Originate the arrow from the middle top, terminate in middle bottom of child
+        qreal sourceBottomPoint = min(max(destinationRect.left() + (destinationRect.width() / 2), sourceRect.left()), sourceRect.right());
         sourcePoint = QPointF(sourceRect.left() + (sourceRect.width() / 2), sourceRect.bottom());
+        sourcePoint = QPointF(sourceBottomPoint, sourceRect.bottom());
         destinationPoint = QPointF(destinationRect.left() + (destinationRect.width() / 2), destinationRect.top());
     }
+    // If child node is completely above parent node
     else if (destinationRect.bottom() < sourceRect.top()) {
-        // Originate the arrow from the middle top, terminate in middle bottom of child
-        sourcePoint = QPointF(sourceRect.left() + (sourceRect.width() / 2), sourceRect.top());
+        qreal sourceTopPoint = min(max(destinationRect.left() + (destinationRect.width() / 2), sourceRect.left()), sourceRect.right());
+        sourcePoint = QPointF(sourceTopPoint, sourceRect.top());
         destinationPoint = QPointF(destinationRect.left() + (destinationRect.width() / 2), destinationRect.bottom());
     }
+    // If the child node is completely to the right of parent
     else if (sourceRect.right() < destinationRect.left()) {
-        // Originate the arrow from the middle right, terminate in middle left of child
-        sourcePoint = QPointF(sourceRect.right(), sourceRect.top() +(sourceRect.height() / 2));
+        qreal sourceRightPoint = min(max(destinationRect.top() + (destinationRect.height() / 2), sourceRect.top()), sourceRect.bottom());
+        sourcePoint = QPointF(sourceRect.right(), sourceRightPoint);
         destinationPoint = QPointF(destinationRect.left(), destinationRect.top() + (destinationRect.height() / 2));
     }
+    // If the child node is completely to the left of parent
     else if (sourceRect.left() > destinationRect.right()) {
-        // Originate the arrow from the middle lef, terminate in middle right of child
-        sourcePoint = QPointF(sourceRect.left(), sourceRect.top() +(sourceRect.height() / 2));
+        qreal sourceLeftPoint = min(max(destinationRect.top() + (destinationRect.height() / 2), sourceRect.top()), sourceRect.bottom());
+        sourcePoint = QPointF(sourceRect.left(), sourceLeftPoint);
         destinationPoint = QPointF(destinationRect.right(), destinationRect.top() + (destinationRect.height() / 2));
     }
 

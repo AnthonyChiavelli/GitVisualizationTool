@@ -61,7 +61,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     }
 
     // Node depth should be maximum of all depths calculated for this node (which differ
-    // based on which parent we came from)
+    // based on which parent we came from
     if (reusingExistingNode) {
         gCommitNode->setDepth(max(nodeDepth, gCommitNode->getDepth()));
     }
