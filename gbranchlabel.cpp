@@ -1,8 +1,6 @@
 #include "gbranchlabel.h"
 
-
 GBranchLabel::GBranchLabel(QGraphicsItem *parent) : QGraphicsItem(parent) {
-
 }
 
 GBranchLabel::GBranchLabel(QString branchName){
@@ -13,13 +11,11 @@ GBranchLabel::GBranchLabel(QString branchName){
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
     this->branchName = branchName;
-
 }
 
 QRectF GBranchLabel::boundingRect() const {
     return QRect(0,0, LABEL_WIDTH, LABEL_HEIGHT);
 }
-
 
 void GBranchLabel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
 
@@ -31,6 +27,8 @@ void GBranchLabel::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 }
 
 void GBranchLabel::renderLabelRectangle(QPainter *painter) {
+
+    // Paint a rectangle
     painter->setBrush(LABEL_BG_COLOR);
     QRect rect = QRect(0, 0, LABEL_WIDTH, LABEL_HEIGHT);
     painter->drawRect(rect);
@@ -65,6 +63,3 @@ void GBranchLabel::setBranchName(const QString &value) { branchName = value; }
 
 GCommitNode *GBranchLabel::getAssociatedCommit() const { return associatedCommit; }
 void GBranchLabel::setAssociatedCommit(GCommitNode *value) { associatedCommit = value; }
-
-
-

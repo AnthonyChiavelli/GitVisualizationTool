@@ -1,21 +1,27 @@
-#include <vector>
-#include <algorithm>
-#include <QSet>
-#include "QColor"
-#include "ggraphicsscene.h"
-#include "gcommitnode.h"
-#include "gcommitarrow.h"
-#include "gbranchlabel.h"
-#include "localrepoparser.h"
-#include "logger.h"
+#include <QColor>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
+#include <QSet>
+
+#include <algorithm>
 #include <iostream>
+#include <vector>
+
+#include "branch.h"
+#include "localrepoparser.h"
+#include "logger.h"
+#include "gbranchlabel.h"
+#include "gcommitarrow.h"
+#include "gcommitnode.h"
+#include "ggraphicsscene.h"
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo"));
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/GitVisualizationTool/test_repo"));
+
+    // Retrieve the list of branches
+    vector<Branch *> branches; //TODO get from parser
 
     // Measure tree
     int totalLeaves = this->measurePhase(root);
@@ -31,8 +37,6 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     GBranchLabel *testLabel1 = new GBranchLabel(QString("hello"));
     testLabel1->setPos(QPoint(100,100));
     this->addItem(testLabel1);
-
-
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
@@ -94,8 +98,6 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     return gCommitNode;
 }
 
-
-
 void GGraphicsScene::renderPhase(GCommitNode *node) {
 
     // Figure out allocated width for whole tree
@@ -108,7 +110,6 @@ void GGraphicsScene::renderPhase(GCommitNode *node) {
     for (vector<GCommitArrow *>::iterator arrow = this->arrows.begin(); arrow != this->arrows.end(); arrow++) {
         this->addItem(*arrow);
     }
-
 }
 
 void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
@@ -125,7 +126,6 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
         return;
     }
 
-
     // Divide up your allocated space into even slots for each child (later to be adjusted based on
     // subtree leaf number)
     int spacePerChild = (int)((double)(endX - startX) / (double)node->getCloseChildren()->size());
@@ -137,12 +137,11 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
     }
-
-
 }
 
 int GGraphicsScene::measurePhase(GCommitNode *node) {
 
+    // Retrieve the children of ours for whom we are the youngest parent
     vector<GCommitNode *> *children = node->getCloseChildren();
 
     // Recurse down tree if we are an inner node
@@ -162,7 +161,4 @@ int GGraphicsScene::measurePhase(GCommitNode *node) {
         // Our parent gets +1 leaves
         return 1;
     }
-
-
 }
-

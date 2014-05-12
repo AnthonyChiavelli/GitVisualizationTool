@@ -39,7 +39,6 @@ public:
     GCommitNode *getAssociatedCommit() const;
     void setAssociatedCommit(GCommitNode *value);
 
-
 protected:
 
     // -- Rendering helper methods

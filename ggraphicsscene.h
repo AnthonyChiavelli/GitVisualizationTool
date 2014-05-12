@@ -1,10 +1,12 @@
 #ifndef GGRAPHICSSCENE_H
 #define GGRAPHICSSCENE_H
+#include <QGraphicsScene>
+
 #include <map>
-#include "gcommitnode.h"
+
 #include "commitnode.h"
 #include "gcommitarrow.h"
-#include <QGraphicsScene>
+#include "gcommitnode.h"
 
 // -- Appearance Properties --
 #define CANVAS_SPACE_PER_NODE 150
@@ -15,7 +17,6 @@
 #define CANVAS_HEIGHT 700
 
 #define CANVAS_BG_COLOR QColor(232,232,232)
-
 
 class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
@@ -38,7 +39,6 @@ public:
 
     // The arrows that connect the nodes
     vector<GCommitArrow *> arrows;
-
 
 private:
     // Render a node and its children in the space space from startX to endX

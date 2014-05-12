@@ -1,10 +1,11 @@
 #ifndef GCOMMITNODE_H
 #define GCOMMITNODE_H
-
-#include <QGraphicsItem>
 #include <QDateTime>
+#include <QGraphicsItem>
 #include <QPainter>
+
 #include <vector>
+
 #include "gituser.h"
 #include "sha1.h"
 
