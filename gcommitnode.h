@@ -2,6 +2,7 @@
 #define GCOMMITNODE_H
 
 #include <QGraphicsItem>
+#include <QDateTime>
 #include <QPainter>
 #include <vector>
 #include "gituser.h"
@@ -30,7 +31,7 @@ class GCommitArrow;
  */
 class GCommitNode : public QObject, public QGraphicsItem {
     Q_OBJECT
-        Q_INTERFACES(QGraphicsItem)
+    Q_INTERFACES(QGraphicsItem)
 
 public:
 
@@ -58,8 +59,8 @@ public:
     string getMessage();
     void setMessage(const string &value);
 
-    string getDateAndTime() ;
-    void setDateAndTime(const string &value);
+    QDateTime getDateAndTime() ;
+    void setDateAndTime(const QDateTime &value);
 
     Sha1 getSha();
     void setSha(const Sha1 &value);
@@ -95,7 +96,7 @@ private:
     GitUser author;
     Sha1 sha;
     string message;
-    string dateAndTime;
+    QDateTime dateAndTime;
 
     // -- Relatives --
     vector<GCommitNode *> parentGNodes;

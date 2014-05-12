@@ -79,4 +79,3 @@ void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->drawPolygon(QPolygonF() << arrowLine.p1() << arrowHeadPoint1 << arrowHeadPoint2);
 
 }
-

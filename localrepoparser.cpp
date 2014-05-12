@@ -6,7 +6,6 @@
 #include <fstream>
 #include <QDateTime>
 #include <QDir>
-#include <QList>
 #include <QString>
 #include <QStringList>
 #include <QStringListIterator>
@@ -28,19 +27,28 @@ static string absPathToGitFolder;
 static CommitNode *rootCommit;
 
 CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
+    QStringList branchNames;
+    vector<Branch *> branches;
     absPathToGitFolder = pathToGitFolder;
 
     // Create hashmap for storing a record of all commits encountered (to prevent duplication)
     QHash<QString, CommitNode *> *commits = new QHash<QString, CommitNode *>();
 
     // Get a list of all the local branches
-    QList<Branch *> branches(getBranches(pathToGitFolder));
+    QDir branchDirectory((pathToGitFolder + PATH_TO_REFS).c_str());
+    branchNames = branchDirectory.entryList();
+    for(int i = SKIP_HIDDEN_FOLDERS; i < branchNames.length(); i++) {
+        branches.push_back(getBranch(pathToGitFolder, branchNames.at(i).toStdString()));
+    }
 
     // Assemble the commit history of each branch into a single CommitNode
     for (Branch *branch : branches) {
         cout << "Branch's commit Sha: " << branch->getCommitSha().getStringOfLength(7) << endl;
         getCommitHistory(branch->getCommitSha(), commits);
     }
+
+    // TODO: Clean up memory
+    delete commits;
 
     return rootCommit;
 }
@@ -63,20 +71,6 @@ Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &
     branch->setType(LOCAL_BRANCH);
 
     return branch;
-}
-
-QList<Branch *> LocalRepoParser::getBranches(string const &pathToGitFolder)
-{
-    QStringList branchNames;
-    QList<Branch *> branches;
-
-    QDir branchDirectory((pathToGitFolder + PATH_TO_REFS).c_str());
-    branchNames = branchDirectory.entryList();
-    for(int i = SKIP_HIDDEN_FOLDERS; i < branchNames.length(); i++) {
-        branches.push_back(getBranch(pathToGitFolder, branchNames.at(i).toStdString()));
-    }
-
-    return branches;
 }
 
 /**

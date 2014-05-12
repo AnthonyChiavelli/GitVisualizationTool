@@ -5,6 +5,7 @@
 #include "ggraphicsscene.h"
 #include "gcommitnode.h"
 #include "gcommitarrow.h"
+#include "gbranchlabel.h"
 #include "localrepoparser.h"
 #include "logger.h"
 #include <QGraphicsSceneMouseEvent>
@@ -14,7 +15,7 @@
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/krose/Development/testGit"));
+    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/homework/GitVisualizationTool/test_repo"));
 
     // Measure tree
     int totalLeaves = this->measurePhase(root);
@@ -26,11 +27,12 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
     // Render tree
     this->renderPhase(root);
 
-    //TODO: remove. Add some arrows
-    GCommitArrow *arrow1 = new GCommitArrow();
-    arrow1->source = root;
-    arrow1->destination = root->getChildrenGNodes()->at(0);
-    this->addItem(arrow1);
+    //TODO: remove. add test branch label
+    GBranchLabel *testLabel1 = new GBranchLabel(QString("hello"));
+    testLabel1->setPos(QPoint(100,100));
+    this->addItem(testLabel1);
+
+
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
@@ -51,7 +53,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         gCommitNode->setSha(commitNode->getSha1());
         gCommitNode->setCommitter(commitNode->getCommitter());
         gCommitNode->setAuthor(commitNode->getAuthor());
-        gCommitNode->setDateAndTime(commitNode->getCommitTime().toString().toStdString());
+        gCommitNode->setDateAndTime(commitNode->getCommitTime());
         gCommitNode->setMessage(commitNode->getMessage().toStdString());
     }
 
@@ -163,5 +165,4 @@ int GGraphicsScene::measurePhase(GCommitNode *node) {
 
 
 }
-
 

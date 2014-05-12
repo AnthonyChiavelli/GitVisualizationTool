@@ -42,13 +42,16 @@ void GCommitNode::renderNodeRectangle(QPainter *painter) {
 
 void GCommitNode::renderNodeText(QPainter *painter) {
 
+    // Set up font
     QFont font;
     font.setPointSize(10);
+
+    // "Commit" and sha label metrics
     QFontMetrics fontMetrics(font);
     int labelTextWidth = fontMetrics.width(NODE_LABEL_TEXT);
     int shaTextWidth = fontMetrics.width(this->sha.getStringOfLength(6).c_str());
 
-    // Calculate margin necessary to center text boxes in node
+    // Calculate margin necessary to center text labels in node
     int labelTextMargin = (NODE_WIDTH - labelTextWidth) / 2;
     int shaTextMargin = (NODE_WIDTH - shaTextWidth) / 2;
 
@@ -93,8 +96,8 @@ void GCommitNode::setAuthor(const GitUser &value) { author = value; }
 string GCommitNode::getMessage()  { return message; }
 void GCommitNode::setMessage(const string &value) { message = value; }
 
-string GCommitNode::getDateAndTime()  { return dateAndTime; }
-void GCommitNode::setDateAndTime(const string &value) { dateAndTime = value; }
+QDateTime GCommitNode::getDateAndTime()  { return dateAndTime; }
+void GCommitNode::setDateAndTime(const QDateTime &value) { dateAndTime = value; }
 
 Sha1 GCommitNode::getSha()  { return sha; }
 void GCommitNode::setSha(const Sha1 &value) { sha = value; }
@@ -136,7 +139,6 @@ int GCommitNode::getXEnd() { return xEnd; }
 void GCommitNode::setXEnd(int value) { xEnd = value; }
 int GCommitNode::getXStart() { return xStart; }
 void GCommitNode::setXStart(int value) { xStart = value; }
-
 
 
 

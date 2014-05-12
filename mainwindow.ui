@@ -58,7 +58,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab1">
           <attribute name="title">
@@ -70,7 +70,7 @@
              <x>0</x>
              <y>-20</y>
              <width>801</width>
-             <height>491</height>
+             <height>481</height>
             </rect>
            </property>
           </widget>
@@ -107,7 +107,7 @@
             <string>Project</string>
            </property>
            <property name="buddy">
-            <cstring>ProjectLineEdit</cstring>
+            <cstring>lineEdit</cstring>
            </property>
           </widget>
          </item>
@@ -128,7 +128,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="ProjectLineEdit">
+          <widget class="QLineEdit" name="lineEdit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -163,7 +163,7 @@
             <string>Branch</string>
            </property>
            <property name="buddy">
-            <cstring>BranchLineEdit</cstring>
+            <cstring>lineEdit_2</cstring>
            </property>
           </widget>
          </item>
@@ -184,7 +184,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="BranchLineEdit"/>
+          <widget class="QLineEdit" name="lineEdit_2"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_11">
@@ -218,9 +218,6 @@
         <widget class="QTextBrowser" name="GitStatusTextBrowser">
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="placeholderText">
-          <string>sdf</string>
          </property>
         </widget>
        </item>
@@ -304,7 +301,7 @@
             <string>Time</string>
            </property>
            <property name="buddy">
-            <cstring>TimeLineEdit</cstring>
+            <cstring>lineEdit_4</cstring>
            </property>
           </widget>
          </item>
@@ -325,7 +322,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="TimeLineEdit"/>
+          <widget class="QLineEdit" name="lineEdit_4"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_10">
@@ -353,7 +350,7 @@
             <string>Date</string>
            </property>
            <property name="buddy">
-            <cstring>DateLineEdit</cstring>
+            <cstring>lineEdit_5</cstring>
            </property>
           </widget>
          </item>
@@ -374,7 +371,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="DateLineEdit"/>
+          <widget class="QLineEdit" name="lineEdit_5"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_9">
@@ -402,7 +399,7 @@
             <string>Author</string>
            </property>
            <property name="buddy">
-            <cstring>AuthorLineEdit</cstring>
+            <cstring>AuthorLineEdit_3</cstring>
            </property>
           </widget>
          </item>
@@ -423,7 +420,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="AuthorLineEdit"/>
+          <widget class="QLineEdit" name="AuthorLineEdit_3"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_8">
@@ -499,7 +496,7 @@
      <x>0</x>
      <y>0</y>
      <width>1262</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
