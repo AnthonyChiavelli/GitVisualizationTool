@@ -51,7 +51,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         gCommitNode->setSha(commitNode->getSha1());
         gCommitNode->setCommitter(commitNode->getCommitter());
         gCommitNode->setAuthor(commitNode->getAuthor());
-        gCommitNode->setDateAndTime(commitNode->getCommitTime().toString().toStdString());
+        gCommitNode->setDateAndTime(commitNode->getCommitTime());
         gCommitNode->setMessage(commitNode->getMessage().toStdString());
     }
 

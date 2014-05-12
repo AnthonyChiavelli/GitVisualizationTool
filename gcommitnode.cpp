@@ -93,8 +93,8 @@ void GCommitNode::setAuthor(const GitUser &value) { author = value; }
 string GCommitNode::getMessage()  { return message; }
 void GCommitNode::setMessage(const string &value) { message = value; }
 
-string GCommitNode::getDateAndTime()  { return dateAndTime; }
-void GCommitNode::setDateAndTime(const string &value) { dateAndTime = value; }
+QDateTime GCommitNode::getDateAndTime()  { return dateAndTime; }
+void GCommitNode::setDateAndTime(const QDateTime &value) { dateAndTime = value; }
 
 Sha1 GCommitNode::getSha()  { return sha; }
 void GCommitNode::setSha(const Sha1 &value) { sha = value; }
