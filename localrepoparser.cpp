@@ -65,7 +65,7 @@ Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &
     return branch;
 }
 
-QList<Branch *> LocalRepoParser::getBranches(string const &pathToGitFolder)
+QList<Branch *> LocalRepoParser::getBranches( string const &pathToGitFolder)
 {
     QStringList branchNames;
     QList<Branch *> branches;
