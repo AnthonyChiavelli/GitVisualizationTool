@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "branch.h"
@@ -17,21 +18,45 @@
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
-    // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/anthony/dev/GitVisualizationTool/test_repo"));
+    string repoPath = "/home/anthony/dev/homework/GitVisualizationTool/test_repo";
+    CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
+
+    // Ensure we recieve a repo back from the parser
+    if (rootCommit == 0) {
+       Logger::error("GGraphicsScene", "Nothing returned from parser. Invalid git repository path? " + repoPath + " Aborting.");
+       return;
+    }
+
+    GCommitNode *root = convertCommitNodeToGCommitNode(rootCommit);
+    // Ensure we recieve a gcommitnode back
+    if (root == 0) {
+       Logger::error("GGraphicsScene", "Nothing returned from convertCommitNodeToGCommitNode. Aborting. ");
+       return;
+    }
+
+    Logger::info("GGraphicsScene", "Parsed and converted repo at path " + repoPath);
+
 
     // Retrieve the list of branches
     vector<Branch *> branches; //TODO get from parser
 
+    // Ensure that we get at least 1 branch
+//    if (branches.empty()) {
+//        Logger::error("GGraphicsScene", "No branches recieved from parser. Aborting");
+//        return;
+//    }
+
     // Measure tree
     int totalLeaves = this->measurePhase(root);
 
+    Logger::info("GGraphicsScene", "Finished measure phase");
     // Size canvas coordinate grid based on measurement
     this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
     this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
 
     // Render tree
     this->renderPhase(root);
+    Logger::info("GGraphicsScene", "Finished render phase");
 
     //TODO: remove. add test branch label
     GBranchLabel *testLabel1 = new GBranchLabel(QString("hello"));
