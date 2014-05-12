@@ -28,8 +28,9 @@ public:
     GCommitNode *destination;
 
     QLineF renderArrowLine(QPainter *painter);
+    void determineArrowAttachment(QPointF destinationPoint, QRectF destinationRect, QRectF sourceRect, QPointF sourcePoint);
+    void determineArrowAttachment(QPointF sourcePoint, QPointF destinationPoint);
 private:
-
 
     // Arrow Head
     QPolygonF arrowHead;
