@@ -1,7 +1,13 @@
 #include "ggraphicsscene.h"
 #include "gcommitnode.h"
+<<<<<<< HEAD
 #include <vector>
 #include <QSet>
+=======
+#include "gcommitarrow.h"
+#include "gbranchlabel.h"
+#include "localrepoparser.h"
+>>>>>>> canvasUI
 #include "logger.h"
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
@@ -12,6 +18,22 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     this->renderScene(NULL);
 
+<<<<<<< HEAD
+=======
+    // Size canvas coordinate grid based on measurement
+    this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
+    this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
+
+    // Render tree
+    this->renderPhase(root);
+
+    //TODO: remove. add test branch label
+    GBranchLabel *testLabel1 = new GBranchLabel(QString("hello"));
+    testLabel1->setPos(QPoint(100,100));
+    this->addItem(testLabel1);
+
+
+>>>>>>> canvasUI
 }
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * commitNode, GCommitNode const * parent, int nodeDepth) {
@@ -27,6 +49,16 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode const * c
     // Otherwise make a new one
     else {
         gCommitNode = new GCommitNode();
+<<<<<<< HEAD
+=======
+
+        // Set attributes for this g node
+        gCommitNode->setSha(commitNode->getSha1());
+        gCommitNode->setCommitter(commitNode->getCommitter());
+        gCommitNode->setAuthor(commitNode->getAuthor());
+        gCommitNode->setDateAndTime(commitNode->getCommitTime());
+        gCommitNode->setMessage(commitNode->getMessage().toStdString());
+>>>>>>> canvasUI
     }
 
     // If this is a recursive call, we'll have a parent to attach

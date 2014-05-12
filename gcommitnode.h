@@ -2,6 +2,7 @@
 #define GCOMMITNODE_H
 
 #include <QGraphicsItem>
+#include <QDateTime>
 #include <QPainter>
 #include <vector>
 
@@ -20,6 +21,8 @@ using namespace std;
  */
 class GCommitNode : public QObject, public QGraphicsItem {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
+
 
 public:
 
@@ -31,8 +34,32 @@ public:
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    // Get the location the commit arrow should point to
-    int getNextArrowStartPoint();
+    // -- Operators --
+    // Implement equality comparison between gcommit nodes
+    friend bool operator==(GCommitNode & lhs, GCommitNode & rhs);
+
+    // -- Getters and setters --
+    GitUser getCommitter();
+    void setCommitter(const GitUser &value);
+
+    GitUser getAuthor();
+    void setAuthor(const GitUser &value);
+
+    string getMessage();
+    void setMessage(const string &value);
+
+    QDateTime getDateAndTime() ;
+    void setDateAndTime(const QDateTime &value);
+
+    Sha1 getSha();
+    void setSha(const Sha1 &value);
+
+    vector<GCommitNode *> *getParentGNodes();
+
+    vector<GCommitNode *> *getChildrenGNodes();
+
+    // Children of ours for which we are the youngest parent
+    vector<GCommitNode *> *getCloseChildren();
 
     // Relatives
     vector<const GCommitNode *> parentGNodes;
@@ -41,7 +68,12 @@ public:
     // Commit data
     string author;
     string message;
-    string sha;
+    QDateTime dateAndTime;
+
+    // -- Relatives --
+    vector<GCommitNode *> parentGNodes;
+    vector<GCommitNode *> childrenGNodes;
+
 
     // How far away from root node we are
     int depth;
