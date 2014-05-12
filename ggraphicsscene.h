@@ -4,6 +4,7 @@
 
 #include <map>
 
+#include "branch.h"
 #include "commitnode.h"
 #include "gcommitarrow.h"
 #include "gcommitnode.h"
@@ -12,6 +13,8 @@
 #define CANVAS_SPACE_PER_NODE 150
 #define CANVAS_ROW_HEIGHT 90
 #define CANVAS_ROW_OFFSET 50
+
+#define BRANCH_LABEL_DISTANCE 50
 
 #define CANVAS_WIDTH 700
 #define CANVAS_HEIGHT 700
@@ -39,6 +42,9 @@ public:
 
     // The arrows that connect the nodes
     vector<GCommitArrow *> arrows;
+
+    // Render the branch labels in this repo
+    void renderBranchLabels(QList<Branch *> branches);
 
 private:
     // Render a node and its children in the space space from startX to endX

@@ -13,6 +13,17 @@ GBranchLabel::GBranchLabel(QString branchName){
     this->branchName = branchName;
 }
 
+GBranchLabel::GBranchLabel(Branch *branch) {
+
+    // Allow the object to be dragged around
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    this->branchName = QString(branch->getName().c_str());
+
+}
+
 QRectF GBranchLabel::boundingRect() const {
     return QRect(0,0, LABEL_WIDTH, LABEL_HEIGHT);
 }
@@ -38,15 +49,31 @@ void GBranchLabel::renderLabelText(QPainter *painter) {
 
     // Set up font
     QFont font;
-    font.setPointSize(10);
+    int initialFontSize = 10;
+    font.setPointSize(initialFontSize);
 
     // Branch name label metrics
     QFontMetrics fontMetrics(font);
     int labelTextWidth = fontMetrics.width(this->branchName);
     int labelTextHeight = fontMetrics.height();
+    int labelHeightAdjustment = 13; // no idea why this is needed
+
+    // Shrink down the text until it fits
+    while(labelTextWidth > LABEL_WIDTH - 6) {
+        // Don't go too small
+        if (initialFontSize < 5) {
+            // TODO handle extreme cases
+            break;
+        }
+        font.setPointSize(--initialFontSize);
+        QFontMetrics smallFontMetrics(font);
+        labelTextWidth = smallFontMetrics.width(this->branchName);
+        labelTextHeight = smallFontMetrics.height();
+        labelHeightAdjustment--;
+    }
 
     // Calculate margins necessary to center text in label
-    int labelTextTopMargin = ((LABEL_HEIGHT - labelTextHeight) / 2) + 13;
+    int labelTextTopMargin = ((LABEL_HEIGHT - labelTextHeight) / 2) + labelHeightAdjustment;
     int labelTextLeftMargin = (LABEL_WIDTH - labelTextWidth) / 2;
 
     // Render the label

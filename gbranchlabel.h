@@ -2,6 +2,7 @@
 #define GBRANCHLABEL_H
 #include <QGraphicsItem>
 
+#include "branch.h"
 #include "gcommitnode.h"
 
 using namespace std;
@@ -25,6 +26,8 @@ public:
     // -- Constructors --
     explicit GBranchLabel(QGraphicsItem *parent = 0);
     explicit GBranchLabel(QString branchName);
+    // Conversion constructor
+    GBranchLabel(Branch *branch);
 
     // -- Graphics methods (required)
     // Returns estimated bounding box

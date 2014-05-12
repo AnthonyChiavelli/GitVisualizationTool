@@ -72,8 +72,8 @@ void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     }
 
     // Calculate the two points of the triangle (the other being the endpoint of the line) that forms the arrow head
-    QPointF arrowHeadPoint1 = sourcePoint + QPointF(sin(angleOfLine + PI / 3) * 10, cos(angleOfLine + PI / 3) * 15);
-    QPointF arrowHeadPoint2 = sourcePoint + QPointF(sin(angleOfLine + PI - PI / 3) * 10, cos(angleOfLine + PI - PI / 3) * 15);
+    QPointF arrowHeadPoint1 = sourcePoint + QPointF(sin(angleOfLine + PI / 3) * ARROW_HEAD_WIDTH, cos(angleOfLine + PI / 3) * ARROW_HEAD_LENGTH);
+    QPointF arrowHeadPoint2 = sourcePoint + QPointF(sin(angleOfLine + PI - PI / 3) * ARROW_HEAD_WIDTH, cos(angleOfLine + PI - PI / 3) * ARROW_HEAD_LENGTH);
 
     // Render arrow head
     painter->drawPolygon(QPolygonF() << arrowLine.p1() << arrowHeadPoint1 << arrowHeadPoint2);
