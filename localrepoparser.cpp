@@ -73,6 +73,20 @@ Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &
     return branch;
 }
 
+QList<Branch *> LocalRepoParser::getBranches( string const &pathToGitFolder)
+{
+    QStringList branchNames;
+    QList<Branch *> branches;
+
+    QDir branchDirectory((pathToGitFolder + PATH_TO_REFS).c_str());
+    branchNames = branchDirectory.entryList();
+    for(int i = SKIP_HIDDEN_FOLDERS; i < branchNames.length(); i++) {
+        branches.push_back(getBranch(pathToGitFolder, branchNames.at(i).toStdString()));
+    }
+
+    return branches;
+}
+
 /**
  * Assembles the commit history for the commit with the given SHA-1 if it doesn't already exist
  *
