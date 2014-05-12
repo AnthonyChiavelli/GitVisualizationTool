@@ -31,7 +31,7 @@ class GCommitArrow;
  */
 class GCommitNode : public QObject, public QGraphicsItem {
     Q_OBJECT
-        Q_INTERFACES(QGraphicsItem)
+    Q_INTERFACES(QGraphicsItem)
 
 public:
 

@@ -39,7 +39,8 @@ SOURCES += branch.cpp \
         gitrevertdialog.cpp \
         gitpulldialog.cpp \
         gitpushdialog.cpp \
-        logger.cpp
+        logger.cpp \
+    gbranchlabel.cpp
 
 
 HEADERS  += branch.h \
@@ -66,7 +67,8 @@ HEADERS  += branch.h \
         gitrevertdialog.h \
         gitpulldialog.h \
         gitpushdialog.h \
-        logger.h 
+        logger.h \ 
+    gbranchlabel.h
 
 FORMS    += mainwindow.ui \
         gitinitdialog.ui \
