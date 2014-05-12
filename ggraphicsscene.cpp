@@ -6,6 +6,8 @@
 #include "gcommitarrow.h"
 #include "localrepoparser.h"
 #include "logger.h"
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
 #include <iostream>
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
@@ -32,7 +34,6 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
 
-
     // Check if this gcommit node has already been instantiated
     GCommitNode *gCommitNode;
     bool recylcingOldNode = false;
@@ -58,7 +59,6 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         gCommitNode->getParentGNodes()->push_back(parent);
     }
 
-
     gCommitNode->setDepth(nodeDepth);
 
     // If there are any children, recursively call this on them
@@ -71,7 +71,8 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
             GCommitNode * newNode = convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth);
             gCommitNode->getChildrenGNodes()->push_back(newNode);
             // Add an arrow from this to the child to the global set of arrows
-            this->arrows.push_back(new GCommitArrow(gCommitNode, newNode));
+            GCommitArrow * newArrow = new GCommitArrow(gCommitNode, newNode);
+            this->arrows.push_back(newArrow);
         }
     }
 
@@ -131,8 +132,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
 int GGraphicsScene::measurePhase(GCommitNode *node) {
 
-    vector<GCommitNode *> *children = node->getCloseChildren();//node->getChildrenGNodes();
-    vector<GCommitNode *> *allChildren = node->getChildrenGNodes();
+    vector<GCommitNode *> *children = node->getCloseChildren();
 
     // Recurse down tree if we are an inner node
     if (children->size() > 0) {
@@ -154,4 +154,5 @@ int GGraphicsScene::measurePhase(GCommitNode *node) {
 
 
 }
+
 

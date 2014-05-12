@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 
 #include "sha1.h"
+#include "gcommitarrow.h"
 
 GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
@@ -18,9 +19,6 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 QRectF GCommitNode::boundingRect() const {
     return QRectF(0,0,NODE_WIDTH, NODE_HEIGHT);
 }
-
-
-
 
 void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
 
@@ -61,13 +59,24 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     QPointF labelTextPosition = QPointF(labelTextMargin, NODE_LABEL_Y);
     painter->drawText(labelTextPosition, NODE_LABEL_TEXT);
     QPointF shaTextPosition = QPointF(shaTextMargin, NODE_SHA_Y);
-    painter->drawText(shaTextPosition, this->message.c_str());//this->sha.getStringOfLength(6).c_str());
+    painter->drawText(shaTextPosition, this->sha.getStringOfLength(6).c_str());
 }
 
-void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
 
+QVariant GCommitNode::itemChange(GraphicsItemChange change, const QVariant &value) {
+
+    // Get a pointer to our containing scene
+    QGraphicsScene *thisScene = scene();
+    // If this method is called before scene is set up, we'll get NULL
+    if (thisScene != 0) {
+        // Refresh everything in the scene
+        thisScene->update();
+    }
+
+    // Pass along event
+    return QGraphicsItem::itemChange(change, value);
 }
+
 
 bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
     return lhs.sha.getFullString() == rhs.sha.getFullString();

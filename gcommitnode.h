@@ -9,6 +9,9 @@
 
 using namespace std;
 
+// Forward declaration to avoid circular dependencies
+class GCommitArrow;
+
 // -- Appearance properties --
 
 #define NODE_WIDTH 70
@@ -83,6 +86,7 @@ public:
     int getXStart();
     void setXStart(int value);
 
+    vector<GCommitArrow *> *getTouchingArrows();
 
 private:
 
@@ -117,9 +121,9 @@ private:
 
 protected:
 
-    // Mouse events
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    // -- QT Callbacks --
+    // Called when there is some change done to an item
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 signals:
 
