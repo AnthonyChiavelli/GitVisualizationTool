@@ -219,6 +219,9 @@
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
+         <property name="placeholderText">
+          <string>sdf</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -496,7 +499,7 @@
      <x>0</x>
      <y>0</y>
      <width>1262</width>
-     <height>25</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
