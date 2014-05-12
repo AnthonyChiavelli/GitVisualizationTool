@@ -68,6 +68,8 @@ private slots:
 
     void on_actionOpenRepo_triggered();
 
+    void updateInfoWindow(GCommitNode *selectedNode);
+
   private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;

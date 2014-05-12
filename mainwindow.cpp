@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "gcommitnode.h"
 #include "gitinitdialog.h"
 #include "gitadddialog.h"
 #include "gitcommitdialog.h"
@@ -204,14 +205,15 @@ void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 
   ui->BranchLineEdit->setPlaceholderText("some Branch");
 
-  GitAPIResponse response = GitApi::gitStatus(path);
-  ui->GitStatusTextBrowser->setPlaceholderText(response);
+  //GitAPIResponse response = GitApi::gitStatus("path");
 
-  ui->CommitMessageEditor->setPlaceholderText(selectedNode->getMessage());
+  //ui->GitStatusTextBrowser->setText(response.getMessage());
 
-  ui->TimeLineEdit->setPlaceholderText(selectedNode->getDateAndTime()->toString("hh:mm:ss.zzz"));
+  //ui->CommitMessageEditor->set(selectedNode->getMessage());
 
-  ui->DateLineEdit->setPlaceholderText(selectedNode->getDateAndTime()->toString("ddd MMMM d yy"));
+  ui->TimeLineEdit->setPlaceholderText(selectedNode->getDateAndTime().toString("hh:mm:ss.zzz"));
+
+  ui->DateLineEdit->setPlaceholderText(selectedNode->getDateAndTime().toString("ddd MMMM d yy"));
 
   ui->AuthorLineEdit->setPlaceholderText(selectedNode->getAuthor());
 
