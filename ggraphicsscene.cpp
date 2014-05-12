@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 #include <QSet>
 #include "QColor"
 #include "ggraphicsscene.h"
@@ -36,10 +37,10 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 
     // Check if this gcommit node has already been instantiated
     GCommitNode *gCommitNode;
-    bool recylcingOldNode = false;
+    bool reusingExistingNode = false;
     if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
         gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
-        recylcingOldNode = true;
+        reusingExistingNode = true;
 
     }
     // Otherwise make a new one
@@ -59,7 +60,15 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         gCommitNode->getParentGNodes()->push_back(parent);
     }
 
-    gCommitNode->setDepth(nodeDepth);
+    // Node depth should be maximum of all depths calculated for this node (which differ
+    // based on which parent we came from)
+    if (reusingExistingNode) {
+        gCommitNode->setDepth(max(nodeDepth, gCommitNode->getDepth()));
+    }
+    // New node, no max needed
+    else {
+        gCommitNode->setDepth(nodeDepth);
+    }
 
     // If there are any children, recursively call this on them
     QSet<CommitNode *>* children = commitNode->getChildren();
@@ -77,7 +86,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     }
 
     // Add this commit to a list of all commits, if it hasn't already been
-    if (!recylcingOldNode) {
+    if (!reusingExistingNode) {
         this->allGCommitNodes.insert({commitNode->getSha1().getFullString(), gCommitNode});
     }
     return gCommitNode;

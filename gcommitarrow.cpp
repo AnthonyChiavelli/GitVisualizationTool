@@ -14,10 +14,7 @@ GCommitArrow::GCommitArrow(GCommitNode *origin, GCommitNode *destination) {
 
 QRectF GCommitArrow::boundingRect() const {
 
-
-    return QRectF(source->pos(), QSizeF(destination->pos().x() - source->pos().x(),
-                                      destination->pos().y() - source->pos().y()))
-        .normalized();
+    return QRectF(source->pos(), QSizeF(destination->pos().x() - source->pos().x(), destination->pos().y() - source->pos().y())).normalized();
 }
 
 void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
