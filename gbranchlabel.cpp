@@ -106,10 +106,10 @@ QVariant GBranchLabel::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 }
 
 
-void GBranchLabel::establishPosition() {
+void GBranchLabel::establishPosition(int branchNum) {
     // Situate label relative to commit node
     this->setPos(this->associatedCommit->sceneBoundingRect().right() +
-                        BRANCH_LABEL_DISTANCE, this->associatedCommit->sceneBoundingRect().top());
+                        BRANCH_LABEL_OFFSET + ((branchNum-1) * BRANCH_LABEL_DISTANCE), this->associatedCommit->sceneBoundingRect().top());
 }
 
 QString GBranchLabel::getBranchName() const { return branchName; }

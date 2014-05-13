@@ -13,7 +13,8 @@ using namespace std;
 #define LABEL_WIDTH 60
 #define LABEL_HEIGHT 40
 
-#define BRANCH_LABEL_DISTANCE 50
+#define BRANCH_LABEL_OFFSET 40
+#define BRANCH_LABEL_DISTANCE 75
 
 #define LABEL_BG_COLOR QColor(135, 71, 71)
 #define LABEL_TEXT_COLOR QColor(255, 255, 255)
@@ -47,7 +48,7 @@ public:
     void setAssociatedCommit(GCommitNode *value);
 
     // Establish position
-    void establishPosition();
+    void establishPosition(int branchNum);
 
 protected:
 

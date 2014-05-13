@@ -56,6 +56,9 @@ void GLabelLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->setBrush(Qt::black);
 
+    // Don't cover other stuff
+    this->setZValue(-5);
+
     // Render line
     QLineF arrowLine(sourcePoint, destinationPoint);
     painter->drawLine(arrowLine);

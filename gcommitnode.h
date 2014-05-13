@@ -91,7 +91,8 @@ public:
 
     vector<GCommitArrow *> *getTouchingArrows();
 
-    void addBranchLabel(GBranchLabel *branchLabel);
+    // Add a branch and return count of branches (including that one)
+    int addBranchLabel(GBranchLabel *branchLabel);
 
 private:
 

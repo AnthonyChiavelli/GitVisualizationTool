@@ -81,8 +81,8 @@ QVariant GCommitNode::itemChange(GraphicsItemChange change, const QVariant &valu
         int deltaY = newPos.y() - oldPos.y();
 
         // Move branch pointers in the same motion
-        if (!this->ourbranches.empty()) {
-            GBranchLabel *branchLabel = this->ourbranches.at(0);
+        for (vector<GBranchLabel *>::iterator it = this->ourbranches.begin(); it != this->ourbranches.end(); it++) {
+            GBranchLabel *branchLabel = *it;
             branchLabel->setPos(branchLabel->pos().x() + deltaX, branchLabel->pos().y() + deltaY);
         }
     }
@@ -96,8 +96,9 @@ bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
     return lhs.sha.getFullString() == rhs.sha.getFullString();
 }
 
-void GCommitNode::addBranchLabel(GBranchLabel *branchLabel) {
+int GCommitNode::addBranchLabel(GBranchLabel *branchLabel) {
     this->ourbranches.push_back(branchLabel);
+    return this->ourbranches.size();
 }
 
 // -- Getters and setters --

@@ -226,8 +226,8 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
             GCommitNode *gCommitNode = this->allGCommitNodes->at(branch->getCommitSha().getFullString());
             // Associate them with each other
             branchLabel->setAssociatedCommit(gCommitNode);
-            gCommitNode->addBranchLabel(branchLabel);
-            branchLabel->establishPosition();
+            int branchNum = gCommitNode->addBranchLabel(branchLabel);
+            branchLabel->establishPosition(branchNum);
             // Add branch label
             this->addItem(branchLabel);
             // Add branch label line
