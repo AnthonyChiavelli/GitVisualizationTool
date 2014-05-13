@@ -1,3 +1,4 @@
+#include "gcommitnode.h"
 #include "gcommitarrow.h"
 #include <math.h>
 

@@ -1,9 +1,11 @@
 #ifndef GBRANCHLABEL_H
 #define GBRANCHLABEL_H
+
 #include <QGraphicsItem>
 
-#include "branch.h"
-#include "gcommitnode.h"
+class QGraphicsItem;
+class Branch;
+class GCommitNode;
 
 using namespace std;
 
@@ -54,6 +56,9 @@ protected:
     void renderLabelText(QPainter *painter);
     void renderLabelLine(QPainter *painter);
 
+    // -- QT Callbacks --
+    // Called when there is some change done to an item
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
 
 private:
 

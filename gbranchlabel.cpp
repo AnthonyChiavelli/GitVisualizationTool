@@ -1,4 +1,10 @@
+#include <QGraphicsScene>
+#include <QPainter>
+
+#include "branch.h"
 #include "gbranchlabel.h"
+#include "gcommitnode.h"
+
 
 GBranchLabel::GBranchLabel(QGraphicsItem *parent) : QGraphicsItem(parent) {
 }
@@ -83,6 +89,20 @@ void GBranchLabel::renderLabelText(QPainter *painter) {
     QPointF labelTextPosition = QPointF(labelTextLeftMargin, labelTextTopMargin);
     painter->drawText(labelTextPosition, this->branchName);
 
+}
+
+QVariant GBranchLabel::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) {
+
+        // Get a pointer to our containing scene
+        QGraphicsScene *thisScene = scene();
+        // If this method is called before scene is set up, we'll get NULL
+        if (thisScene != 0) {
+            // Refresh everything in the scene
+            thisScene->update();
+        }
+
+        // Pass along event
+        return QGraphicsItem::itemChange(change, value);
 }
 
 

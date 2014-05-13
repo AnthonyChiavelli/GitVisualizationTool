@@ -9,14 +9,15 @@
 #include <string>
 #include <vector>
 
-#include "branch.h"
+#include "ggraphicsscene.h"
+#include "gcommitarrow.h"
 #include "localrepoparser.h"
 #include "logger.h"
 #include "gbranchlabel.h"
-#include "gcommitarrow.h"
-#include "gcommitnode.h"
-#include "ggraphicsscene.h"
 #include "glabelline.h"
+#include "gcommitnode.h"
+#include "commitnode.h"
+#include "branch.h"
 
 
 
@@ -200,19 +201,6 @@ void GGraphicsScene::renderCanvas() {
 
 }
 
-//QVariant GGraphicsScene::itemChange(GraphicsItemChange change, const QVariant &value) {
-
-//    // Get a pointer to our containing scene
-//    QGraphicsScene *thisScene = scene();
-//    // If this method is called before scene is set up, we'll get NULL
-//    if (thisScene != 0) {
-//        // Refresh everything in the scene
-//        thisScene->update();
-//    }
-
-//    // Pass along event
-//    return QGraphicsItem::itemChange(change, value);
-//}
 
 void GGraphicsScene::notifyRepoChange() {
 
@@ -220,6 +208,7 @@ void GGraphicsScene::notifyRepoChange() {
     this->clear();
 
     // Re-render
+    this->renderCanvas();
 
 }
 

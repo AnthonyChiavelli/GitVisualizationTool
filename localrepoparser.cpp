@@ -1,3 +1,4 @@
+#include "commitnode.h"
 #include "localrepoparser.h"
 #include "gitapiresponse.h"
 #include "gitapi.h"

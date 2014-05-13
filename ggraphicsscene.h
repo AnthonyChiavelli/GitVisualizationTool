@@ -2,13 +2,16 @@
 #define GGRAPHICSSCENE_H
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-
+#include <string>
+#include <vector>
 #include <map>
 
-#include "branch.h"
-#include "commitnode.h"
-#include "gcommitarrow.h"
-#include "gcommitnode.h"
+class Branch;
+class GCommitArrow;
+class GCommitNode;
+class CommitNode;
+
+using namespace std;
 
 // -- Appearance Properties --
 #define CANVAS_SPACE_PER_NODE 150
@@ -45,7 +48,8 @@ public:
     // Render the branch labels in this repo
     void renderBranchLabels(QList<Branch *> branches);
 
-    //QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+protected:
+
 
 private:
     // Render a node and its children in the space space from startX to endX
