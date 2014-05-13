@@ -12,10 +12,10 @@ int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
     MainWindow window;
-    window.setWindowTitle("Gitty Up!");
+    window.setWindowTitle("The Gituation");
 
     // Test getting a branch from the git folder
-    string pathToGitFolder = "/home/maura/Desktop/GitTest";//"~/Documents/Assignments/CS 410/GitVisualizationTool";   //"/home/krose/Development/GitVisualiztionTool/GitVisualizationTool";
+    string pathToGitFolder = "/home/nrosato/Desktop/GitTest";//"~/Documents/Assignments/CS 410/GitVisualizationTool";   //"/home/krose/Development/GitVisualiztionTool/GitVisualizationTool";
     string branchName = "master";
     LocalRepoParser::getBranch(pathToGitFolder, branchName);
 

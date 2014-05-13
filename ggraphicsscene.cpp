@@ -22,7 +22,7 @@
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Render everything
-    this->renderRepository("/home/krose/Development/testGit");
+    this->renderRepository("/home/nrosato/Desktop/GitTest");
 
 }
 

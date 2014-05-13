@@ -111,11 +111,11 @@ void MainWindow::on_actionRefresh_triggered()
 
 void MainWindow::on_actionOpenRepo_triggered()
 {
-    gitOpenRepoDialog OpenRepo;
+    /*gitOpenRepoDialog OpenRepo;
     OpenRepo.scene = this->scene;
     OpenRepo.path = this->repoPath;
     OpenRepo.setModal(true);
-    OpenRepo.exec();
+    OpenRepo.exec();*/
 }
 
 
