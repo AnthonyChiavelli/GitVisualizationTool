@@ -70,6 +70,10 @@ private slots:
 
     void updateInfoWindow(GCommitNode *selectedNode);
 
+  signals:
+
+    void refreshCanvas();
+
   private:
     Ui::MainWindow *ui;
     GGraphicsScene *scene;

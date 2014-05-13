@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     this->scene= new GGraphicsScene(this);
     canvas->setScene(scene);
 
+    // TODO: Update SLOT!
+    connect(this, SIGNAL(refreshCanvas()), scene, SLOT(notifyRepoChange()));
+
 //    //Test stuff
 //    GCommitNode *node1 = new GCommitNode(1, 0, 0);
 //    GCommitNode *node2 = new GCommitNode(2, 2, 0);
@@ -109,7 +112,7 @@ void MainWindow::on_actionGitPull_triggered()
 
 void MainWindow::on_actionRefresh_triggered()
 {
-
+    emit refreshCanvas();
 }
 
 void MainWindow::on_actionOpenRepo_triggered()
