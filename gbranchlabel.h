@@ -11,6 +11,8 @@ using namespace std;
 #define LABEL_WIDTH 60
 #define LABEL_HEIGHT 40
 
+#define BRANCH_LABEL_DISTANCE 50
+
 #define LABEL_BG_COLOR QColor(135, 71, 71)
 #define LABEL_TEXT_COLOR QColor(255, 255, 255)
 
@@ -42,11 +44,16 @@ public:
     GCommitNode *getAssociatedCommit() const;
     void setAssociatedCommit(GCommitNode *value);
 
+    // Establish position
+    void establishPosition();
+
 protected:
 
     // -- Rendering helper methods
     void renderLabelRectangle(QPainter *painter);
     void renderLabelText(QPainter *painter);
+    void renderLabelLine(QPainter *painter);
+
 
 private:
 

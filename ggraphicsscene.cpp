@@ -21,48 +21,11 @@
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
-    string repoPath = "/home/anthony/dev/homework/GitVisualizationTool/test_repo";
-    CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
-
-    // Ensure we recieve a repo back from the parser
-    if (rootCommit == 0) {
-       Logger::error("GGraphicsScene", "Nothing returned from parser. Invalid git repository path? " + repoPath + " Aborting.");
-       return;
-    }
-
-    GCommitNode *root = convertCommitNodeToGCommitNode(rootCommit);
-    // Ensure we recieve a gcommitnode back
-    if (root == 0) {
-       Logger::error("GGraphicsScene", "Nothing returned from convertCommitNodeToGCommitNode. Aborting. ");
-       return;
-    }
-
-    Logger::info("GGraphicsScene", "Parsed and converted repo at path " + repoPath);
-
-    // Retrieve the list of branches
-    QList<Branch *> branches = LocalRepoParser::getBranches(repoPath);
-
-    // Ensure that we get at least 1 branch
-    if (branches.empty()) {
-        Logger::error("GGraphicsScene", "No branches recieved from parser. Aborting");
-        return;
-    }
-
-    // Measure tree
-    int totalLeaves = this->measurePhase(root);
-
-    Logger::info("GGraphicsScene", "Finished measure phase");
-    // Size canvas coordinate grid based on measurement
-    this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
-    this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
-
-    // Render tree
-    this->renderPhase(root);
-    Logger::info("GGraphicsScene", "Finished render phase");
-
-    // Render branches
-    this->renderBranchLabels(branches);
+    // Render everything
+    this->renderCanvas();
 }
+
+
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
 
@@ -190,6 +153,61 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     }
 }
 
+void GGraphicsScene::renderCanvas() {
+
+    string repoPath = "/home/anthony/dev/homework/GitVisualizationTool/test_repo";
+    CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
+
+    // Ensure we recieve a repo back from the parser
+    if (rootCommit == 0) {
+       Logger::error("GGraphicsScene", "Nothing returned from parser. Invalid git repository path? " + repoPath + " Aborting.");
+       return;
+    }
+
+    GCommitNode *root = convertCommitNodeToGCommitNode(rootCommit);
+    // Ensure we recieve a gcommitnode back
+    if (root == 0) {
+       Logger::error("GGraphicsScene", "Nothing returned from convertCommitNodeToGCommitNode. Aborting. ");
+       return;
+    }
+
+    Logger::info("GGraphicsScene", "Parsed and converted repo at path " + repoPath);
+
+    // Retrieve the list of branches
+    QList<Branch *> branches = LocalRepoParser::getBranches(repoPath);
+
+    // Ensure that we get at least 1 branch
+    if (branches.empty()) {
+        Logger::error("GGraphicsScene", "No branches recieved from parser. Aborting");
+        return;
+    }
+
+    // Measure tree
+    int totalLeaves = this->measurePhase(root);
+
+    Logger::info("GGraphicsScene", "Finished measure phase");
+    // Size canvas coordinate grid based on measurement
+    this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
+    this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
+
+    // Render tree
+    this->renderPhase(root);
+    Logger::info("GGraphicsScene", "Finished render phase");
+
+    // Render branches
+    this->renderBranchLabels(branches);
+
+}
+
+void GGraphicsScene::notifyRepoChange() {
+
+    // Clear this scene
+    this->clear();
+
+    // Re-render
+
+}
+
 void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
 
     //Iterate over branches
@@ -202,10 +220,13 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
         // Find commit to which this branch refers
         if(this->allGCommitNodes.find(branch->getCommitSha().getFullString()) != allGCommitNodes.end()) {
             GCommitNode *gCommitNode = this->allGCommitNodes.at(branch->getCommitSha().getFullString());
-            // Situate label relative to commit node
-            branchLabel->setPos(gCommitNode->sceneBoundingRect().right() +
-                                BRANCH_LABEL_DISTANCE, gCommitNode->sceneBoundingRect().top());
+            // Pass it the commit
+            branchLabel->setAssociatedCommit(gCommitNode);
+            branchLabel->establishPosition();
+            // BranchLabel will add its own lines
+            // Add branch label
             this->addItem(branchLabel);
+
         }
 
     }

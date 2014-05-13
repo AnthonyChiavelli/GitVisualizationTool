@@ -31,10 +31,10 @@ QRectF GBranchLabel::boundingRect() const {
 void GBranchLabel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
 
     // Render the rectangle
-    renderLabelRectangle(painter);
+    this->renderLabelRectangle(painter);
 
     // Render the text
-    renderLabelText(painter);
+    this->renderLabelText(painter);
 }
 
 void GBranchLabel::renderLabelRectangle(QPainter *painter) {
@@ -83,6 +83,13 @@ void GBranchLabel::renderLabelText(QPainter *painter) {
     QPointF labelTextPosition = QPointF(labelTextLeftMargin, labelTextTopMargin);
     painter->drawText(labelTextPosition, this->branchName);
 
+}
+
+
+void GBranchLabel::establishPosition() {
+    // Situate label relative to commit node
+    this->setPos(this->associatedCommit->sceneBoundingRect().right() +
+                        BRANCH_LABEL_DISTANCE, this->associatedCommit->sceneBoundingRect().top());
 }
 
 QString GBranchLabel::getBranchName() const { return branchName; }

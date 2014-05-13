@@ -14,8 +14,6 @@
 #define CANVAS_ROW_HEIGHT 90
 #define CANVAS_ROW_OFFSET 50
 
-#define BRANCH_LABEL_DISTANCE 50
-
 #define CANVAS_WIDTH 700
 #define CANVAS_HEIGHT 700
 
@@ -50,9 +48,14 @@ private:
     // Render a node and its children in the space space from startX to endX
     void renderNode(GCommitNode *node, int startX, int endX);
 
+    // Initiate rendering
+    void renderCanvas();
+
 signals:
 
 public slots:
+    // Re-render canvas, something has changed
+    void notifyRepoChange();
 
 };
 
