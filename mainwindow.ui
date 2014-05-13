@@ -107,7 +107,7 @@
             <string>Project</string>
            </property>
            <property name="buddy">
-            <cstring>lineEdit</cstring>
+            <cstring>ProjectLineEdit</cstring>
            </property>
           </widget>
          </item>
@@ -128,7 +128,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="ProjectLineEdit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -163,7 +163,7 @@
             <string>Branch</string>
            </property>
            <property name="buddy">
-            <cstring>lineEdit_2</cstring>
+            <cstring>BranchLineEdit</cstring>
            </property>
           </widget>
          </item>
@@ -184,7 +184,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="BranchLineEdit"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_11">
@@ -301,7 +301,7 @@
             <string>Time</string>
            </property>
            <property name="buddy">
-            <cstring>lineEdit_4</cstring>
+            <cstring>TimeLineEdit</cstring>
            </property>
           </widget>
          </item>
@@ -322,7 +322,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="TimeLineEdit"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_10">
@@ -350,7 +350,7 @@
             <string>Date</string>
            </property>
            <property name="buddy">
-            <cstring>lineEdit_5</cstring>
+            <cstring>DateLineEdit</cstring>
            </property>
           </widget>
          </item>
@@ -371,7 +371,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_5"/>
+          <widget class="QLineEdit" name="DateLineEdit"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_9">
@@ -399,7 +399,7 @@
             <string>Author</string>
            </property>
            <property name="buddy">
-            <cstring>AuthorLineEdit_3</cstring>
+            <cstring>AuthorLineEdit</cstring>
            </property>
           </widget>
          </item>
@@ -420,7 +420,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="AuthorLineEdit_3"/>
+          <widget class="QLineEdit" name="AuthorLineEdit"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_8">
@@ -496,7 +496,7 @@
      <x>0</x>
      <y>0</y>
      <width>1262</width>
-     <height>29</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -747,11 +747,6 @@
    </property>
    <property name="toolTip">
     <string>Checkout a different branch</string>
-   </property>
-  </action>
-  <action name="actionTest">
-   <property name="text">
-    <string>Test</string>
    </property>
   </action>
  </widget>

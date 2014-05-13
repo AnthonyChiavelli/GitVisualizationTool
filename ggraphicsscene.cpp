@@ -19,8 +19,6 @@
 #include "commitnode.h"
 #include "branch.h"
 
-
-
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Render everything
@@ -157,7 +155,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
 void GGraphicsScene::renderCanvas() {
 
-    string repoPath = "/home/anthony/dev/homework/GitVisualizationTool/test_repo";
+    string repoPath = "/home/krose/Development/testGit";
     CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
 
     // Ensure we recieve a repo back from the parser
