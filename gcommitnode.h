@@ -95,6 +95,9 @@ public:
     // Add a branch and return count of branches (including that one)
     int addBranchLabel(GBranchLabel *branchLabel);
 
+    int getChildRanking() const;
+    void setChildRanking(int value);
+
 private:
 
     // -- Attributes of the commit --
@@ -122,6 +125,8 @@ private:
     int numberOfCousins;
     // Branches that point to us
     vector<GBranchLabel *> ourbranches;
+    // Helps decide the best place to stick the branch label
+    int childRanking;
 
     // -- Helper methods to help render the node --
     void renderNodeRectangle(QPainter *painter);

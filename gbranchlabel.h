@@ -48,7 +48,7 @@ public:
     void setAssociatedCommit(GCommitNode *value);
 
     // Establish position
-    void establishPosition(int branchNum);
+    void establishPosition(int branchNum, int childRanking);
 
 protected:
 

@@ -123,6 +123,9 @@ void GGraphicsScene::renderPhase(GCommitNode *node) {
         this->addItem(*arrow);
     }
 
+    // Refresh
+    this->update();
+
 }
 
 void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
@@ -147,6 +150,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     int childNumber = 0;
     set<GCommitNode *> *children = node->getCloseChildren();
     for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+        (*it)->setChildRanking(childNumber);
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
     }
@@ -157,7 +161,7 @@ void GGraphicsScene::renderCanvas() {
     this->allGCommitNodes = new map<string, GCommitNode *>();
     this->arrows = new vector<GCommitArrow *>();
 
-    string repoPath = "/home/anthony/dev/homework/GitVisualizationTool/test_repo";
+    string repoPath = "/home/anthony/dev/GitVisualizationTool/test_repo";
     CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
 
     // Ensure we recieve a repo back from the parser
@@ -227,7 +231,7 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
             // Associate them with each other
             branchLabel->setAssociatedCommit(gCommitNode);
             int branchNum = gCommitNode->addBranchLabel(branchLabel);
-            branchLabel->establishPosition(branchNum);
+            branchLabel->establishPosition(branchNum, gCommitNode->getChildRanking());
             // Add branch label
             this->addItem(branchLabel);
             // Add branch label line

@@ -58,7 +58,8 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     QPointF labelTextPosition = QPointF(labelTextMargin, NODE_LABEL_Y);
     painter->drawText(labelTextPosition, NODE_LABEL_TEXT);
     QPointF shaTextPosition = QPointF(shaTextMargin, NODE_SHA_Y);
-    painter->drawText(shaTextPosition, this->sha.getStringOfLength(6).c_str());
+//    painter->drawText(shaTextPosition, this->sha.getStringOfLength(6).c_str());
+        painter->drawText(shaTextPosition, QString::number(this->childRanking));
 }
 
 
@@ -100,6 +101,7 @@ int GCommitNode::addBranchLabel(GBranchLabel *branchLabel) {
     this->ourbranches.push_back(branchLabel);
     return this->ourbranches.size();
 }
+
 
 // -- Getters and setters --
 GitUser GCommitNode::getCommitter() {return committer;}
@@ -155,3 +157,5 @@ void GCommitNode::setXEnd(int value) { xEnd = value; }
 int GCommitNode::getXStart() { return xStart; }
 void GCommitNode::setXStart(int value) { xStart = value; }
 
+int GCommitNode::getChildRanking() const { return childRanking; }
+void GCommitNode::setChildRanking(int value) { childRanking = value; }

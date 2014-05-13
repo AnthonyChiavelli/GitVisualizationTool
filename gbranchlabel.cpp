@@ -106,10 +106,18 @@ QVariant GBranchLabel::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 }
 
 
-void GBranchLabel::establishPosition(int branchNum) {
-    // Situate label relative to commit node
-    this->setPos(this->associatedCommit->sceneBoundingRect().right() +
-                        BRANCH_LABEL_OFFSET + ((branchNum-1) * BRANCH_LABEL_DISTANCE), this->associatedCommit->sceneBoundingRect().top());
+void GBranchLabel::establishPosition(int branchNum, int childRanking) {
+    QRectF commitRect = this->associatedCommit->sceneBoundingRect();
+    int xOffset = BRANCH_LABEL_OFFSET + ((branchNum-1) * BRANCH_LABEL_DISTANCE);
+
+    // For even children, draw labels to the left
+    if (childRanking % 2 == 0) {
+        this->setPos( commitRect.left() - (commitRect.width() + xOffset), commitRect.top());
+    }
+    // For odd children, draw labels to the right
+    else {
+        this->setPos(commitRect.right() + xOffset, commitRect.top());
+    }
 }
 
 QString GBranchLabel::getBranchName() const { return branchName; }
