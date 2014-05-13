@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "gituser.h"
+#include "gbranchlabel.h"
 #include "sha1.h"
 
 using namespace std;
@@ -90,6 +91,8 @@ public:
 
     vector<GCommitArrow *> *getTouchingArrows();
 
+    void addBranchLabel(GBranchLabel *branchLabel);
+
 private:
 
     // -- Attributes of the commit --
@@ -103,6 +106,7 @@ private:
     vector<GCommitNode *> parentGNodes;
     vector<GCommitNode *> childrenGNodes;
 
+
     // -- Tree Situation --
     // Our allocated space - the space we can use for ourselves and all of our children
     int allocatedWidth;
@@ -114,15 +118,14 @@ private:
     int depth;
     // Number of cousins we have
     int numberOfCousins;
-
-private:
+    // Branches that point to us
+    vector<GBranchLabel *> ourbranches;
 
     // -- Helper methods to help render the node --
     void renderNodeRectangle(QPainter *painter);
     void renderNodeText(QPainter *painter);
 
 protected:
-
 
     // -- QT Callbacks --
     // Called when there is some change done to an item

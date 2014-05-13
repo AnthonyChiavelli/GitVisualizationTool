@@ -224,8 +224,9 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
         // Find commit to which this branch refers
         if(this->allGCommitNodes->find(branch->getCommitSha().getFullString()) != allGCommitNodes->end()) {
             GCommitNode *gCommitNode = this->allGCommitNodes->at(branch->getCommitSha().getFullString());
-            // Pass it the commit
+            // Associate them with each other
             branchLabel->setAssociatedCommit(gCommitNode);
+            gCommitNode->addBranchLabel(branchLabel);
             branchLabel->establishPosition();
             // Add branch label
             this->addItem(branchLabel);

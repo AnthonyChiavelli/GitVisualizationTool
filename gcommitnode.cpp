@@ -64,12 +64,27 @@ void GCommitNode::renderNodeText(QPainter *painter) {
 
 QVariant GCommitNode::itemChange(GraphicsItemChange change, const QVariant &value) {
 
-    // Get a pointer to our containing scene
-    QGraphicsScene *thisScene = scene();
-    // If this method is called before scene is set up, we'll get NULL
-    if (thisScene != 0) {
-        // Refresh everything in the scene
-        thisScene->update();
+    // If this was a position change
+    if (change == ItemPositionChange) {
+        // Get a pointer to our containing scene
+        QGraphicsScene *thisScene = scene();
+        // If this method is called before scene is set up, we'll get NULL
+        if (thisScene != 0) {
+            // Refresh everything in the scene
+            thisScene->update();
+        }
+
+        // Calculate our delta
+        QPointF newPos = value.toPointF();
+        QPointF oldPos = this->pos();
+        int deltaX = newPos.x() - oldPos.x();
+        int deltaY = newPos.y() - oldPos.y();
+
+        // Move branch pointers in the same motion
+        if (!this->ourbranches.empty()) {
+            GBranchLabel *branchLabel = this->ourbranches.at(0);
+            branchLabel->setPos(branchLabel->pos().x() + deltaX, branchLabel->pos().y() + deltaY);
+        }
     }
 
     // Pass along event
@@ -81,6 +96,9 @@ bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
     return lhs.sha.getFullString() == rhs.sha.getFullString();
 }
 
+void GCommitNode::addBranchLabel(GBranchLabel *branchLabel) {
+    this->ourbranches.push_back(branchLabel);
+}
 
 // -- Getters and setters --
 GitUser GCommitNode::getCommitter() {return committer;}
@@ -135,3 +153,4 @@ int GCommitNode::getXEnd() { return xEnd; }
 void GCommitNode::setXEnd(int value) { xEnd = value; }
 int GCommitNode::getXStart() { return xStart; }
 void GCommitNode::setXStart(int value) { xStart = value; }
+
