@@ -1,9 +1,13 @@
 #include <QColor>
 #include <QGraphicsView>
+#include <QGraphicsSceneMouseEvent>
 
 #include "gcommitarrow.h"
+#include "ggraphicsscene.h"
 #include "gcommitnode.h"
+#include "gitbranchdialog.h"
 #include "sha1.h"
+#include "logger.h"
 
 GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
@@ -89,6 +93,25 @@ QVariant GCommitNode::itemChange(GraphicsItemChange change, const QVariant &valu
 
     // Pass along event
     return QGraphicsItem::itemChange(change, value);
+}
+
+void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+    // Continue to propagate it
+    QGraphicsItem::mousePressEvent(event);
+
+    // On right click, make a new branch
+    if (event->button() == Qt::RightButton) {
+        // Launch new branch dialog
+        GitBranchDialog *newBranchDialog = new GitBranchDialog();
+        newBranchDialog->setModal(true);
+        newBranchDialog->exec();
+
+        if (scene() != 0) {
+            // Refresh everything in the scene
+            (GGraphicsScene(scene())).refreshRepo();
+        }
+    }
+
 }
 
 

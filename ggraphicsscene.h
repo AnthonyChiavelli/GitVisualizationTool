@@ -18,8 +18,8 @@ using namespace std;
 #define CANVAS_ROW_HEIGHT 90
 #define CANVAS_ROW_OFFSET 50
 
-#define CANVAS_WIDTH 700
-#define CANVAS_HEIGHT 700
+#define CANVAS_WIDTH 1500
+#define CANVAS_HEIGHT 1500
 
 #define CANVAS_BG_COLOR QColor(232,232,232)
 
@@ -54,6 +54,7 @@ public:
     string getCurrentRepoPath() const;
     void setCurrentRepoPath(const string &value);
 
+    void refreshRepo();
 protected:
 
 

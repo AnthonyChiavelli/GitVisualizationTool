@@ -23,24 +23,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Instantiate a graphics view for this scene
     QGraphicsView *canvas = ui->graphicsView;
-    canvas->setDragMode(QGraphicsView::ScrollHandDrag);
     this->scene= new GGraphicsScene(this);
+    canvas->setDragMode(QGraphicsView::ScrollHandDrag);
     canvas->setScene(scene);
 
     // TODO: Update SLOT!
     connect(this, SIGNAL(refreshCanvas()), scene, SLOT(notifyRepoChange()));
 
-//    //Test stuff
-//    GCommitNode *node1 = new GCommitNode(1, 0, 0);
-//    GCommitNode *node2 = new GCommitNode(2, 2, 0);
-//    GCommitNode *node3 = new GCommitNode(3, 3, 0);
-//    GCommitNode *node4 = new GCommitNode(4, 4, 0);
 
-
-//    this->scene->addItem(node1);
-//    this->scene->addItem(node2);
-//    this->scene->addItem(node3);
-//    this->scene->addItem(node4);
 }
 
 MainWindow::~MainWindow() {
@@ -203,7 +193,7 @@ void MainWindow::on_actionBitBucket_triggered()
 void MainWindow::on_UpdateButton_clicked()
 {
     //changes latest commit message. All you, Nick; I don't know the appropriate git command for that
-  string newMessage = ui->CommitMessageEditor->toPlainText().toStdString();
+  string newMessage = ui->commitMessageTxt->toPlainText().toStdString();
   if(newMessage.empty())
     return;
   //GitApi::modifyCommit(newMessage); //or something like this

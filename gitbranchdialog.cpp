@@ -15,6 +15,7 @@ GitBranchDialog::~GitBranchDialog()
   delete ui;
 }
 
+
 void GitBranchDialog::on_branchButton_clicked()
 {
   QString path = *(this->repoPath);
