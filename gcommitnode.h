@@ -47,6 +47,7 @@ public:
     QRectF boundingRect() const;
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     // -- Operators --
     // Implement equality comparison between gcommit nodes

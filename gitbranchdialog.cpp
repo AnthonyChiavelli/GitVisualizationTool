@@ -15,9 +15,9 @@ GitBranchDialog::~GitBranchDialog()
   delete ui;
 }
 
-void GitBranchDialog::on_branchButton_clicked()
-{
-  string path = "/home/maura/Desktop/GitTest";
+void GitBranchDialog::on_branchButton_clicked() {
+
+  string path = "/home/anthony/dev/GitVisualizationTool/test_repo";
   string name = ui->branch->text().toStdString();
   GitAPIResponse response = GitApi::gitBranch(path, name);
   accept();

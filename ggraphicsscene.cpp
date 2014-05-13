@@ -27,7 +27,6 @@ GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 }
 
 
-
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
 
     // Check if this gcommit node has already been instantiated
@@ -145,7 +144,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
     // Divide up your allocated space into even slots for each child (later to be adjusted based on
     // subtree leaf number)
-    int spacePerChild = (int)((double)(endX - startX) / (double)node->getCloseChildren()->size());
+    int spacePerChild = ((int)((double)(endX - startX) / (double)node->getCloseChildren()->size()));
 
     // Iterate over children, allocate them space inside us, and render them
     int childNumber = 0;
@@ -153,7 +152,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     set<GCommitNode *> *children = node->getCloseChildren();
     for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
         (*it)->setChildRanking(childNumber);
-        this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
+        this->renderNode(*it, (int)((startX + (spacePerChild * childNumber))), (int)(startX + ((spacePerChild * (childNumber + 1)))));
         childNumber++;
     }
 }
@@ -212,13 +211,14 @@ string GGraphicsScene::getCurrentRepoPath() const { return currentRepoPath; }
 
 void GGraphicsScene::setCurrentRepoPath(const string &value) { currentRepoPath = value; }
 
+void GGraphicsScene::refreshRepo() {
+    this->clear();
+    this->renderRepository(this->currentRepoPath);
+}
+
 void GGraphicsScene::notifyRepoChange() {
 
-    // Clear this scene
-    this->clear();
-
-    // Re-render
-    this->renderRepository(this->currentRepoPath);
+    this->refreshRepo();
 
 }
 
