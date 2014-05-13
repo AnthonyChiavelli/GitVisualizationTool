@@ -4,8 +4,11 @@
 #include <string>
 #include <QHash>
 #include <QString>
-#include "commitnode.h"
-#include "branch.h"
+
+using namespace std;
+
+class CommitNode;
+class Branch;
 
 namespace LocalRepoParser {
 

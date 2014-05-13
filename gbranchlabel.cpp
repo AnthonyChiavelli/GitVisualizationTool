@@ -1,4 +1,11 @@
+#include <QGraphicsScene>
+#include <QPainter>
+
+#include "branch.h"
 #include "gbranchlabel.h"
+#include "gcommitnode.h"
+#include "logger.h"
+
 
 GBranchLabel::GBranchLabel(QGraphicsItem *parent) : QGraphicsItem(parent) {
 }
@@ -85,11 +92,33 @@ void GBranchLabel::renderLabelText(QPainter *painter) {
 
 }
 
+QVariant GBranchLabel::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) {
 
-void GBranchLabel::establishPosition() {
-    // Situate label relative to commit node
-    this->setPos(this->associatedCommit->sceneBoundingRect().right() +
-                        BRANCH_LABEL_DISTANCE, this->associatedCommit->sceneBoundingRect().top());
+        // Get a pointer to our containing scene
+        QGraphicsScene *thisScene = scene();
+        // If this method is called before scene is set up, we'll get NULL
+        if (thisScene != 0) {
+            // Refresh everything in the scene
+            thisScene->update();
+        }
+
+        // Pass along event
+        return QGraphicsItem::itemChange(change, value);
+}
+
+
+void GBranchLabel::establishPosition(int branchNum, int childRanking) {
+    QRectF commitRect = this->associatedCommit->sceneBoundingRect();
+    int xOffset = BRANCH_LABEL_OFFSET + ((branchNum-1) * BRANCH_LABEL_DISTANCE);
+
+    // For even children, draw labels to the left
+    if (childRanking % 2 == 0) {
+        this->setPos( commitRect.left() - (commitRect.width() + xOffset), commitRect.top());
+    }
+    // For odd children, draw labels to the right
+    else {
+        this->setPos(commitRect.right() + xOffset, commitRect.top());
+    }
 }
 
 QString GBranchLabel::getBranchName() const { return branchName; }

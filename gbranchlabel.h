@@ -1,9 +1,11 @@
 #ifndef GBRANCHLABEL_H
 #define GBRANCHLABEL_H
+
 #include <QGraphicsItem>
 
-#include "branch.h"
-#include "gcommitnode.h"
+class QGraphicsItem;
+class Branch;
+class GCommitNode;
 
 using namespace std;
 
@@ -11,7 +13,8 @@ using namespace std;
 #define LABEL_WIDTH 60
 #define LABEL_HEIGHT 40
 
-#define BRANCH_LABEL_DISTANCE 50
+#define BRANCH_LABEL_OFFSET 40
+#define BRANCH_LABEL_DISTANCE 75
 
 #define LABEL_BG_COLOR QColor(135, 71, 71)
 #define LABEL_TEXT_COLOR QColor(255, 255, 255)
@@ -45,7 +48,7 @@ public:
     void setAssociatedCommit(GCommitNode *value);
 
     // Establish position
-    void establishPosition();
+    void establishPosition(int branchNum, int childRanking);
 
 protected:
 
@@ -54,6 +57,9 @@ protected:
     void renderLabelText(QPainter *painter);
     void renderLabelLine(QPainter *painter);
 
+    // -- QT Callbacks --
+    // Called when there is some change done to an item
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
 
 private:
 

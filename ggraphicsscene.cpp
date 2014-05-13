@@ -9,19 +9,21 @@
 #include <string>
 #include <vector>
 
-#include "branch.h"
+#include "ggraphicsscene.h"
+#include "gcommitarrow.h"
 #include "localrepoparser.h"
 #include "logger.h"
 #include "gbranchlabel.h"
-#include "gcommitarrow.h"
-#include "gcommitnode.h"
-#include "ggraphicsscene.h"
 #include "glabelline.h"
+#include "gcommitnode.h"
+#include "commitnode.h"
+#include "branch.h"
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Render everything
-    this->renderCanvas();
+    this->renderRepository("/home/anthony/dev/GitVisualizationTool/test_repo");
+
 }
 
 
@@ -31,8 +33,8 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     // Check if this gcommit node has already been instantiated
     GCommitNode *gCommitNode;
     bool reusingExistingNode = false;
-    if(this->allGCommitNodes.find(commitNode->getSha1().getFullString()) != allGCommitNodes.end()) {
-        gCommitNode = this->allGCommitNodes.at(commitNode->getSha1().getFullString());
+    if(this->allGCommitNodes->find(commitNode->getSha1().getFullString()) != allGCommitNodes->end()) {
+        gCommitNode = this->allGCommitNodes->at(commitNode->getSha1().getFullString());
         reusingExistingNode = true;
 
     }
@@ -50,7 +52,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 
     // If this is a recursive call, we'll have a parent to attach
     if (parent != 0) {
-        gCommitNode->getParentGNodes()->push_back(parent);
+        gCommitNode->getParentGNodes()->insert(parent);
     }
 
     // Node depth should be maximum of all depths calculated for this node (which differ
@@ -71,16 +73,16 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         // Recursively call ourselves for each child and add result to our set of children
         for (QSet<CommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
             GCommitNode * newNode = convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth);
-            gCommitNode->getChildrenGNodes()->push_back(newNode);
+            gCommitNode->getChildrenGNodes()->insert(newNode);
             // Add an arrow from this to the child to the global set of arrows
             GCommitArrow * newArrow = new GCommitArrow(gCommitNode, newNode);
-            this->arrows.push_back(newArrow);
+            this->arrows->push_back(newArrow);
         }
     }
 
     // Add this commit to a list of all commits, if it hasn't already been
     if (!reusingExistingNode) {
-        this->allGCommitNodes.insert({commitNode->getSha1().getFullString(), gCommitNode});
+        this->allGCommitNodes->insert({commitNode->getSha1().getFullString(), gCommitNode});
     }
     return gCommitNode;
 }
@@ -88,12 +90,12 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 int GGraphicsScene::measurePhase(GCommitNode *node) {
 
     // Retrieve the children of ours for whom we are the youngest parent
-    vector<GCommitNode *> *children = node->getCloseChildren();
+    set<GCommitNode *> *children = node->getCloseChildren();
 
     // Recurse down tree if we are an inner node
     if (children->size() > 0) {
         int leavesOnSubTrees = 0;
-        for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+        for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
             leavesOnSubTrees += measurePhase(*it);
         }
         // Number of leaves to a node is the leaves on all of its subtrees added together
@@ -114,14 +116,16 @@ void GGraphicsScene::renderPhase(GCommitNode *node) {
     // Figure out allocated width for whole tree
     int totalAllocatedWidth = node->getNumberOfLeaves() * CANVAS_SPACE_PER_NODE;
 
-
     // Render tree starting at root node
     this->renderNode(node, 0, totalAllocatedWidth);
 
     // Render arrows
-    for (vector<GCommitArrow *>::iterator arrow = this->arrows.begin(); arrow != this->arrows.end(); arrow++) {
+    for (vector<GCommitArrow *>::iterator arrow = this->arrows->begin(); arrow != this->arrows->end(); arrow++) {
         this->addItem(*arrow);
     }
+
+    // Refresh
+    this->update();
 
 }
 
@@ -145,16 +149,22 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
     // Iterate over children, allocate them space inside us, and render them
     int childNumber = 0;
-    vector<GCommitNode *> *children = node->getCloseChildren();
-    for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+
+    set<GCommitNode *> *children = node->getCloseChildren();
+    for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+        (*it)->setChildRanking(childNumber);
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
     }
 }
 
-void GGraphicsScene::renderCanvas() {
+void GGraphicsScene::renderRepository(string repoPath) {
 
-    string repoPath = "/home/cjunix/Desktop/test";
+    this->currentRepoPath = repoPath;
+
+    this->allGCommitNodes = new map<string, GCommitNode *>();
+    this->arrows = new vector<GCommitArrow *>();
+
     CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
 
     // Ensure we recieve a repo back from the parser
@@ -198,19 +208,9 @@ void GGraphicsScene::renderCanvas() {
 
 }
 
-//QVariant GGraphicsScene::itemChange(GraphicsItemChange change, const QVariant &value) {
+string GGraphicsScene::getCurrentRepoPath() const { return currentRepoPath; }
 
-//    // Get a pointer to our containing scene
-//    QGraphicsScene *thisScene = scene();
-//    // If this method is called before scene is set up, we'll get NULL
-//    if (thisScene != 0) {
-//        // Refresh everything in the scene
-//        thisScene->update();
-//    }
-
-//    // Pass along event
-//    return QGraphicsItem::itemChange(change, value);
-//}
+void GGraphicsScene::setCurrentRepoPath(const string &value) { currentRepoPath = value; }
 
 void GGraphicsScene::notifyRepoChange() {
 
@@ -218,6 +218,7 @@ void GGraphicsScene::notifyRepoChange() {
     this->clear();
 
     // Re-render
+    this->renderRepository(this->currentRepoPath);
 
 }
 
@@ -231,11 +232,12 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
         GBranchLabel *branchLabel = new GBranchLabel(branch);
 
         // Find commit to which this branch refers
-        if(this->allGCommitNodes.find(branch->getCommitSha().getFullString()) != allGCommitNodes.end()) {
-            GCommitNode *gCommitNode = this->allGCommitNodes.at(branch->getCommitSha().getFullString());
-            // Pass it the commit
+        if(this->allGCommitNodes->find(branch->getCommitSha().getFullString()) != allGCommitNodes->end()) {
+            GCommitNode *gCommitNode = this->allGCommitNodes->at(branch->getCommitSha().getFullString());
+            // Associate them with each other
             branchLabel->setAssociatedCommit(gCommitNode);
-            branchLabel->establishPosition();
+            int branchNum = gCommitNode->addBranchLabel(branchLabel);
+            branchLabel->establishPosition(branchNum, gCommitNode->getChildRanking());
             // Add branch label
             this->addItem(branchLabel);
             // Add branch label line
@@ -244,6 +246,3 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
 
     }
 }
-
-
-

@@ -1,5 +1,8 @@
-#include "glabelline.h"
+#include <QPainter>
+
 #include <math.h>
+
+#include "glabelline.h"
 
 using namespace std;
 
@@ -49,10 +52,12 @@ void GLabelLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         destinationPoint = QPointF(destinationRect.right(), destinationRect.top() + (destinationRect.height() / 2));
     }
 
-
     // Set up pen
     painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->setBrush(Qt::black);
+
+    // Don't cover other stuff
+    this->setZValue(-5);
 
     // Render line
     QLineF arrowLine(sourcePoint, destinationPoint);
