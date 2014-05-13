@@ -1,6 +1,7 @@
 #ifndef GGRAPHICSSCENE_H
 #define GGRAPHICSSCENE_H
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 
 #include <map>
 
@@ -43,6 +44,8 @@ public:
 
     // Render the branch labels in this repo
     void renderBranchLabels(QList<Branch *> branches);
+
+    //QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 private:
     // Render a node and its children in the space space from startX to endX

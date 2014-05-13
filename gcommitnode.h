@@ -123,6 +123,7 @@ private:
 
 protected:
 
+
     // -- QT Callbacks --
     // Called when there is some change done to an item
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);

@@ -25,17 +25,10 @@ public:
     QRectF boundingRect() const;
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
     // -- Source and destination nodes --
     GCommitNode *source;
     GCommitNode *destination;
-
-    QLineF renderArrowLine(QPainter *painter);
-    void determineArrowAttachment(QPointF destinationPoint, QRectF destinationRect, QRectF sourceRect, QPointF sourcePoint);
-    void determineArrowAttachment(QPointF sourcePoint, QPointF destinationPoint);
-private:
-
-    // Arrow Head
-    QPolygonF arrowHead;
 
 signals:
 

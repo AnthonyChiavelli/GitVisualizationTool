@@ -16,6 +16,7 @@
 #include "gcommitarrow.h"
 #include "gcommitnode.h"
 #include "ggraphicsscene.h"
+#include "glabelline.h"
 
 
 
@@ -199,6 +200,20 @@ void GGraphicsScene::renderCanvas() {
 
 }
 
+//QVariant GGraphicsScene::itemChange(GraphicsItemChange change, const QVariant &value) {
+
+//    // Get a pointer to our containing scene
+//    QGraphicsScene *thisScene = scene();
+//    // If this method is called before scene is set up, we'll get NULL
+//    if (thisScene != 0) {
+//        // Refresh everything in the scene
+//        thisScene->update();
+//    }
+
+//    // Pass along event
+//    return QGraphicsItem::itemChange(change, value);
+//}
+
 void GGraphicsScene::notifyRepoChange() {
 
     // Clear this scene
@@ -223,10 +238,10 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
             // Pass it the commit
             branchLabel->setAssociatedCommit(gCommitNode);
             branchLabel->establishPosition();
-            // BranchLabel will add its own lines
             // Add branch label
             this->addItem(branchLabel);
-
+            // Add branch label line
+            this->addItem(new GLabelLine(gCommitNode, branchLabel));
         }
 
     }
