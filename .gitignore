@@ -1,4 +1,10 @@
 GitVisualizationTool.pro.user
 *autosave
+<<<<<<< HEAD
+/logs
+/test_repo
+/test_repo_bk
+=======
 ./logs
 
+>>>>>>> 0b3fda048ab2d9a3ec2d8e68e48091a07a86155c

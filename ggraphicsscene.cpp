@@ -1,39 +1,32 @@
-#include <vector>
-#include <algorithm>
-#include <QSet>
-#include "QColor"
-#include "ggraphicsscene.h"
-#include "gcommitnode.h"
-#include "gcommitarrow.h"
-#include "gbranchlabel.h"
-#include "localrepoparser.h"
-#include "logger.h"
+#include <QColor>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
+#include <QList>
+#include <QSet>
+
+#include <algorithm>
 #include <iostream>
+#include <string>
+#include <vector>
+
+#include "branch.h"
+#include "localrepoparser.h"
+#include "logger.h"
+#include "gbranchlabel.h"
+#include "gcommitarrow.h"
+#include "gcommitnode.h"
+#include "ggraphicsscene.h"
+#include "glabelline.h"
+
+
 
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
-    // Build up test tree
-    GCommitNode *root = convertCommitNodeToGCommitNode(LocalRepoParser::getGitTree("/home/nrosato/Development/GitVisualizationTool/test_repo"));
-
-    // Measure tree
-    int totalLeaves = this->measurePhase(root);
-
-    // Size canvas coordinate grid based on measurement
-    this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
-    this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
-
-    // Render tree
-    this->renderPhase(root);
-
-    //TODO: remove. add test branch label
-    GBranchLabel *testLabel1 = new GBranchLabel(QString("hello"));
-    testLabel1->setPos(QPoint(100,100));
-    this->addItem(testLabel1);
-
-
+    // Render everything
+    this->renderCanvas();
 }
+
+
 
 GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNode, GCommitNode* parent, int nodeDepth) {
 
@@ -94,12 +87,35 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
     return gCommitNode;
 }
 
+int GGraphicsScene::measurePhase(GCommitNode *node) {
 
+    // Retrieve the children of ours for whom we are the youngest parent
+    vector<GCommitNode *> *children = node->getCloseChildren();
+
+    // Recurse down tree if we are an inner node
+    if (children->size() > 0) {
+        int leavesOnSubTrees = 0;
+        for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+            leavesOnSubTrees += measurePhase(*it);
+        }
+        // Number of leaves to a node is the leaves on all of its subtrees added together
+        node->setNumberOfLeaves(leavesOnSubTrees);
+        return leavesOnSubTrees;
+    }
+    // Otherwise we are a leaf
+    else {
+        // We have no leaves
+        node->setNumberOfLeaves(0);
+        // Our parent gets +1 leaves
+        return 1;
+    }
+}
 
 void GGraphicsScene::renderPhase(GCommitNode *node) {
 
     // Figure out allocated width for whole tree
     int totalAllocatedWidth = node->getNumberOfLeaves() * CANVAS_SPACE_PER_NODE;
+
 
     // Render tree starting at root node
     this->renderNode(node, 0, totalAllocatedWidth);
@@ -125,7 +141,6 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
         return;
     }
 
-
     // Divide up your allocated space into even slots for each child (later to be adjusted based on
     // subtree leaf number)
     int spacePerChild = (int)((double)(endX - startX) / (double)node->getCloseChildren()->size());
@@ -137,32 +152,100 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
     }
+}
 
+void GGraphicsScene::renderCanvas() {
+
+    string repoPath = "/home/anthony/dev/homework/GitVisualizationTool/test_repo";
+    CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
+
+    // Ensure we recieve a repo back from the parser
+    if (rootCommit == 0) {
+       Logger::error("GGraphicsScene", "Nothing returned from parser. Invalid git repository path? " + repoPath + " Aborting.");
+       return;
+    }
+
+    GCommitNode *root = convertCommitNodeToGCommitNode(rootCommit);
+    // Ensure we recieve a gcommitnode back
+    if (root == 0) {
+       Logger::error("GGraphicsScene", "Nothing returned from convertCommitNodeToGCommitNode. Aborting. ");
+       return;
+    }
+
+    Logger::info("GGraphicsScene", "Parsed and converted repo at path " + repoPath);
+
+    // Retrieve the list of branches
+    QList<Branch *> branches = LocalRepoParser::getBranches(repoPath);
+
+    // Ensure that we get at least 1 branch
+    if (branches.empty()) {
+        Logger::error("GGraphicsScene", "No branches recieved from parser. Aborting");
+        return;
+    }
+
+    // Measure tree
+    int totalLeaves = this->measurePhase(root);
+
+    Logger::info("GGraphicsScene", "Finished measure phase");
+    // Size canvas coordinate grid based on measurement
+    this->setSceneRect(0, 0, totalLeaves * CANVAS_SPACE_PER_NODE, 1000); //TODO fix number
+    this->setBackgroundBrush(QBrush(CANVAS_BG_COLOR, Qt::SolidPattern));
+
+    // Render tree
+    this->renderPhase(root);
+    Logger::info("GGraphicsScene", "Finished render phase");
+
+    // Render branches
+    this->renderBranchLabels(branches);
 
 }
 
-int GGraphicsScene::measurePhase(GCommitNode *node) {
+//QVariant GGraphicsScene::itemChange(GraphicsItemChange change, const QVariant &value) {
 
-    vector<GCommitNode *> *children = node->getCloseChildren();
+//    // Get a pointer to our containing scene
+//    QGraphicsScene *thisScene = scene();
+//    // If this method is called before scene is set up, we'll get NULL
+//    if (thisScene != 0) {
+//        // Refresh everything in the scene
+//        thisScene->update();
+//    }
 
-    // Recurse down tree if we are an inner node
-    if (children->size() > 0) {
-        int leavesOnSubTrees = 0;
-        for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
-            leavesOnSubTrees += measurePhase(*it);
+//    // Pass along event
+//    return QGraphicsItem::itemChange(change, value);
+//}
+
+void GGraphicsScene::notifyRepoChange() {
+
+    // Clear this scene
+    this->clear();
+
+    // Re-render
+
+}
+
+void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
+
+    //Iterate over branches
+    QListIterator<Branch *> iter(branches);
+    while (iter.hasNext()) {
+        // Convert them into GBranchLabels
+        Branch * branch = iter.next();
+        GBranchLabel *branchLabel = new GBranchLabel(branch);
+
+        // Find commit to which this branch refers
+        if(this->allGCommitNodes.find(branch->getCommitSha().getFullString()) != allGCommitNodes.end()) {
+            GCommitNode *gCommitNode = this->allGCommitNodes.at(branch->getCommitSha().getFullString());
+            // Pass it the commit
+            branchLabel->setAssociatedCommit(gCommitNode);
+            branchLabel->establishPosition();
+            // Add branch label
+            this->addItem(branchLabel);
+            // Add branch label line
+            this->addItem(new GLabelLine(gCommitNode, branchLabel));
         }
-        // Number of leaves to a node is the leaves on all of its subtrees added together
-        node->setNumberOfLeaves(leavesOnSubTrees);
-        return leavesOnSubTrees;
-    }
-    // Otherwise we are a leaf
-    else {
-        // We have no leaves
-        node->setNumberOfLeaves(0);
-        // Our parent gets +1 leaves
-        return 1;
-    }
 
-
+    }
 }
+
+
 

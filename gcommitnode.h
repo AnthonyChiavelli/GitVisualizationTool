@@ -1,10 +1,11 @@
 #ifndef GCOMMITNODE_H
 #define GCOMMITNODE_H
-
-#include <QGraphicsItem>
 #include <QDateTime>
+#include <QGraphicsItem>
 #include <QPainter>
+
 #include <vector>
+
 #include "gituser.h"
 #include "sha1.h"
 
@@ -121,6 +122,7 @@ private:
     void renderNodeText(QPainter *painter);
 
 protected:
+
 
     // -- QT Callbacks --
     // Called when there is some change done to an item

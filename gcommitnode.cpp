@@ -1,10 +1,9 @@
-#include "gcommitnode.h"
-#include "QColor"
-
+#include <QColor>
 #include <QGraphicsView>
 
-#include "sha1.h"
 #include "gcommitarrow.h"
+#include "gcommitnode.h"
+#include "sha1.h"
 
 GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
@@ -12,9 +11,7 @@ GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-
 }
-
 
 QRectF GCommitNode::boundingRect() const {
     return QRectF(0,0,NODE_WIDTH, NODE_HEIGHT);
@@ -30,7 +27,6 @@ void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     // Render the node text
     renderNodeText(painter);
-
 }
 
 void GCommitNode::renderNodeRectangle(QPainter *painter) {
@@ -139,7 +135,3 @@ int GCommitNode::getXEnd() { return xEnd; }
 void GCommitNode::setXEnd(int value) { xEnd = value; }
 int GCommitNode::getXStart() { return xStart; }
 void GCommitNode::setXStart(int value) { xStart = value; }
-
-
-
-

@@ -14,6 +14,9 @@ namespace LocalRepoParser {
 
     Branch* getBranch(string const &pathToGitFolder, string const &branchName);
 
+    // Returns all local branches
+    QList<Branch *> getBranches (string const &pathToGitFolder);
+
 }
 
 #endif // LOCALREPOPARSER_H

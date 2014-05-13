@@ -40,7 +40,8 @@ SOURCES += branch.cpp \
         gitpulldialog.cpp \
         gitpushdialog.cpp \
         logger.cpp \
-    gbranchlabel.cpp
+    gbranchlabel.cpp \
+    glabelline.cpp
 
 
 HEADERS  += branch.h \
@@ -68,7 +69,8 @@ HEADERS  += branch.h \
         gitpulldialog.h \
         gitpushdialog.h \
         logger.h \ 
-    gbranchlabel.h
+    gbranchlabel.h \
+    glabelline.h
 
 FORMS    += mainwindow.ui \
         gitinitdialog.ui \

@@ -1,10 +1,14 @@
 #ifndef GGRAPHICSSCENE_H
 #define GGRAPHICSSCENE_H
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+
 #include <map>
-#include "gcommitnode.h"
+
+#include "branch.h"
 #include "commitnode.h"
 #include "gcommitarrow.h"
-#include <QGraphicsScene>
+#include "gcommitnode.h"
 
 // -- Appearance Properties --
 #define CANVAS_SPACE_PER_NODE 150
@@ -15,7 +19,6 @@
 #define CANVAS_HEIGHT 700
 
 #define CANVAS_BG_COLOR QColor(232,232,232)
-
 
 class GGraphicsScene : public QGraphicsScene {
     Q_OBJECT
@@ -39,14 +42,23 @@ public:
     // The arrows that connect the nodes
     vector<GCommitArrow *> arrows;
 
+    // Render the branch labels in this repo
+    void renderBranchLabels(QList<Branch *> branches);
+
+    //QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 private:
     // Render a node and its children in the space space from startX to endX
     void renderNode(GCommitNode *node, int startX, int endX);
 
+    // Initiate rendering
+    void renderCanvas();
+
 signals:
 
 public slots:
+    // Re-render canvas, something has changed
+    void notifyRepoChange();
 
 };
 

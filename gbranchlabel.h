@@ -2,6 +2,7 @@
 #define GBRANCHLABEL_H
 #include <QGraphicsItem>
 
+#include "branch.h"
 #include "gcommitnode.h"
 
 using namespace std;
@@ -9,6 +10,8 @@ using namespace std;
 // -- Appearance properties --
 #define LABEL_WIDTH 60
 #define LABEL_HEIGHT 40
+
+#define BRANCH_LABEL_DISTANCE 50
 
 #define LABEL_BG_COLOR QColor(135, 71, 71)
 #define LABEL_TEXT_COLOR QColor(255, 255, 255)
@@ -25,6 +28,8 @@ public:
     // -- Constructors --
     explicit GBranchLabel(QGraphicsItem *parent = 0);
     explicit GBranchLabel(QString branchName);
+    // Conversion constructor
+    GBranchLabel(Branch *branch);
 
     // -- Graphics methods (required)
     // Returns estimated bounding box
@@ -39,12 +44,16 @@ public:
     GCommitNode *getAssociatedCommit() const;
     void setAssociatedCommit(GCommitNode *value);
 
+    // Establish position
+    void establishPosition();
 
 protected:
 
     // -- Rendering helper methods
     void renderLabelRectangle(QPainter *painter);
     void renderLabelText(QPainter *painter);
+    void renderLabelLine(QPainter *painter);
+
 
 private:
 
