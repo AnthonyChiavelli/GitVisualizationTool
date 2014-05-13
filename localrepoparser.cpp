@@ -32,6 +32,10 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
     vector<Branch *> branches;
     absPathToGitFolder = pathToGitFolder;
 
+    if (rootCommit != 0) {
+        rootCommit = NULL;
+    }
+
     // Create hashmap for storing a record of all commits encountered (to prevent duplication)
     QHash<QString, CommitNode *> *commits = new QHash<QString, CommitNode *>();
 
@@ -47,9 +51,6 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
         cout << "Branch's commit Sha: " << branch->getCommitSha().getStringOfLength(7) << endl;
         getCommitHistory(branch->getCommitSha(), commits);
     }
-
-    // TODO: Clean up memory
-    delete commits;
 
     return rootCommit;
 }
