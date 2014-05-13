@@ -41,7 +41,9 @@ SOURCES += branch.cpp \
         gitpushdialog.cpp \
         logger.cpp \
     gbranchlabel.cpp \
-    glabelline.cpp
+    glabelline.cpp \
+    gitopenrepodialog.cpp \
+    giterrordialog.cpp
 
 
 HEADERS  += branch.h \
@@ -70,7 +72,10 @@ HEADERS  += branch.h \
         gitpushdialog.h \
         logger.h \ 
     gbranchlabel.h \
-    glabelline.h
+    glabelline.h \
+    gitopenrepodialog.h \
+    giterrordialog.h
+
 
 FORMS    += mainwindow.ui \
         gitinitdialog.ui \
@@ -80,6 +85,8 @@ FORMS    += mainwindow.ui \
         gitbranchdialog.ui \
         gitrevertdialog.ui \
         gitpulldialog.ui \
-        gitpushdialog.ui
+        gitpushdialog.ui \
+    gitopenrepodialog.ui \
+    giterrordialog.ui
 
 RESOURCES += resources/images.qrc

@@ -2,6 +2,7 @@
 #define GITINITDIALOG_H
 
 #include <QDialog>
+#include <QFileSystemModel>
 
 namespace Ui {
 class GitInitDialog;
@@ -21,8 +22,14 @@ public:
 
     void on_cancelButton_clicked();
 
-  private:
+    void on_treeView_activated(const QModelIndex &index);
+
+    void on_treeView_clicked(const QModelIndex &index);
+
+private:
     Ui::GitInitDialog *ui;
+    QFileSystemModel* directoyTree;
+
 };
 
 #endif // GITINITDIALOG_H

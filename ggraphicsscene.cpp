@@ -154,7 +154,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
 void GGraphicsScene::renderCanvas() {
 
-    string repoPath = "/home/krose/Development/testGit";
+    string repoPath = "/home/cjunix/Desktop/test";
     CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
 
     // Ensure we recieve a repo back from the parser

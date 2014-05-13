@@ -4,6 +4,7 @@
 #include "gitinitdialog.h"
 #include "gitadddialog.h"
 #include "gitcommitdialog.h"
+#include "gitopenrepodialog.h"
 #include "gitmergedialog.h"
 #include "gitrevertdialog.h"
 #include "gitbranchdialog.h"
@@ -117,7 +118,9 @@ void MainWindow::on_actionRefresh_triggered()
 
 void MainWindow::on_actionOpenRepo_triggered()
 {
-
+    gitOpenRepoDialog OpenRepo;
+    OpenRepo.setModal(true);
+    OpenRepo.exec();
 }
 
 
