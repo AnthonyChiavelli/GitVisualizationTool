@@ -14,6 +14,8 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
+    GGraphicsScene *scene;
+    QString *repoPath = new QString();
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -76,7 +78,6 @@ private slots:
 
   private:
     Ui::MainWindow *ui;
-    GGraphicsScene *scene;
 
 };
 

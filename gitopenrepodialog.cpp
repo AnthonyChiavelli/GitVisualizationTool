@@ -2,6 +2,7 @@
 #include "ui_gitopenrepodialog.h"
 #include "gitapi.h"
 #include "giterrordialog.h"
+#include "ggraphicsscene.h"
 
 gitOpenRepoDialog::gitOpenRepoDialog(QWidget *parent) :
     QDialog(parent),
@@ -39,7 +40,9 @@ void gitOpenRepoDialog::on_pushButton_clicked()
         ErrorBox.exec();
     }
     else{
-
+        string pth = path.toStdString();
+        this->scene->renderRepository(pth);
+        *(this->path) = path;
     }
 
     accept();

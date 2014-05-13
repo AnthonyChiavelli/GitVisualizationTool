@@ -80,6 +80,7 @@ void MainWindow::on_actionGitStatus_triggered()
 void MainWindow::on_actionGitCommit_triggered()
 {
   GitCommitDialog GCdialog;
+  GCdialog.path = this->repoPath;
   GCdialog.setModal(true);
   GCdialog.exec();
 }
@@ -87,6 +88,7 @@ void MainWindow::on_actionGitCommit_triggered()
 void MainWindow::on_actionGitBranch_triggered()
 {
   GitBranchDialog GBdialog;
+  GBdialog.repoPath = this->repoPath;
   GBdialog.setModal(true);
   GBdialog.exec();
 }
@@ -120,6 +122,8 @@ void MainWindow::on_actionRefresh_triggered()
 void MainWindow::on_actionOpenRepo_triggered()
 {
     gitOpenRepoDialog OpenRepo;
+    OpenRepo.scene = this->scene;
+    OpenRepo.path = this->repoPath;
     OpenRepo.setModal(true);
     OpenRepo.exec();
 }

@@ -17,9 +17,10 @@ GitBranchDialog::~GitBranchDialog()
 
 void GitBranchDialog::on_branchButton_clicked()
 {
-  string path = "/home/maura/Desktop/GitTest";
+  QString path = *(this->repoPath);
+  string repoPath = path.toStdString();
   string name = ui->branch->text().toStdString();
-  GitAPIResponse response = GitApi::gitBranch(path, name);
+  GitAPIResponse response = GitApi::gitBranch(repoPath, name);
   accept();
 }
 

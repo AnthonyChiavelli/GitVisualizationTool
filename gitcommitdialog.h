@@ -13,6 +13,7 @@ class GitCommitDialog : public QDialog
     
   public:
     explicit GitCommitDialog(QWidget *parent = 0);
+    QString* path;
     ~GitCommitDialog();
     
   private slots:

@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QFileSystemModel>
 
+class GGraphicsScene;
+
 namespace Ui {
 class gitOpenRepoDialog;
 }
@@ -14,6 +16,8 @@ class gitOpenRepoDialog : public QDialog
 
 public:
     explicit gitOpenRepoDialog(QWidget *parent = 0);
+    GGraphicsScene* scene;
+    QString *path;
     ~gitOpenRepoDialog();
 
 private slots:

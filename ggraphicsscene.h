@@ -48,6 +48,9 @@ public:
     // Render the branch labels in this repo
     void renderBranchLabels(QList<Branch *> branches);
 
+    // Initiate rendering
+    void renderRepository(string repoPath);
+
     string getCurrentRepoPath() const;
     void setCurrentRepoPath(const string &value);
 
@@ -57,9 +60,6 @@ protected:
 private:
     // Render a node and its children in the space space from startX to endX
     void renderNode(GCommitNode *node, int startX, int endX);
-
-    // Initiate rendering
-    void renderRepository(string repoPath);
 
     // Current repo path
     string currentRepoPath;
