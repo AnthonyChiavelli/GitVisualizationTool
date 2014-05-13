@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     LocalRepoParser::getBranch(pathToGitFolder, branchName);
 
     // Test getting a git tree
-    LocalRepoParser::getGitTree(pathToGitFolder);
+//    LocalRepoParser::getGitTree(pathToGitFolder);
 
     window.show();
     return a.exec();

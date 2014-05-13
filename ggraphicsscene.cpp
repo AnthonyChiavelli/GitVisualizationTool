@@ -22,7 +22,7 @@
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Render everything
-    this->renderRepository("/home/anthony/dev/GitVisualizationTool/test_repo");
+    this->renderRepository("/home/krose/Development/testGit");
 
 }
 
@@ -164,7 +164,7 @@ void GGraphicsScene::renderRepository(string repoPath) {
     this->allGCommitNodes = new map<string, GCommitNode *>();
     this->arrows = new vector<GCommitArrow *>();
 
-    CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
+    CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath, *this);
 
     // Ensure we recieve a repo back from the parser
     if (rootCommit == 0) {
