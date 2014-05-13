@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Instantiate a graphics view for this scene
     QGraphicsView *canvas = ui->graphicsView;
+    canvas->setDragMode(QGraphicsView::ScrollHandDrag);
     this->scene= new GGraphicsScene(this);
     canvas->setScene(scene);
 

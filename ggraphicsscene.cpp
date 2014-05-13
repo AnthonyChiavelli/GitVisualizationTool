@@ -22,7 +22,8 @@
 GGraphicsScene::GGraphicsScene(QObject *parent) : QGraphicsScene(parent) {
 
     // Render everything
-    this->renderCanvas();
+    this->renderRepository("/home/anthony/dev/GitVisualizationTool/test_repo");
+
 }
 
 
@@ -148,6 +149,7 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
     // Iterate over children, allocate them space inside us, and render them
     int childNumber = 0;
+
     set<GCommitNode *> *children = node->getCloseChildren();
     for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
         (*it)->setChildRanking(childNumber);
@@ -156,12 +158,13 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
     }
 }
 
-void GGraphicsScene::renderCanvas() {
+void GGraphicsScene::renderRepository(string repoPath) {
+
+    this->currentRepoPath = repoPath;
 
     this->allGCommitNodes = new map<string, GCommitNode *>();
     this->arrows = new vector<GCommitArrow *>();
 
-    string repoPath = "/home/anthony/dev/GitVisualizationTool/test_repo";
     CommitNode *rootCommit = LocalRepoParser::getGitTree(repoPath);
 
     // Ensure we recieve a repo back from the parser
@@ -205,6 +208,9 @@ void GGraphicsScene::renderCanvas() {
 
 }
 
+string GGraphicsScene::getCurrentRepoPath() const { return currentRepoPath; }
+
+void GGraphicsScene::setCurrentRepoPath(const string &value) { currentRepoPath = value; }
 
 void GGraphicsScene::notifyRepoChange() {
 
@@ -212,7 +218,7 @@ void GGraphicsScene::notifyRepoChange() {
     this->clear();
 
     // Re-render
-    this->renderCanvas();
+    this->renderRepository(this->currentRepoPath);
 
 }
 
@@ -240,6 +246,3 @@ void GGraphicsScene::renderBranchLabels(QList<Branch *> branches) {
 
     }
 }
-
-
-

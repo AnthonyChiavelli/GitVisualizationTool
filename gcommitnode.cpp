@@ -58,8 +58,7 @@ void GCommitNode::renderNodeText(QPainter *painter) {
     QPointF labelTextPosition = QPointF(labelTextMargin, NODE_LABEL_Y);
     painter->drawText(labelTextPosition, NODE_LABEL_TEXT);
     QPointF shaTextPosition = QPointF(shaTextMargin, NODE_SHA_Y);
-//    painter->drawText(shaTextPosition, this->sha.getStringOfLength(6).c_str());
-        painter->drawText(shaTextPosition, QString::number(this->childRanking));
+    painter->drawText(shaTextPosition, this->sha.getStringOfLength(6).c_str());
 }
 
 

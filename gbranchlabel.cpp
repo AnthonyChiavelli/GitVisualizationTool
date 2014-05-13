@@ -4,6 +4,7 @@
 #include "branch.h"
 #include "gbranchlabel.h"
 #include "gcommitnode.h"
+#include "logger.h"
 
 
 GBranchLabel::GBranchLabel(QGraphicsItem *parent) : QGraphicsItem(parent) {
@@ -100,6 +101,13 @@ QVariant GBranchLabel::itemChange(QGraphicsItem::GraphicsItemChange change, cons
             // Refresh everything in the scene
             thisScene->update();
         }
+
+        // Check if we are touching another branch pointer
+        if (!this->collidingItems().empty()) {
+            if (this->collidingItems().at(0))
+            Logger::debug("GBranchLabel", "Branch collision!");
+        }
+
 
         // Pass along event
         return QGraphicsItem::itemChange(change, value);
