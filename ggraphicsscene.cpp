@@ -51,7 +51,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 
     // If this is a recursive call, we'll have a parent to attach
     if (parent != 0) {
-        gCommitNode->getParentGNodes()->push_back(parent);
+        gCommitNode->getParentGNodes()->insert(parent);
     }
 
     // Node depth should be maximum of all depths calculated for this node (which differ
@@ -72,7 +72,7 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
         // Recursively call ourselves for each child and add result to our set of children
         for (QSet<CommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
             GCommitNode * newNode = convertCommitNodeToGCommitNode(*it, gCommitNode, nodeDepth);
-            gCommitNode->getChildrenGNodes()->push_back(newNode);
+            gCommitNode->getChildrenGNodes()->insert(newNode);
             // Add an arrow from this to the child to the global set of arrows
             GCommitArrow * newArrow = new GCommitArrow(gCommitNode, newNode);
             this->arrows->push_back(newArrow);
@@ -89,12 +89,12 @@ GCommitNode *GGraphicsScene::convertCommitNodeToGCommitNode(CommitNode* commitNo
 int GGraphicsScene::measurePhase(GCommitNode *node) {
 
     // Retrieve the children of ours for whom we are the youngest parent
-    vector<GCommitNode *> *children = node->getCloseChildren();
+    set<GCommitNode *> *children = node->getCloseChildren();
 
     // Recurse down tree if we are an inner node
     if (children->size() > 0) {
         int leavesOnSubTrees = 0;
-        for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+        for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
             leavesOnSubTrees += measurePhase(*it);
         }
         // Number of leaves to a node is the leaves on all of its subtrees added together
@@ -145,8 +145,8 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
     // Iterate over children, allocate them space inside us, and render them
     int childNumber = 0;
-    vector<GCommitNode *> *children = node->getCloseChildren();
-    for (vector<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
+    set<GCommitNode *> *children = node->getCloseChildren();
+    for (set<GCommitNode *>::iterator it = children->begin(); it !=children->end(); ++it ) {
         this->renderNode(*it, startX + (spacePerChild * childNumber), startX + ((spacePerChild * (childNumber + 1))));
         childNumber++;
     }

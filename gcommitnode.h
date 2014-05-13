@@ -5,6 +5,7 @@
 #include <QPainter>
 
 #include <vector>
+#include <set>
 
 #include "gituser.h"
 #include "gbranchlabel.h"
@@ -67,12 +68,12 @@ public:
     Sha1 getSha();
     void setSha(const Sha1 &value);
 
-    vector<GCommitNode *> *getParentGNodes();
+    set<GCommitNode *> *getParentGNodes();
 
-    vector<GCommitNode *> *getChildrenGNodes();
+    set<GCommitNode *> *getChildrenGNodes();
 
     // Children of ours for which we are the youngest parent
-    vector<GCommitNode *> *getCloseChildren();
+    set<GCommitNode *> *getCloseChildren();
 
     int getNumberOfLeaves();
     void setNumberOfLeaves(int value);
@@ -104,8 +105,8 @@ private:
     QDateTime dateAndTime;
 
     // -- Relatives --
-    vector<GCommitNode *> parentGNodes;
-    vector<GCommitNode *> childrenGNodes;
+    set<GCommitNode *> parentGNodes;
+    set<GCommitNode *> childrenGNodes;
 
 
     // -- Tree Situation --
