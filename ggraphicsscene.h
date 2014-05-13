@@ -40,10 +40,10 @@ public:
     void renderPhase(GCommitNode *node);
 
     // A global set of all nodes mapped by sha
-    map<string, GCommitNode *> allGCommitNodes;
+    map<string, GCommitNode *> *allGCommitNodes;
 
     // The arrows that connect the nodes
-    vector<GCommitArrow *> arrows;
+    vector<GCommitArrow *> *arrows;
 
     // Render the branch labels in this repo
     void renderBranchLabels(QList<Branch *> branches);
