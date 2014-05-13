@@ -102,13 +102,6 @@ QVariant GBranchLabel::itemChange(QGraphicsItem::GraphicsItemChange change, cons
             thisScene->update();
         }
 
-        // Check if we are touching another branch pointer
-        if (!this->collidingItems().empty()) {
-            if (this->collidingItems().at(0))
-            Logger::debug("GBranchLabel", "Branch collision!");
-        }
-
-
         // Pass along event
         return QGraphicsItem::itemChange(change, value);
 }
