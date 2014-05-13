@@ -1,16 +1,15 @@
 #ifndef GCOMMITARROW_H
 #define GCOMMITARROW_H
+
 #include <QGraphicsItem>
-#include <QGraphicsLineItem>
-#include "gcommitnode.h"
+
+class GCommitNode;
 
 #define PI 3.14159265
 
 // -- Graphics properties --
 #define ARROW_HEAD_WIDTH 8
 #define ARROW_HEAD_LENGTH 14
-
-
 
 class GCommitArrow : public QObject, public QGraphicsItem {
     Q_OBJECT

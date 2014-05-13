@@ -5,8 +5,10 @@
 #include <QPainter>
 
 #include <vector>
+#include <set>
 
 #include "gituser.h"
+#include "gbranchlabel.h"
 #include "sha1.h"
 
 using namespace std;
@@ -45,6 +47,7 @@ public:
     QRectF boundingRect() const;
     // Performs actual object rendering
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     // -- Operators --
     // Implement equality comparison between gcommit nodes
@@ -66,12 +69,12 @@ public:
     Sha1 getSha();
     void setSha(const Sha1 &value);
 
-    vector<GCommitNode *> *getParentGNodes();
+    set<GCommitNode *> *getParentGNodes();
 
-    vector<GCommitNode *> *getChildrenGNodes();
+    set<GCommitNode *> *getChildrenGNodes();
 
     // Children of ours for which we are the youngest parent
-    vector<GCommitNode *> *getCloseChildren();
+    set<GCommitNode *> *getCloseChildren();
 
     int getNumberOfLeaves();
     void setNumberOfLeaves(int value);
@@ -90,6 +93,12 @@ public:
 
     vector<GCommitArrow *> *getTouchingArrows();
 
+    // Add a branch and return count of branches (including that one)
+    int addBranchLabel(GBranchLabel *branchLabel);
+
+    int getChildRanking() const;
+    void setChildRanking(int value);
+
 private:
 
     // -- Attributes of the commit --
@@ -100,8 +109,9 @@ private:
     QDateTime dateAndTime;
 
     // -- Relatives --
-    vector<GCommitNode *> parentGNodes;
-    vector<GCommitNode *> childrenGNodes;
+    set<GCommitNode *> parentGNodes;
+    set<GCommitNode *> childrenGNodes;
+
 
     // -- Tree Situation --
     // Our allocated space - the space we can use for ourselves and all of our children
@@ -114,15 +124,16 @@ private:
     int depth;
     // Number of cousins we have
     int numberOfCousins;
-
-private:
+    // Branches that point to us
+    vector<GBranchLabel *> ourbranches;
+    // Helps decide the best place to stick the branch label
+    int childRanking;
 
     // -- Helper methods to help render the node --
     void renderNodeRectangle(QPainter *painter);
     void renderNodeText(QPainter *painter);
 
 protected:
-
 
     // -- QT Callbacks --
     // Called when there is some change done to an item

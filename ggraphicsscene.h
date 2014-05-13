@@ -2,21 +2,24 @@
 #define GGRAPHICSSCENE_H
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-
+#include <string>
+#include <vector>
 #include <map>
 
-#include "branch.h"
-#include "commitnode.h"
-#include "gcommitarrow.h"
-#include "gcommitnode.h"
+class Branch;
+class GCommitArrow;
+class GCommitNode;
+class CommitNode;
+
+using namespace std;
 
 // -- Appearance Properties --
 #define CANVAS_SPACE_PER_NODE 150
 #define CANVAS_ROW_HEIGHT 90
 #define CANVAS_ROW_OFFSET 50
 
-#define CANVAS_WIDTH 700
-#define CANVAS_HEIGHT 700
+#define CANVAS_WIDTH 1500
+#define CANVAS_HEIGHT 1500
 
 #define CANVAS_BG_COLOR QColor(232,232,232)
 
@@ -37,22 +40,30 @@ public:
     void renderPhase(GCommitNode *node);
 
     // A global set of all nodes mapped by sha
-    map<string, GCommitNode *> allGCommitNodes;
+    map<string, GCommitNode *> *allGCommitNodes;
 
     // The arrows that connect the nodes
-    vector<GCommitArrow *> arrows;
+    vector<GCommitArrow *> *arrows;
 
     // Render the branch labels in this repo
     void renderBranchLabels(QList<Branch *> branches);
 
-    //QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+    string getCurrentRepoPath() const;
+    void setCurrentRepoPath(const string &value);
+
+    void refreshRepo();
+protected:
+
 
 private:
     // Render a node and its children in the space space from startX to endX
     void renderNode(GCommitNode *node, int startX, int endX);
 
     // Initiate rendering
-    void renderCanvas();
+    void renderRepository(string repoPath);
+
+    // Current repo path
+    string currentRepoPath;
 
 signals:
 

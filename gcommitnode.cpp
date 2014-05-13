@@ -1,9 +1,13 @@
 #include <QColor>
 #include <QGraphicsView>
+#include <QGraphicsSceneMouseEvent>
 
 #include "gcommitarrow.h"
+#include "ggraphicsscene.h"
 #include "gcommitnode.h"
+#include "gitbranchdialog.h"
 #include "sha1.h"
+#include "logger.h"
 
 GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
@@ -64,21 +68,60 @@ void GCommitNode::renderNodeText(QPainter *painter) {
 
 QVariant GCommitNode::itemChange(GraphicsItemChange change, const QVariant &value) {
 
-    // Get a pointer to our containing scene
-    QGraphicsScene *thisScene = scene();
-    // If this method is called before scene is set up, we'll get NULL
-    if (thisScene != 0) {
-        // Refresh everything in the scene
-        thisScene->update();
+    // If this was a position change
+    if (change == ItemPositionChange) {
+        // Get a pointer to our containing scene
+        QGraphicsScene *thisScene = scene();
+        // If this method is called before scene is set up, we'll get NULL
+        if (thisScene != 0) {
+            // Refresh everything in the scene
+            thisScene->update();
+        }
+
+        // Calculate our delta
+        QPointF newPos = value.toPointF();
+        QPointF oldPos = this->pos();
+        int deltaX = newPos.x() - oldPos.x();
+        int deltaY = newPos.y() - oldPos.y();
+
+        // Move branch pointers in the same motion
+        for (vector<GBranchLabel *>::iterator it = this->ourbranches.begin(); it != this->ourbranches.end(); it++) {
+            GBranchLabel *branchLabel = *it;
+            branchLabel->setPos(branchLabel->pos().x() + deltaX, branchLabel->pos().y() + deltaY);
+        }
     }
 
     // Pass along event
     return QGraphicsItem::itemChange(change, value);
 }
 
+void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+    // Continue to propagate it
+    QGraphicsItem::mousePressEvent(event);
+
+    // On right click, make a new branch
+    if (event->button() == Qt::RightButton) {
+        // Launch new branch dialog
+        GitBranchDialog *newBranchDialog = new GitBranchDialog();
+        newBranchDialog->setModal(true);
+        newBranchDialog->exec();
+
+        if (scene() != 0) {
+            // Refresh everything in the scene
+            (GGraphicsScene(scene())).refreshRepo();
+        }
+    }
+
+}
+
 
 bool operator==(GCommitNode &lhs, GCommitNode &rhs) {
     return lhs.sha.getFullString() == rhs.sha.getFullString();
+}
+
+int GCommitNode::addBranchLabel(GBranchLabel *branchLabel) {
+    this->ourbranches.push_back(branchLabel);
+    return this->ourbranches.size();
 }
 
 
@@ -98,25 +141,25 @@ void GCommitNode::setDateAndTime(const QDateTime &value) { dateAndTime = value; 
 Sha1 GCommitNode::getSha()  { return sha; }
 void GCommitNode::setSha(const Sha1 &value) { sha = value; }
 
-vector< GCommitNode *> *GCommitNode::getParentGNodes()  { return &parentGNodes; }
+set< GCommitNode *> *GCommitNode::getParentGNodes()  { return &parentGNodes; }
 
-vector<GCommitNode *> *GCommitNode::getChildrenGNodes()  { return &childrenGNodes; }
+set<GCommitNode *> *GCommitNode::getChildrenGNodes()  { return &childrenGNodes; }
 
-vector<GCommitNode *> *GCommitNode::getCloseChildren() {
+set<GCommitNode *> *GCommitNode::getCloseChildren() {
     int counter = 0;
-    vector<GCommitNode *> *closeChildren = new vector<GCommitNode*>();
-    for (vector<GCommitNode *>::iterator child = this->childrenGNodes.begin(); child != this->childrenGNodes.end(); child++) {
+    set<GCommitNode *> *closeChildren = new set<GCommitNode*>();
+    for (set<GCommitNode *>::iterator child = this->childrenGNodes.begin(); child != this->childrenGNodes.end(); child++) {
         GCommitNode *childNode = *child;
         bool haveYoungerParents = false;
         //Check if they have younger parents
-        for (vector<GCommitNode *>::iterator childParent = childNode->getParentGNodes()->begin(); childParent != childNode->getParentGNodes()->end(); childParent++) {
+        for (set<GCommitNode *>::iterator childParent = childNode->getParentGNodes()->begin(); childParent != childNode->getParentGNodes()->end(); childParent++) {
             GCommitNode *childParentNode = *childParent;
             if (childParentNode->depth > this->depth) {
                 haveYoungerParents = true;
             }
         }
         if (!haveYoungerParents) {
-            closeChildren->push_back(childNode);
+            closeChildren->insert(childNode);
         }
     }
     return closeChildren;
@@ -135,3 +178,6 @@ int GCommitNode::getXEnd() { return xEnd; }
 void GCommitNode::setXEnd(int value) { xEnd = value; }
 int GCommitNode::getXStart() { return xStart; }
 void GCommitNode::setXStart(int value) { xStart = value; }
+
+int GCommitNode::getChildRanking() const { return childRanking; }
+void GCommitNode::setChildRanking(int value) { childRanking = value; }

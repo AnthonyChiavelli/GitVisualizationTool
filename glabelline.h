@@ -2,8 +2,8 @@
 #define GLABELLINE_H
 
 #include <QGraphicsItem>
-#include <QGraphicsLineItem>
-#include <QPainter>
+
+class QPainter;
 
 class GLabelLine : public QObject, public QGraphicsItem {
     Q_OBJECT

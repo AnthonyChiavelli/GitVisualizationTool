@@ -1,3 +1,4 @@
+#include "gcommitnode.h"
 #include "gcommitarrow.h"
 #include <math.h>
 
@@ -49,6 +50,10 @@ void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
         qreal sourceLeftPoint = min(max(destinationRect.top() + (destinationRect.height() / 2), sourceRect.top()), sourceRect.bottom());
         sourcePoint = QPointF(sourceRect.left(), sourceLeftPoint);
         destinationPoint = QPointF(destinationRect.right(), destinationRect.top() + (destinationRect.height() / 2));
+    }
+    // If they are overlapping, nothing to do
+    else {
+        return;
     }
 
 
