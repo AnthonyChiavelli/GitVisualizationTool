@@ -6,11 +6,12 @@
 #include <fstream>
 #include <QDateTime>
 #include <QDir>
+#include <QFileSystemWatcher>
 #include <QString>
 #include <QStringList>
 #include <QStringListIterator>
 
-#define PATH_TO_REFS "/.git/refs/heads/"
+#define PATH_TO_BRANCHES "/.git/refs/heads/"
 #define PATH_TO_OBJECTS "/.git/objects/"
 #define SKIP_HIDDEN_FOLDERS 2
 // git object line formats (for parsing)
@@ -25,17 +26,34 @@ QString parseEmail(QString const &token);
 
 static string absPathToGitFolder;
 static CommitNode *rootCommit;
+static QFileSystemWatcher repoWatcher;
 
-CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
+CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder, GGraphicsScene &canvas) {
     QStringList branchNames;
     vector<Branch *> branches;
-    absPathToGitFolder = pathToGitFolder;
+
+    // Watch the repository for any changes, signaling the canvas to refresh when necessary
+    if (absPathToGitFolder != "") {
+        if (absPathToGitFolder != pathToGitFolder) {
+            repoWatcher.removePath(QString((absPathToGitFolder + PATH_TO_BRANCHES).c_str()));
+            repoWatcher.removePath(QString((absPathToGitFolder + PATH_TO_OBJECTS).c_str()));
+            repoWatcher.addPath(QString((absPathToGitFolder + PATH_TO_BRANCHES).c_str()));
+            repoWatcher.addPath(QString((absPathToGitFolder + PATH_TO_OBJECTS).c_str()));
+            repoWatcher.connect(&repoWatcher, SIGNAL(directoryChanged(QString)), &canvas, SLOT(notifyRepoChange()));
+        }
+    }
+    else {
+        absPathToGitFolder = pathToGitFolder;
+        repoWatcher.addPath(QString((absPathToGitFolder + PATH_TO_BRANCHES).c_str()));
+        repoWatcher.addPath(QString((absPathToGitFolder + PATH_TO_OBJECTS).c_str()));
+        repoWatcher.connect(&repoWatcher, SIGNAL(directoryChanged(QString)), &canvas, SLOT(notifyRepoChange()));
+    }
 
     // Create hashmap for storing a record of all commits encountered (to prevent duplication)
     QHash<QString, CommitNode *> *commits = new QHash<QString, CommitNode *>();
 
     // Get a list of all the local branches
-    QDir branchDirectory((pathToGitFolder + PATH_TO_REFS).c_str());
+    QDir branchDirectory((pathToGitFolder + PATH_TO_BRANCHES).c_str());
     branchNames = branchDirectory.entryList();
     for(int i = SKIP_HIDDEN_FOLDERS; i < branchNames.length(); i++) {
         branches.push_back(getBranch(pathToGitFolder, branchNames.at(i).toStdString()));
@@ -48,7 +66,7 @@ CommitNode* LocalRepoParser::getGitTree(string const &pathToGitFolder) {
     }
 
     // TODO: Clean up memory
-    delete commits;
+//    delete commits;
 
     return rootCommit;
 }
@@ -58,11 +76,11 @@ Branch* LocalRepoParser::getBranch(string const &pathToGitFolder, string const &
     string branchFileContents;
 
     // Get the branch file contents
-    string const& filePathToBranch(pathToGitFolder + PATH_TO_REFS + branchName);
+    string const& filePathToBranch(pathToGitFolder + PATH_TO_BRANCHES + branchName);
     ifstream in(filePathToBranch.c_str(), ios::binary);
     getline(in, branchFileContents);
     cout << "Branch name: " << branchName;
-    cout << ", Branch file contents (commit SHA): " << branchFileContents << endl;
+    cout << ", Branch file contents (commit SHA)" << branchFileContents << endl;
 
     // Create a branch with the contents of the branch file
     Branch *branch = new Branch();
@@ -78,7 +96,7 @@ QList<Branch *> LocalRepoParser::getBranches( string const &pathToGitFolder)
     QStringList branchNames;
     QList<Branch *> branches;
 
-    QDir branchDirectory((pathToGitFolder + PATH_TO_REFS).c_str());
+    QDir branchDirectory((pathToGitFolder + PATH_TO_BRANCHES).c_str());
     branchNames = branchDirectory.entryList();
     for(int i = SKIP_HIDDEN_FOLDERS; i < branchNames.length(); i++) {
         branches.push_back(getBranch(pathToGitFolder, branchNames.at(i).toStdString()));
