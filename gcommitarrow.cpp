@@ -50,6 +50,10 @@ void GCommitArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
         sourcePoint = QPointF(sourceRect.left(), sourceLeftPoint);
         destinationPoint = QPointF(destinationRect.right(), destinationRect.top() + (destinationRect.height() / 2));
     }
+    // If they are overlapping, nothing to do
+    else {
+        return;
+    }
 
 
     // Set up pen
