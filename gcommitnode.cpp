@@ -117,6 +117,7 @@ void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     QGraphicsItem::mousePressEvent(event);
 
     // On right click, make a new branch
+    /*
     if (event->button() == Qt::RightButton) {
         // Launch new branch dialog
         GitBranchDialog *newBranchDialog = new GitBranchDialog();
@@ -128,6 +129,7 @@ void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             (GGraphicsScene(scene())).refreshRepo();
         }
     }
+    */
 }
 
 

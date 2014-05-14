@@ -82,7 +82,7 @@ void MainWindow::on_actionGitCommit_triggered()
 void MainWindow::on_actionGitBranch_triggered()
 {
   GitBranchDialog GBdialog;
-  GBdialog.repoPath = this->repoPath;
+  GBdialog.path = this->repoPath;
   GBdialog.setModal(true);
   GBdialog.exec();
 }
@@ -112,6 +112,7 @@ void MainWindow::on_actionGitCheckout_triggered()
 {
   GitCheckoutDialog GCdialog;
   GCdialog.path = this->repoPath;
+  GCdialog.assembleSelector();
   GCdialog.setModal(true);
   GCdialog.exec();
 }

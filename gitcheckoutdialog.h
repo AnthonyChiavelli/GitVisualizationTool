@@ -15,6 +15,7 @@ class GitCheckoutDialog : public QDialog
     explicit GitCheckoutDialog(QWidget *parent = 0);
     ~GitCheckoutDialog();
     QString* path;
+    void assembleSelector();
     
   private slots:
     void on_checkoutButton_clicked();
