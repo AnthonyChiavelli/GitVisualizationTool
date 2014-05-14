@@ -1,7 +1,8 @@
-/*#ifndef GITERRORDIALOG_H
+#ifndef GITERRORDIALOG_H
 #define GITERRORDIALOG_H
 
 #include <QDialog>
+#include <QString>
 
 namespace Ui {
   class GitErrorDialog;
@@ -10,13 +11,17 @@ namespace Ui {
 class GitErrorDialog : public QDialog
 {
     Q_OBJECT
-
-public:
+    
+  public:
     explicit GitErrorDialog(QWidget *parent = 0);
     ~GitErrorDialog();
+    void updateMessage(QString& message);
+    
+  private slots:
+    void on_okButton_clicked();
 
-private:
+  private:
     Ui::GitErrorDialog *ui;
 };
 
-#endif // GITERRORDIALOG_H */
+#endif // GITERRORDIALOG_H

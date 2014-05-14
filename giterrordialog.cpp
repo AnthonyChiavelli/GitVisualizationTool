@@ -1,15 +1,26 @@
-/*
 #include "giterrordialog.h"
+#include "ui_giterrordialog.h"
 
-Ui::GitErrorDialog::GitErrorDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::GitErrorDialog)
+GitErrorDialog::GitErrorDialog(QWidget *parent) :
+  QDialog(parent),
+  ui(new Ui::GitErrorDialog)
 {
-    ui->setupUi(this);
+  ui->setupUi(this);
 }
 
 GitErrorDialog::~GitErrorDialog()
 {
-    delete ui;
+  delete ui;
 }
-*/
+
+void GitErrorDialog::updateMessage(QString& message)
+{
+  ui->errorLabel->setText(message);
+  this->adjustSize();
+
+}
+
+void GitErrorDialog::on_okButton_clicked()
+{
+  accept();
+}
