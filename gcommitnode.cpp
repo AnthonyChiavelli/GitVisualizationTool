@@ -37,7 +37,12 @@ void GCommitNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void GCommitNode::renderNodeRectangle(QPainter *painter) {
 
-    painter->setBrush(NODE_BG_COLOR);
+    if (this->isSelected()) {
+        painter->setBrush(NODE_BG_COLOR_SELECTED);
+    }
+    else {
+        painter->setBrush(NODE_BG_COLOR);
+    }
     QRect rect = QRect(0, 0, NODE_WIDTH, NODE_HEIGHT);
     painter->drawRoundedRect(rect, NODE_CORNER_RADIUS, NODE_CORNER_RADIUS);
 }
