@@ -41,9 +41,11 @@ void GitOpenRepoDialog::on_pushButton_clicked()
     QDir dir(testPath);
 
     if(!dir.exists()){
-/*        GitErrorDialog ErrorBox;
+        /*
+        GitErrorDialog ErrorBox;
         ErrorBox.setModal(true);
-        ErrorBox.exec()*/;
+        ErrorBox.exec();
+        */
     }
     else{
         string pth = path.toStdString();

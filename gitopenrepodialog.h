@@ -26,7 +26,7 @@ private slots:
 
 
 private:
-    Ui::GitOpenRepoDialog *ui;
+    Ui::GitOpenRepoDialog* ui;
     QFileSystemModel* treeModel;
 };
 
