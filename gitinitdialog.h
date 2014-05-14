@@ -15,6 +15,7 @@ class GitInitDialog : public QDialog
 public:
     explicit GitInitDialog(QWidget *parent = 0);
     ~GitInitDialog();
+    QString* path;
 
   private slots:
 
@@ -28,7 +29,7 @@ public:
 
 private:
     Ui::GitInitDialog *ui;
-    QFileSystemModel* directoyTree;
+    QFileSystemModel* treeModel;
 
 };
 

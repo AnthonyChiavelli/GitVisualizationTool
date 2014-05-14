@@ -15,6 +15,7 @@ class GitAddDialog : public QDialog
 public:
     explicit GitAddDialog(QWidget *parent = 0);
     ~GitAddDialog();
+    QString* path;
     QStringList filenames;
 
   private slots:

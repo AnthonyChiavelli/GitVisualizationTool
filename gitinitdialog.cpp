@@ -15,11 +15,15 @@ GitInitDialog::GitInitDialog(QWidget *parent) :
     ui->setupUi(this);
 
     QString rootPath = "/home";
-    directoyTree = new QFileSystemModel(this);
-    directoyTree->setRootPath(rootPath);
-    directoyTree->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
-    ui->treeView->setModel(directoyTree);
-
+    treeModel = new QFileSystemModel(this);
+    treeModel->setRootPath(rootPath);
+    treeModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    ui->treeView->setModel(treeModel);
+    ui->treeView->setRootIndex(treeModel->index(rootPath));
+    ui->treeView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->treeView->hideColumn(1);
+    ui->treeView->hideColumn(2);
+    ui->treeView->hideColumn(3);
 }
 
 GitInitDialog::~GitInitDialog()
@@ -29,10 +33,12 @@ GitInitDialog::~GitInitDialog()
 
 void GitInitDialog::on_initButton_clicked()
 {
+
   string path = ui->path->text().toStdString();
   if(path.empty())
     return;
   GitAPIResponse response = GitApi::gitInit(path);
+  /**(this->path) = QString::fromStdString(path);*/
   accept();
 }
 
@@ -48,6 +54,6 @@ void GitInitDialog::on_treeView_activated(const QModelIndex &index)
 
 void GitInitDialog::on_treeView_clicked(const QModelIndex &index)
 {
-    QString path = directoyTree->fileInfo(index).absoluteFilePath();
+    QString path = treeModel->fileInfo(index).canonicalFilePath();
     ui->path->setText(path);
 }

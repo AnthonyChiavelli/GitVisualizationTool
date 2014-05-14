@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::gitOpenRepoDialog *ui;
-    QFileSystemModel* directoryTree;
+    QFileSystemModel* treeModel;
 };
 
 #endif // GITOPENREPODIALOG_H

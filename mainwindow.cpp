@@ -58,6 +58,7 @@ void MainWindow::on_actionGitMerge_triggered()
 void MainWindow::on_actionGitAdd_triggered()
 {
   GitAddDialog GAdialog;
+  GAdialog.path = this->repoPath;
   GAdialog.setModal(true);
   GAdialog.exec();
 }
@@ -81,7 +82,6 @@ void MainWindow::on_actionGitBranch_triggered()
   GBdialog.repoPath = this->repoPath;
   GBdialog.setModal(true);
   GBdialog.exec();
-  this->repoPath = GBdialog.repoPath;
 }
 
 void MainWindow::on_actionGitRevert_triggered()
