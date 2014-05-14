@@ -2,6 +2,7 @@
 #define GITCHECKOUTDIALOG_H
 
 #include <QDialog>
+#include "branch.h"
 
 namespace Ui {
   class GitCheckoutDialog;
@@ -15,6 +16,7 @@ class GitCheckoutDialog : public QDialog
     explicit GitCheckoutDialog(QWidget *parent = 0);
     ~GitCheckoutDialog();
     QString* path;
+    QList<Branch *>* branches;
     void assembleSelector();
     
   private slots:
