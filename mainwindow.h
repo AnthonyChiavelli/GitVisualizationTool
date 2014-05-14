@@ -19,6 +19,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void updateInfoWindow(GCommitNode *selectedNode);
+
+
 private slots:
     void on_actionGitInit_triggered();
 
@@ -70,7 +73,6 @@ private slots:
 
     void on_actionOpenRepo_triggered();
 
-    void updateInfoWindow(GCommitNode *selectedNode);
 
   signals:
 
