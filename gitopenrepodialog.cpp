@@ -7,7 +7,7 @@
 
 GitOpenRepoDialog::GitOpenRepoDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::gitOpenRepoDialog)
+    ui(new Ui::GitOpenRepoDialog)
 {
     ui->setupUi(this);
 
