@@ -4,19 +4,19 @@
 #include <QDialog>
 
 namespace Ui {
-class gitErrorDialog;
+class GitErrorDialog;
 }
 
-class gitErrorDialog : public QDialog
+class GitErrorDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit gitErrorDialog(QWidget *parent = 0);
-    ~gitErrorDialog();
+    explicit GitErrorDialog(QWidget *parent = 0);
+    ~GitErrorDialog();
 
 private:
-    Ui::gitErrorDialog *ui;
+    Ui::GitErrorDialog *ui;
 };
 
 #endif // GITERRORDIALOG_H

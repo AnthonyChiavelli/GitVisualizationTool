@@ -43,6 +43,7 @@ MainWindow::~MainWindow() {
 void MainWindow::on_actionGitInit_triggered()
 {
     GitInitDialog GIdialog;
+    GIdialog.path = this->repoPath;
     GIdialog.setModal(true);
     GIdialog.exec();
 }
@@ -58,6 +59,7 @@ void MainWindow::on_actionGitMerge_triggered()
 void MainWindow::on_actionGitAdd_triggered()
 {
   GitAddDialog GAdialog;
+  GAdialog.path = this->repoPath;
   GAdialog.setModal(true);
   GAdialog.exec();
 }
@@ -111,7 +113,7 @@ void MainWindow::on_actionRefresh_triggered()
 
 void MainWindow::on_actionOpenRepo_triggered()
 {
-    gitOpenRepoDialog OpenRepo;
+    GitOpenRepoDialog OpenRepo;
     OpenRepo.scene = this->scene;
     OpenRepo.path = this->repoPath;
     OpenRepo.setModal(true);

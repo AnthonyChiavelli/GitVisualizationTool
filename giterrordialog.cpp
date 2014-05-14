@@ -1,14 +1,14 @@
 #include "giterrordialog.h"
 #include "ui_giterrordialog.h"
 
-gitErrorDialog::gitErrorDialog(QWidget *parent) :
+GitErrorDialog::GitErrorDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::gitErrorDialog)
+    ui(new Ui::GitErrorDialog)
 {
     ui->setupUi(this);
 }
 
-gitErrorDialog::~gitErrorDialog()
+GitErrorDialog::~GitErrorDialog()
 {
     delete ui;
 }

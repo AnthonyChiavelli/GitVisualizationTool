@@ -3,26 +3,32 @@
 #include "gitapi.h"
 #include "giterrordialog.h"
 #include "ggraphicsscene.h"
+#include "mainwindow.h"
 
-gitOpenRepoDialog::gitOpenRepoDialog(QWidget *parent) :
+GitOpenRepoDialog::GitOpenRepoDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::gitOpenRepoDialog)
 {
     ui->setupUi(this);
 
     QString rootPath = "/home";
-    directoryTree = new QFileSystemModel(this);
-    directoryTree->setRootPath(rootPath);
-    directoryTree->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
-    ui->treeView->setModel(directoryTree);
+    treeModel = new QFileSystemModel(this);
+    treeModel->setRootPath(rootPath);
+    treeModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    ui->treeView->setModel(treeModel);
+    ui->treeView->setRootIndex(treeModel->index(rootPath));
+    ui->treeView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->treeView->hideColumn(1);
+    ui->treeView->hideColumn(2);
+    ui->treeView->hideColumn(3);
 }
 
-gitOpenRepoDialog::~gitOpenRepoDialog()
+GitOpenRepoDialog::~GitOpenRepoDialog()
 {
     delete ui;
 }
 
-void gitOpenRepoDialog::on_pushButton_clicked()
+void GitOpenRepoDialog::on_pushButton_clicked()
 {
     QString path = ui->lineEdit->text();
 
@@ -35,7 +41,7 @@ void gitOpenRepoDialog::on_pushButton_clicked()
     QDir dir(testPath);
 
     if(!dir.exists()){
-        gitErrorDialog ErrorBox;
+        GitErrorDialog ErrorBox;
         ErrorBox.setModal(true);
         ErrorBox.exec();
     }
@@ -48,8 +54,8 @@ void gitOpenRepoDialog::on_pushButton_clicked()
     accept();
 }
 
-void gitOpenRepoDialog::on_treeView_clicked(const QModelIndex &index)
+void GitOpenRepoDialog::on_treeView_clicked(const QModelIndex &index)
 {
-    QString path = directoryTree->fileInfo(index).absoluteFilePath();
+    QString path = treeModel->fileInfo(index).absoluteFilePath();
     ui->lineEdit->setText(path);
 }
