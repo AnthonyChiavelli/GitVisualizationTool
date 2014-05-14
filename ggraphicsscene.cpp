@@ -157,6 +157,8 @@ void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
 void GGraphicsScene::renderRepository(string repoPath) {
 
+    this->clear();
+
     this->currentRepoPath = repoPath;
 
     this->allGCommitNodes = new map<string, GCommitNode *>();
