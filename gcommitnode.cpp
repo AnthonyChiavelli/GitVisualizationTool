@@ -116,7 +116,8 @@ void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     // On left click, show information in side bar
     if (event->button() == Qt::LeftButton) {
 //        MainWindow *window = (MainWindow *) QCoreApplication::instance();
-        MainWindow *window = qobject_cast<MainWindow *>(QCoreApplication::instance());
+        MainWindow *window = qobject_cast<MainWindow *>(qApp->activeWindow());
+
         window->updateInfoWindow(this);
     }
 
