@@ -18,7 +18,8 @@ GitBranchDialog::~GitBranchDialog()
 
 void GitBranchDialog::on_branchButton_clicked()
 {
-  string repoPath = this->path->toStdString();
+  QString path = *(this->repoPath);
+  string repoPath = path.toStdString();
   string name = ui->branch->text().toStdString();
   GitAPIResponse response = GitApi::gitBranch(repoPath, name);
   accept();

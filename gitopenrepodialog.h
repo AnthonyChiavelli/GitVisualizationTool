@@ -7,7 +7,7 @@
 class GGraphicsScene;
 
 namespace Ui {
-class GitOpenRepoDialog;
+class gitOpenRepoDialog;
 }
 
 class GitOpenRepoDialog : public QDialog
@@ -26,7 +26,7 @@ private slots:
 
 
 private:
-    Ui::GitOpenRepoDialog *ui;
+    Ui::gitOpenRepoDialog *ui;
     QFileSystemModel* treeModel;
 };
 
