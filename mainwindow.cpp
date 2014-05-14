@@ -211,7 +211,7 @@ void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 
 // GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
 // ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
-
+adfasdfadfa
 
  ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("hh:mm:ss.zzz"));
 
