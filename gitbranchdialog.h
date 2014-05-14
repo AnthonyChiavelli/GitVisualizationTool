@@ -13,7 +13,7 @@ class GitBranchDialog : public QDialog
     
   public:
     explicit GitBranchDialog(QWidget *parent = 0);
-    QString* repoPath;
+    QString* path;
     ~GitBranchDialog();
     
   private slots:
