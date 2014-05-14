@@ -56,6 +56,8 @@ void MainWindow::on_actionGitInit_triggered()
 void MainWindow::on_actionGitMerge_triggered()
 {
   GitMergeDialog GMdialog;
+  GMdialog.path = this->repoPath;
+  GMdialog.assembleSelector();
   GMdialog.setModal(true);
   GMdialog.exec();
 }

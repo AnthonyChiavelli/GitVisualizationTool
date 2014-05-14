@@ -2,6 +2,7 @@
 #define GITMERGEDIALOG_H
 
 #include <QDialog>
+#include "branch.h"
 
 namespace Ui {
   class GitMergeDialog;
@@ -14,6 +15,9 @@ class GitMergeDialog : public QDialog
   public:
     explicit GitMergeDialog(QWidget *parent = 0);
     ~GitMergeDialog();
+    QString* path;
+    QList<Branch *>* branches;
+    void assembleSelector();
     
   private slots:
     void on_mergeButton_clicked();

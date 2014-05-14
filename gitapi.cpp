@@ -84,7 +84,7 @@ static GitAPIResponse executeGitCommand(string& command);
 //        return response;
 //    }
 
-    GitAPIResponse GitApi::gitMerge(string& repoPath, Branch targetBranch, string& message){
+    GitAPIResponse GitApi::gitMerge(string& repoPath, Branch& targetBranch, string& message){
         string branchName = targetBranch.getName();
         string command = "cd " + repoPath + ";git merge " + branchName + " -m " + message + ";echo $?";
 
