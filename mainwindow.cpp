@@ -214,7 +214,7 @@ void MainWindow::on_UpdateButton_clicked()
 }
 
 void MainWindow::infoWindowInit()
-/* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
+/* This function populates the infowindow with placeholder data upon opening*/
 {
 
  ui->ProjectLineEdit->setPlaceholderText("some project");
