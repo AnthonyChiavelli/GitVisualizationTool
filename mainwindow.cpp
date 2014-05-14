@@ -4,6 +4,7 @@
 #include "gitinitdialog.h"
 #include "gitadddialog.h"
 #include "gitcommitdialog.h"
+#include "gitcheckoutdialog.h"
 #include "gitopenrepodialog.h"
 #include "gitmergedialog.h"
 #include "gitrevertdialog.h"
@@ -107,6 +108,14 @@ void MainWindow::on_actionGitPull_triggered()
   GitPullDialog GPdialog;
   GPdialog.setModal(true);
   GPdialog.exec();
+}
+
+void MainWindow::on_actionGitCheckout_triggered()
+{
+  GitCheckoutDialog GCdialog;
+  GCdialog.path = this->repoPath;
+  GCdialog.setModal(true);
+  GCdialog.exec();
 }
 
 void MainWindow::on_actionRefresh_triggered()

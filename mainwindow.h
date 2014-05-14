@@ -74,6 +74,8 @@ private slots:
     void on_actionOpenRepo_triggered();
 
 
+    void on_actionGitCheckout_triggered();
+
   signals:
 
     void refreshCanvas();
