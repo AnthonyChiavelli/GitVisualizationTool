@@ -7,6 +7,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QDialog>
+#include <iostream>
 
 GitInitDialog::GitInitDialog(QWidget *parent) :
     QDialog(parent),
@@ -38,7 +39,7 @@ void GitInitDialog::on_initButton_clicked()
   if(path.empty())
     return;
   GitAPIResponse response = GitApi::gitInit(path);
-  /**(this->path) = QString::fromStdString(path);*/
+  // *(this->path) = QString::fromStdString(path); //only use if fileupdater works
   accept();
 }
 
@@ -54,6 +55,6 @@ void GitInitDialog::on_treeView_activated(const QModelIndex &index)
 
 void GitInitDialog::on_treeView_clicked(const QModelIndex &index)
 {
-    QString path = treeModel->fileInfo(index).canonicalFilePath();
+    QString path = QDir::toNativeSeparators(treeModel->fileInfo(index).canonicalFilePath());
     ui->path->setText(path);
 }

@@ -43,6 +43,7 @@ MainWindow::~MainWindow() {
 void MainWindow::on_actionGitInit_triggered()
 {
     GitInitDialog GIdialog;
+    GIdialog.path = this->repoPath;
     GIdialog.setModal(true);
     GIdialog.exec();
 }
