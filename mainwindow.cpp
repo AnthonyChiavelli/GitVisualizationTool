@@ -81,6 +81,7 @@ void MainWindow::on_actionGitBranch_triggered()
   GBdialog.repoPath = this->repoPath;
   GBdialog.setModal(true);
   GBdialog.exec();
+  this->repoPath = GBdialog.repoPath;
 }
 
 void MainWindow::on_actionGitRevert_triggered()
@@ -111,7 +112,7 @@ void MainWindow::on_actionRefresh_triggered()
 
 void MainWindow::on_actionOpenRepo_triggered()
 {
-    gitOpenRepoDialog OpenRepo;
+    GitOpenRepoDialog OpenRepo;
     OpenRepo.scene = this->scene;
     OpenRepo.path = this->repoPath;
     OpenRepo.setModal(true);

@@ -10,15 +10,15 @@ namespace Ui {
 class gitOpenRepoDialog;
 }
 
-class gitOpenRepoDialog : public QDialog
+class GitOpenRepoDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit gitOpenRepoDialog(QWidget *parent = 0);
+    explicit GitOpenRepoDialog(QWidget *parent = 0);
     GGraphicsScene* scene;
     QString *path;
-    ~gitOpenRepoDialog();
+    ~GitOpenRepoDialog();
 
 private slots:
     void on_pushButton_clicked();

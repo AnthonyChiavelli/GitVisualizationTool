@@ -4,7 +4,7 @@
 #include "giterrordialog.h"
 #include "ggraphicsscene.h"
 
-gitOpenRepoDialog::gitOpenRepoDialog(QWidget *parent) :
+GitOpenRepoDialog::GitOpenRepoDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::gitOpenRepoDialog)
 {
@@ -17,12 +17,12 @@ gitOpenRepoDialog::gitOpenRepoDialog(QWidget *parent) :
     ui->treeView->setModel(directoryTree);
 }
 
-gitOpenRepoDialog::~gitOpenRepoDialog()
+GitOpenRepoDialog::~GitOpenRepoDialog()
 {
     delete ui;
 }
 
-void gitOpenRepoDialog::on_pushButton_clicked()
+void GitOpenRepoDialog::on_pushButton_clicked()
 {
     QString path = ui->lineEdit->text();
 
@@ -48,7 +48,7 @@ void gitOpenRepoDialog::on_pushButton_clicked()
     accept();
 }
 
-void gitOpenRepoDialog::on_treeView_clicked(const QModelIndex &index)
+void GitOpenRepoDialog::on_treeView_clicked(const QModelIndex &index)
 {
     QString path = directoryTree->fileInfo(index).absoluteFilePath();
     ui->lineEdit->setText(path);
