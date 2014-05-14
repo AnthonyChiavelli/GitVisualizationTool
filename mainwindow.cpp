@@ -218,7 +218,7 @@ void MainWindow::infoWindowInit()
 /* This function populates the infowindow with placeholder data upon opening*/
 {
 
- ui->ProjectLineEdit->setPlaceholderText("some project");
+ /*ui->ProjectLineEdit->setPlaceholderText("some project");
 
  ui->BranchLineEdit->setPlaceholderText("some branch");
 
@@ -234,7 +234,7 @@ void MainWindow::infoWindowInit()
 
  ui->DateLineEdit->setPlaceholderText("Date");
 
- ui->AuthorLineEdit->setPlaceholderText("Author");
+ ui->AuthorLineEdit->setPlaceholderText("Author");*/
 
 }
 
