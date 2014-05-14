@@ -97,6 +97,16 @@ QVariant GCommitNode::itemChange(GraphicsItemChange change, const QVariant &valu
             branchLabel->setPos(branchLabel->pos().x() + deltaX, branchLabel->pos().y() + deltaY);
         }
     }
+    // If selection state changes
+    else if (change == ItemSelectedChange) {
+        // Grab reference to main window
+        MainWindow *window = qobject_cast<MainWindow *>(qApp->activeWindow());
+        // Show info if we're selected
+        if (value.toBool() == true) {
+            window->updateInfoWindow(this);
+        }
+    }
+
 
     // Pass along event
     return QGraphicsItem::itemChange(change, value);
@@ -118,14 +128,6 @@ void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             (GGraphicsScene(scene())).refreshRepo();
         }
     }
-    // On left click, show information in side bar
-    if (event->button() == Qt::LeftButton) {
-//        MainWindow *window = (MainWindow *) QCoreApplication::instance();
-        MainWindow *window = qobject_cast<MainWindow *>(qApp->activeWindow());
-
-        window->updateInfoWindow(this);
-    }
-
 }
 
 

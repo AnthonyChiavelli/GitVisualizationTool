@@ -13,6 +13,7 @@
 #include "gcommitarrow.h"
 #include "localrepoparser.h"
 #include "logger.h"
+#include "mainwindow.h"
 #include "gbranchlabel.h"
 #include "glabelline.h"
 #include "gcommitnode.h"
@@ -125,6 +126,8 @@ void GGraphicsScene::renderPhase(GCommitNode *node) {
     this->update();
 
 }
+
+
 
 void GGraphicsScene::renderNode(GCommitNode *node, int startX, int endX) {
 
