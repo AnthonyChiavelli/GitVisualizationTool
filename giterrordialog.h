@@ -1,22 +1,27 @@
-//#ifndef GITERRORDIALOG_H
-//#define GITERRORDIALOG_H
+#ifndef GITERRORDIALOG_H
+#define GITERRORDIALOG_H
 
-//#include <QDialog>
+#include <QDialog>
+#include <QString>
 
-//namespace Ui {
-//class GitErrorDialog;
-//}
+namespace Ui {
+  class GitErrorDialog;
+}
 
-//class GitErrorDialog : public QDialog
-//{
-//    Q_OBJECT
+class GitErrorDialog : public QDialog
+{
+    Q_OBJECT
+    
+  public:
+    explicit GitErrorDialog(QWidget *parent = 0);
+    ~GitErrorDialog();
+    void updateMessage(QString& message);
+    
+  private slots:
+    void on_okButton_clicked();
 
-//public:
-//    explicit GitErrorDialog(QWidget *parent = 0);
-//    ~GitErrorDialog();
+  private:
+    Ui::GitErrorDialog *ui;
+};
 
-//private:
-//    Ui::GitErrorDialog *ui;
-//};
-
-//#endif // GITERRORDIALOG_H
+#endif // GITERRORDIALOG_H

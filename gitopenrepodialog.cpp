@@ -4,6 +4,7 @@
 #include "giterrordialog.h"
 #include "ggraphicsscene.h"
 #include "mainwindow.h"
+#include <iostream>
 
 GitOpenRepoDialog::GitOpenRepoDialog(QWidget *parent) :
     QDialog(parent),
@@ -41,9 +42,13 @@ void GitOpenRepoDialog::on_pushButton_clicked()
     QDir dir(testPath);
 
     if(!dir.exists()){
-/*        GitErrorDialog ErrorBox;
-        ErrorBox.setModal(true);
-        ErrorBox.exec()*/;
+      QString message = QString::fromStdString("The directory " + path.toStdString() +
+                                               " does not contain a repository");
+      std::cout << message.toStdString() << std::endl;
+      GitErrorDialog ErrorBox;
+      ErrorBox.setModal(true);
+      ErrorBox.updateMessage(message);
+      ErrorBox.exec();
     }
     else{
         string pth = path.toStdString();
