@@ -113,7 +113,7 @@ static GitAPIResponse executeGitCommand(string& command);
         return branches;
     }
 
-    // not implemented yet
+// not implemented yet
 //    GitAPIResponse GitApi::gitMergeMultipleBranches(string& repoPath, vector<Branch> targetBranchs, string& message){
 //        string test = "test";
 //        GitAPIResponse response (false, test);

@@ -30,7 +30,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // TODO: Update SLOT!
     connect(this, SIGNAL(refreshCanvas()), scene, SLOT(notifyRepoChange()));
 
-
+    //populates InfoWindow fields with placeholder text
+    infoWindowInit();
 }
 
 MainWindow::~MainWindow() {
@@ -227,19 +228,21 @@ void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 /* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
 {
 
- ui->ProjectLineEdit->setText("some project");
+  ui->ProjectLineEdit->setText("some project");
 
- ui->BranchLineEdit->setText("some branch");
+ //GitAPIResponse response = GitApi::gitBranches(this->repoPath->toStdString());
 
- //ui->CommitMessageEditor->setText(selectedNode->getMessage());
+ //ui->BranchLineEdit->setText(response.getMessage());
 
-// GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
-// ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
+ //ui->commitMessageTxt->setText(selectedNode->getMessage());
+
+ // GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
+ // ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
 
 
- ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("hh:mm:ss.zzz"));
+ ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("h:m ap"));
 
- ui->DateLineEdit->setText(selectedNode->getDateAndTime().toString("hh:mm:ss.zzz"));
+ ui->DateLineEdit->setText(selectedNode->getDateAndTime().toString("ddd MMMM d yyyy"));
 
  ui->AuthorLineEdit->setText(selectedNode->getAuthor().getName());
 
