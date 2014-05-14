@@ -15,7 +15,6 @@ gitOpenRepoDialog::gitOpenRepoDialog(QWidget *parent) :
     directoryTree->setRootPath(rootPath);
     directoryTree->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     ui->treeView->setModel(directoryTree);
-
 }
 
 gitOpenRepoDialog::~gitOpenRepoDialog()
