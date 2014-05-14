@@ -1,4 +1,5 @@
 #include <QColor>
+#include <QCoreApplication>
 #include <QGraphicsView>
 #include <QGraphicsSceneMouseEvent>
 
@@ -8,6 +9,7 @@
 #include "gitbranchdialog.h"
 #include "sha1.h"
 #include "logger.h"
+#include "mainwindow.h"
 
 GCommitNode::GCommitNode(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
@@ -110,6 +112,13 @@ void GCommitNode::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             // Refresh everything in the scene
             (GGraphicsScene(scene())).refreshRepo();
         }
+    }
+    // On left click, show information in side bar
+    if (event->button() == Qt::LeftButton) {
+//        MainWindow *window = (MainWindow *) QCoreApplication::instance();
+        MainWindow *window = qobject_cast<MainWindow *>(qApp->activeWindow());
+
+        window->updateInfoWindow(this);
     }
 
 }
