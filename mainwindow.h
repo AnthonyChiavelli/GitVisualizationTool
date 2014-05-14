@@ -22,6 +22,7 @@ public:
     void updateInfoWindow(GCommitNode *selectedNode);
 
 
+    void infoWindowInit();
 private slots:
     void on_actionGitInit_triggered();
 

@@ -201,6 +201,28 @@ void MainWindow::on_UpdateButton_clicked()
   //GitApi::modifyCommit(newMessage); //or something like this
 }
 
+void MainWindow::infoWindowInit()
+/* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
+{
+
+ ui->ProjectLineEdit->setPlaceholderText("some project");
+
+ ui->BranchLineEdit->setPlaceholderText("some branch");
+
+ //ui->CommitMessageEditor->setText(selectedNode->getMessage());
+
+// GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
+// ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
+
+
+ ui->TimeLineEdit->setPlaceholderText("Time");
+
+ ui->DateLineEdit->setPlaceholderText("Date");
+
+ ui->AuthorLineEdit->setPlaceholderText("Author");
+
+}
+
 void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 /* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
 {
