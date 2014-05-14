@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>gitOpenRepoDialog</class>
- <widget class="QDialog" name="gitOpenRepoDialog">
+ <class>GitOpenRepoDialog</class>
+ <widget class="QDialog" name="GitOpenRepoDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>5</x>
@@ -83,7 +83,7 @@
   <connection>
    <sender>pushButton</sender>
    <signal>clicked()</signal>
-   <receiver>gitOpenRepoDialog</receiver>
+   <receiver>GitOpenRepoDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -99,7 +99,7 @@
   <connection>
    <sender>pushButton_2</sender>
    <signal>clicked()</signal>
-   <receiver>gitOpenRepoDialog</receiver>
+   <receiver>GitOpenRepoDialog</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
