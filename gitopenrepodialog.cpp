@@ -24,7 +24,8 @@ gitOpenRepoDialog::~gitOpenRepoDialog()
 
 void gitOpenRepoDialog::on_pushButton_clicked()
 {
-    QString path = ui->path->text();
+    QString path = ui->lineEdit->text();
+
 
     if(path.toStdString().empty())
       return;
@@ -50,5 +51,5 @@ void gitOpenRepoDialog::on_pushButton_clicked()
 void gitOpenRepoDialog::on_treeView_clicked(const QModelIndex &index)
 {
     QString path = directoryTree->fileInfo(index).absoluteFilePath();
-    ui->path->setText(path);
+    ui->lineEdit->setText(path);
 }
