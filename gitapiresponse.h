@@ -11,7 +11,6 @@ class GitAPIResponse
 
     public:
         GitAPIResponse ( bool isError, std::string& message);
-
         void setError(bool& value);
         bool getError() const;
         std::string getMessage() const;

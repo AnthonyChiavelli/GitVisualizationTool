@@ -6,6 +6,7 @@
 #include <string>
 #include "localrepoparser.h"
 #include <iostream>
+#include "giterrordialog.h"
 
 GitMergeDialog::GitMergeDialog(QWidget *parent) :
   QDialog(parent),
@@ -26,7 +27,6 @@ void GitMergeDialog::assembleSelector()
     Branch next = *(branches->at(i));
     QString name = QString::fromStdString(next.getName());
     ui->branchSelector->addItem(name);
-    std::cout << "Branch: " << name.toStdString() << " Index: " << i << std::endl;
   }
   this->adjustSize();
 }
@@ -34,14 +34,20 @@ void GitMergeDialog::assembleSelector()
 void GitMergeDialog::on_mergeButton_clicked()
 {
   int selected = ui->branchSelector->currentIndex();
-  std::cout << "selected index" << selected << std::endl;
   string gitpath = path->toStdString();
-  std::cout << gitpath << std::endl;
   string name = branches->at(selected)->getName();
-  std::cout << "branch " << name << std::endl;
   string message = "Merging \"" + name + "\" into current branch.";
   GitAPIResponse response = GitApi::gitMergeByName(gitpath, name, message);
   //GitAPIResponse response = GitApi::gitMerge(gitpath, *(branches->at(selected)), message);
+
+  if(response.getError()){
+    QString message = QString::fromStdString(response.getMessage());
+    std::cout << message.toStdString() << std::endl;
+    GitErrorDialog ErrorBox;
+    ErrorBox.setModal(true);
+    ErrorBox.updateMessage(message);
+    ErrorBox.exec();
+  }
   accept();
 }
 

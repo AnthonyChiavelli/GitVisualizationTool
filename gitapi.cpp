@@ -36,7 +36,7 @@ static GitAPIResponse executeGitCommand(string& command);
 
     GitAPIResponse GitApi::gitCommit(string& repoPath, string& message){
 
-        string command = "cd " + repoPath + ";git commit -m " + "\"" + message + "\"" + ";echo $?";
+        string command = "cd " + repoPath + ";git commit -m \"" + message + "\";echo $?";
 
         return executeGitCommand(command);
     }
@@ -86,13 +86,13 @@ static GitAPIResponse executeGitCommand(string& command);
 
     GitAPIResponse GitApi::gitMerge(string& repoPath, Branch& targetBranch, string& message){
         string branchName = targetBranch.getName();
-        string command = "cd " + repoPath + ";git merge " + branchName + " -m " + message + ";echo $?";
+        string command = "cd " + repoPath + ";git merge " + branchName + " -m \"" + message + "\";echo $?";
 
         return executeGitCommand(command);
     }
 
     GitAPIResponse GitApi::gitMergeByName(string& repoPath, string& targetBranch, string& message){
-      string command = "cd " + repoPath + ";git merge " + targetBranch + " -m " + message + ";echo $?";
+      string command = "cd " + repoPath + ";git merge " + targetBranch + " -m \"" + message + "\";echo $?";
 
       return executeGitCommand(command);
     }

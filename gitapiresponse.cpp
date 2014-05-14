@@ -3,24 +3,22 @@
 using namespace std;
 
 
-    GitAPIResponse::GitAPIResponse (bool isError, string &message){
-        GitAPIResponse::isError = isError;
-        GitAPIResponse::message =  message;
-    }
+GitAPIResponse::GitAPIResponse (bool isError, string &message){
+  this->isError = isError;
+  this->message =  message;
+}
 
-    void GitAPIResponse::setError(bool& value){
-        GitAPIResponse::isError = value;
-    }
+void GitAPIResponse::setError(bool& value){
+  isError = value;
+}
 
-    bool GitAPIResponse::getError() const{
-        return GitAPIResponse::isError;
-    }
+bool GitAPIResponse::getError() const{
+  return isError;
+}
 
-    string GitAPIResponse::getMessage() const{
-       return GitAPIResponse::message;
-    }
-
-
+string GitAPIResponse::getMessage() const{
+  return message;
+}
 
 
 
