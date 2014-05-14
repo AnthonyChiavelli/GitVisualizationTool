@@ -16,6 +16,8 @@
 #include "ggraphicsscene.h"
 #include "gitapi.h"
 #include <string>
+#include "QTextEdit"
+#include "QString"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow) {
 
@@ -196,7 +198,7 @@ void MainWindow::on_actionBitBucket_triggered()
 void MainWindow::on_UpdateButton_clicked()
 {
     //changes latest commit message. All you, Nick; I don't know the appropriate git command for that
-  string newMessage = ui->commitMessageTxt->toPlainText().toStdString();
+  string newMessage = ui->commitMessageTextEdit->toPlainText().toStdString();
   if(newMessage.empty())
     return;
   //GitApi::modifyCommit(newMessage); //or something like this
@@ -210,7 +212,9 @@ void MainWindow::infoWindowInit()
 
  ui->BranchLineEdit->setPlaceholderText("some branch");
 
- //ui->CommitMessageEditor->setText(selectedNode->getMessage());
+ ui->PathTextEdit->setPlaceholderText("some path");
+
+ ui->commitMessageTextEdit->setText("Commit Info");
 
 // GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
 // ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
@@ -228,16 +232,20 @@ void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 /* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
 {
 
+
   ui->ProjectLineEdit->setText("some project");
 
- //GitAPIResponse response = GitApi::gitBranches(this->repoPath->toStdString());
+  ui->PathTextEdit->setText(*(this->repoPath));
 
- //ui->BranchLineEdit->setText(response.getMessage());
 
- //ui->commitMessageTxt->setText(selectedNode->getMessage());
+  // ui->BranchLineEdit->setText();
 
- // GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
- // ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
+
+  QString commitTxtMessage = QString::fromStdString(selectedNode->getMessage());
+
+  ui->commitMessageTextEdit->setText(commitTxtMessage);
+
+  // ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
 
 
  ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("h:m ap"));
