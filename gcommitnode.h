@@ -28,6 +28,7 @@ class GCommitArrow;
 
 #define NODE_TEXT_COLOR QColor(255,255,255)
 #define NODE_BG_COLOR QColor(99,102,133)
+#define NODE_BG_COLOR_SELECTED QColor(229,150,47)
 
 /*
  * Graphical node representing a commit
