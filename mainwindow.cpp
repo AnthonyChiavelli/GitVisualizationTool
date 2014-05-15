@@ -219,8 +219,8 @@ void MainWindow::on_UpdateButton_clicked()
 void MainWindow::infoWindowInit()
 /* This function populates the infowindow with placeholder data upon opening*/
 {
-
- /*ui->ProjectLineEdit->setPlaceholderText("some project");
+/*
+ ui->ProjectLineEdit->setPlaceholderText("some project");
 
  ui->BranchLineEdit->setPlaceholderText("some branch");
 
@@ -228,24 +228,23 @@ void MainWindow::infoWindowInit()
 
  ui->commitMessageTextEdit->setText("Commit Info");
 
-// GitAPIResponse response = GitApi::gitStatus("/home/nrosato/Development/GitVisualizationTool");
-// ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
-
 
  ui->TimeLineEdit->setPlaceholderText("Time");
 
  ui->DateLineEdit->setPlaceholderText("Date");
 
- ui->AuthorLineEdit->setPlaceholderText("Author");*/
-
+ ui->AuthorLineEdit->setPlaceholderText("Author");
+*/
 }
 
 void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 /* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
 {
+/*
 
+  QString projectName= repoPath->section('/', -1);
 
-  ui->ProjectLineEdit->setText("some project");
+  ui->ProjectLineEdit->setText(projectName);
 
   ui->PathTextEdit->setText(*(this->repoPath));
 
@@ -255,15 +254,12 @@ void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 
   QString commitTxtMessage = QString::fromStdString(selectedNode->getMessage());
 
-  ui->commitMessageTextEdit->setText(commitTxtMessage);
+     ui->commitMessageTextEdit->setText(commitTxtMessage);
 
-  // ui->GitStatusTextBrowser->setPlaceholderText(response.getMessage());
+     ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("h:m ap"));
 
+     ui->DateLineEdit->setText(selectedNode->getDateAndTime().toString("ddd MMMM d yyyy"));
 
- ui->TimeLineEdit->setText(selectedNode->getDateAndTime().toString("h:m ap"));
-
- ui->DateLineEdit->setText(selectedNode->getDateAndTime().toString("ddd MMMM d yyyy"));
-
- ui->AuthorLineEdit->setText(selectedNode->getAuthor().getName());
-
+     ui->AuthorLineEdit->setText(selectedNode->getAuthor().getName());
+*/
 }
