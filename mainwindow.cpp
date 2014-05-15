@@ -219,14 +219,14 @@ void MainWindow::on_UpdateButton_clicked()
 void MainWindow::infoWindowInit()
 /* This function populates the infowindow with placeholder data upon opening*/
 {
-/*
- ui->ProjectLineEdit->setPlaceholderText("some project");
 
- ui->BranchLineEdit->setPlaceholderText("some branch");
+ ui->ProjectLineEdit->setPlaceholderText("project");
 
- ui->PathTextEdit->setPlaceholderText("some path");
+ ui->BranchLineEdit->setPlaceholderText("branch");
 
- ui->commitMessageTextEdit->setText("Commit Info");
+ ui->PathTextEdit->setPlaceholderText("path");
+
+ ui->commitMessageTextEdit->setPlaceholderText("Commit Info");
 
 
  ui->TimeLineEdit->setPlaceholderText("Time");
@@ -234,13 +234,13 @@ void MainWindow::infoWindowInit()
  ui->DateLineEdit->setPlaceholderText("Date");
 
  ui->AuthorLineEdit->setPlaceholderText("Author");
-*/
+
 }
 
 void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
 /* This function takes in a pointer to the GCommitNode the user selected, extracts the info, and updates the UI*/
 {
-/*
+
 
   QString projectName= repoPath->section('/', -1);
 
@@ -261,5 +261,5 @@ void MainWindow::updateInfoWindow(GCommitNode *selectedNode)
      ui->DateLineEdit->setText(selectedNode->getDateAndTime().toString("ddd MMMM d yyyy"));
 
      ui->AuthorLineEdit->setText(selectedNode->getAuthor().getName());
-*/
+
 }
