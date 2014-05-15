@@ -104,6 +104,7 @@ static GitAPIResponse executeGitCommand(string& command);
         return executeGitCommand(command);
     }
 
+    /*
     QStringList GitApi::gitBranches(string& repoPath){
 
         string command = "cd " + repoPath + ";git branch;echo $?";
@@ -112,6 +113,7 @@ static GitAPIResponse executeGitCommand(string& command);
 
         return branches;
     }
+    */
 
 // not implemented yet
 //    GitAPIResponse GitApi::gitMergeMultipleBranches(string& repoPath, vector<Branch> targetBranchs, string& message){
