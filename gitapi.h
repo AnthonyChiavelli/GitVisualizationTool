@@ -15,7 +15,7 @@ namespace GitApi{
     //GitAPIResponse gitAdd(string& repoPath, vector<string> files);
     GitAPIResponse gitAdd_All(std::string& repoPath);
     GitAPIResponse gitBranch(std::string& repoPath, std::string newBranchName);
-    QStringList gitBranches(std::string& repoPath);
+    //QStringList gitBranches(std::string& repoPath);
     GitAPIResponse gitMerge(std::string& repoPath, Branch& targetBranch, std::string& message);
     GitAPIResponse gitMergeByName(std::string& repoPath, std::string& targetBranch, std::string& message);
     //GitAPIResponse gitMergeMultipleBranches(std::string& repoPath, std::vector<Branch> targetBranchs, std::string& message);
