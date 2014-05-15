@@ -2,6 +2,8 @@
 #define GITPUSHDIALOG_H
 
 #include <QDialog>
+#include "branch.h"
+#include "remote.h"
 
 namespace Ui {
   class GitPushDialog;
@@ -14,6 +16,10 @@ class GitPushDialog : public QDialog
   public:
     explicit GitPushDialog(QWidget *parent = 0);
     ~GitPushDialog();
+    QString* path;
+    QList<Branch *>* branches;
+    QList<Remote *>* remotes;
+    void assembleSelectors();
     
   private slots:
     void on_pushButton_clicked();

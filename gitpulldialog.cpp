@@ -1,5 +1,8 @@
 #include "gitpulldialog.h"
 #include "ui_gitpulldialog.h"
+#include "localrepoparser.h"
+#include "gitapi.h"
+#include "gitapiresponse.h"
 
 GitPullDialog::GitPullDialog(QWidget *parent) :
   QDialog(parent),
@@ -13,8 +16,25 @@ GitPullDialog::~GitPullDialog()
   delete ui;
 }
 
-void GitPullDialog::on_pullButton_clicked()
-{
+void GitPullDialog::assembleSelectors(){
+  /*
+  branches = new QList<Branch*>(LocalRepoParser::getBranches(path->toStdString()));
+  for(int i = 0; i < branches->size(); i++){
+    Branch next = *(branches->at(i));
+    QString name = QString::fromStdString(next.getName());
+    ui->branchSelector->addItem(name);
+  }
+  this->adjustSize();
+  */
+}
+
+void GitPullDialog::on_pullButton_clicked(){
+  /*
+  int selectedBranch = ui->branchSelector->currentIndex();
+  int selectedRemote = ui->remoteSelector->currentIndex();
+  string gitpath = path->toStdString();
+  //GitAPIResponse response;
+  */
   accept();
 }
 
