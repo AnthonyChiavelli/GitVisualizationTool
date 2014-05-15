@@ -2,6 +2,7 @@
 #include "ui_gitcheckoutdialog.h"
 #include "localrepoparser.h"
 #include "gitapi.h"
+#include "giterrordialog.h"
 
 GitCheckoutDialog::GitCheckoutDialog(QWidget *parent) :
   QDialog(parent),
@@ -30,7 +31,15 @@ void GitCheckoutDialog::on_checkoutButton_clicked()
 {
   int selected = ui->branchSelector->currentIndex();
   string gitpath = path->toStdString();
-  GitApi::gitCheckout(gitpath, *(branches->at(selected)));
+  GitAPIResponse response = GitApi::gitCheckout(gitpath, *(branches->at(selected)));
+  if(response.getError()){
+    QString message = QString::fromStdString(response.getMessage());
+    GitErrorDialog ErrorBox;
+    ErrorBox.setModal(true);
+    ErrorBox.updateMessage(message);
+    ErrorBox.exec();
+    reject();
+  }
   accept();
 }
 

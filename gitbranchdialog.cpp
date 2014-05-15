@@ -2,6 +2,7 @@
 #include "ui_gitbranchdialog.h"
 #include "gitapi.h"
 #include "gitapiresponse.h"
+#include "giterrordialog.h"
 
 GitBranchDialog::GitBranchDialog(QWidget *parent) :
   QDialog(parent),
@@ -22,6 +23,14 @@ void GitBranchDialog::on_branchButton_clicked()
   string repoPath = path.toStdString();
   string name = ui->branch->text().toStdString();
   GitAPIResponse response = GitApi::gitBranch(repoPath, name);
+  if(response.getError()){
+    QString message = QString::fromStdString(response.getMessage());
+    GitErrorDialog ErrorBox;
+    ErrorBox.setModal(true);
+    ErrorBox.updateMessage(message);
+    ErrorBox.exec();
+    reject();
+  }
   accept();
 }
 
