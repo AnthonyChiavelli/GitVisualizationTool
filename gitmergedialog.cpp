@@ -42,11 +42,11 @@ void GitMergeDialog::on_mergeButton_clicked()
 
   if(response.getError()){
     QString message = QString::fromStdString(response.getMessage());
-    std::cout << message.toStdString() << std::endl;
     GitErrorDialog ErrorBox;
     ErrorBox.setModal(true);
     ErrorBox.updateMessage(message);
     ErrorBox.exec();
+    reject();
   }
   accept();
 }

@@ -46,28 +46,38 @@ MainWindow::~MainWindow() {
 /* Tool Bar Actions */
 void MainWindow::on_actionGitInit_triggered()
 {
-    GitInitDialog GIdialog;
-    GIdialog.path = this->repoPath;
-    GIdialog.setModal(true);
-    GIdialog.exec();
+    GitInitDialog dialog;
+    dialog.path = this->repoPath;
+    dialog.setModal(true);
+    dialog.exec();
+    /*
+    if(dialog.Accepted){
+      emit refreshCanvas();
+    }
+    */
 }
 
 
 void MainWindow::on_actionGitMerge_triggered()
 {
-  GitMergeDialog GMdialog;
-  GMdialog.path = this->repoPath;
-  GMdialog.assembleSelector();
-  GMdialog.setModal(true);
-  GMdialog.exec();
+  GitMergeDialog dialog;
+  dialog.path = this->repoPath;
+  dialog.assembleSelector();
+  dialog.setModal(true);
+  dialog.exec();
+  /*
+  if(dialog.Accepted){
+    emit refreshCanvas();
+  }
+  */
 }
 
 void MainWindow::on_actionGitAdd_triggered()
 {
-  GitAddDialog GAdialog;
-  GAdialog.path = this->repoPath;
-  GAdialog.setModal(true);
-  GAdialog.exec();
+  GitAddDialog dialog;
+  dialog.path = this->repoPath;
+  dialog.setModal(true);
+  dialog.exec();
 }
 
 void MainWindow::on_actionGitStatus_triggered()
@@ -77,48 +87,63 @@ void MainWindow::on_actionGitStatus_triggered()
 
 void MainWindow::on_actionGitCommit_triggered()
 {
-  GitCommitDialog GCdialog;
-  GCdialog.path = this->repoPath;
-  GCdialog.setModal(true);
-  GCdialog.exec();
+  GitCommitDialog dialog;
+  dialog.path = this->repoPath;
+  dialog.setModal(true);
+  dialog.exec();
+  /*
+  if(dialog.Accepted){
+    emit refreshCanvas();
+  }
+  */
 }
 
 void MainWindow::on_actionGitBranch_triggered()
 {
-  GitBranchDialog GBdialog;
-  GBdialog.path = this->repoPath;
-  GBdialog.setModal(true);
-  GBdialog.exec();
+  GitBranchDialog dialog;
+  dialog.path = this->repoPath;
+  dialog.setModal(true);
+  dialog.exec();
 }
 
 void MainWindow::on_actionGitRevert_triggered()
 {
-  GitRevertDialog GRdialog;
-  GRdialog.setModal(true);
-  GRdialog.exec();
+  GitRevertDialog dialog;
+  dialog.setModal(true);
+  dialog.exec();
+  /*
+  if(dialog.Accepted){
+    emit refreshCanvas();
+  }
+  */
 }
 
 void MainWindow::on_actionGitPush_triggered()
 {
-  GitPushDialog GPdialog;
-  GPdialog.setModal(true);
-  GPdialog.exec();
+  GitPushDialog dialog;
+  dialog.setModal(true);
+  dialog.exec();
 }
 
 void MainWindow::on_actionGitPull_triggered()
 {
-  GitPullDialog GPdialog;
-  GPdialog.setModal(true);
-  GPdialog.exec();
+  GitPullDialog dialog;
+  dialog.setModal(true);
+  dialog.exec();
+  /*
+  if(dialog.Accepted){
+    emit refreshCanvas();
+  }
+  */
 }
 
 void MainWindow::on_actionGitCheckout_triggered()
 {
-  GitCheckoutDialog GCdialog;
-  GCdialog.path = this->repoPath;
-  GCdialog.assembleSelector();
-  GCdialog.setModal(true);
-  GCdialog.exec();
+  GitCheckoutDialog dialog;
+  dialog.path = this->repoPath;
+  dialog.assembleSelector();
+  dialog.setModal(true);
+  dialog.exec();
 }
 
 void MainWindow::on_actionRefresh_triggered()
@@ -128,13 +153,19 @@ void MainWindow::on_actionRefresh_triggered()
 
 void MainWindow::on_actionOpenRepo_triggered()
 {
-    GitOpenRepoDialog OpenRepo;
-    OpenRepo.scene = this->scene;
-    OpenRepo.path = this->repoPath;
-    OpenRepo.setModal(true);
-    OpenRepo.exec();
+    GitOpenRepoDialog dialog;
+    dialog.scene = this->scene;
+    dialog.path = this->repoPath;
+    dialog.setModal(true);
+    dialog.exec();
 }
 
+/* Menu File */
+
+void MainWindow::on_actionOpen_triggered()
+{
+  on_actionOpenRepo_triggered();
+}
 
 /* Menu Git Actions*/
 void MainWindow::on_actionGit_Init_triggered()

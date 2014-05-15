@@ -8,6 +8,7 @@
 #include <QtGui>
 #include <QDialog>
 #include <iostream>
+#include "giterrordialog.h"
 
 GitInitDialog::GitInitDialog(QWidget *parent) :
     QDialog(parent),
@@ -36,10 +37,24 @@ void GitInitDialog::on_initButton_clicked()
 {
 
   string path = ui->path->text().toStdString();
-  if(path.empty())
+  if(path.empty()){
+    QString message = "Must specify a path!";
+    GitErrorDialog ErrorBox;
+    ErrorBox.setModal(true);
+    ErrorBox.updateMessage(message);
+    ErrorBox.exec();
     return;
+  }
   GitAPIResponse response = GitApi::gitInit(path);
-  // *(this->path) = QString::fromStdString(path); //only use if filenotifyer works
+  if(response.getError()){
+    QString message = QString::fromStdString(response.getMessage());
+    GitErrorDialog ErrorBox;
+    ErrorBox.setModal(true);
+    ErrorBox.updateMessage(message);
+    ErrorBox.exec();
+    reject();
+  }
+  //*(this->path) = QString::fromStdString(path);
   accept();
 }
 

@@ -3,6 +3,7 @@
 
 #include "gitapiresponse.h"
 #include "branch.h"
+#include "remote.h"
 #include "sha1.h"
 #include <vector>
 #include <QStringList>
@@ -21,6 +22,8 @@ namespace GitApi{
     //GitAPIResponse gitMergeMultipleBranches(std::string& repoPath, std::vector<Branch> targetBranchs, std::string& message);
     GitAPIResponse gitStatus(std::string& repoPath);
     GitAPIResponse showGitObjectContents(std::string& repoPath, Sha1 hash);
+    GitAPIResponse gitPull(std::string& repoPath, Remote& remote, Branch& branch);
+    GitAPIResponse gitPush(std::string& repoPath, Remote& remote, Branch& branch);
 
 }
 

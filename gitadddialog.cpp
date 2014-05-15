@@ -3,6 +3,7 @@
 #include "gitapi.h"
 #include "gitapiresponse.h"
 #include <QFileDialog>
+#include "giterrordialog.h"
 
 GitAddDialog::GitAddDialog(QWidget *parent) :
     QDialog(parent),
@@ -21,6 +22,14 @@ void GitAddDialog::on_addButton_clicked()
   string path = this->path->toStdString();
   if (! filenames.empty()){
     GitAPIResponse response = GitApi::gitAdd(path, filenames);
+    if(response.getError()){
+      QString message = QString::fromStdString(response.getMessage());
+      GitErrorDialog ErrorBox;
+      ErrorBox.setModal(true);
+      ErrorBox.updateMessage(message);
+      ErrorBox.exec();
+      reject();
+    }
   }
   accept();
 }
