@@ -433,7 +433,7 @@
     <string>GitRevert</string>
    </property>
    <property name="toolTip">
-    <string>Not yet implemented. Sorry!</string>
+    <string>Not implemented in this version. Sorry!</string>
    </property>
   </action>
   <action name="actionGitHub">
@@ -447,11 +447,17 @@
    </property>
   </action>
   <action name="actionGit_Revert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Git Revert</string>
    </property>
   </action>
   <action name="actionGitPush">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources/images.qrc">
      <normaloff>:/icons/push.png</normaloff>:/icons/push.png</iconset>
@@ -460,10 +466,13 @@
     <string>Gitpush</string>
    </property>
    <property name="toolTip">
-    <string>Commit and push your code to a remote repo</string>
+    <string>Not implemented in this version. Sorry!</string>
    </property>
   </action>
   <action name="actionGitPull">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources/images.qrc">
      <normaloff>:/icons/pull.png</normaloff>:/icons/pull.png</iconset>
@@ -472,15 +481,21 @@
     <string>GitPull</string>
    </property>
    <property name="toolTip">
-    <string>Pull latest from repo/branch</string>
+    <string>Not implemented in this version. Sorry!</string>
    </property>
   </action>
   <action name="actionGit_Push">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Git Push</string>
    </property>
   </action>
   <action name="actionGit_Pull">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Git Pull</string>
    </property>

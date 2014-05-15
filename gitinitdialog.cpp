@@ -39,7 +39,7 @@ void GitInitDialog::on_initButton_clicked()
   if(path.empty())
     return;
   GitAPIResponse response = GitApi::gitInit(path);
-  // *(this->path) = QString::fromStdString(path); //only use if filenotifyer works
+  //*(this->path) = QString::fromStdString(path);
   accept();
 }
 
